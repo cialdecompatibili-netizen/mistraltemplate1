@@ -16,7 +16,7 @@ permalink: /en/carrello/
 {%- assign nz_lh = '/' -%}{%- if page.lang and page.lang != site.default_lang -%}{%- assign nz_lh = '/' | append: page.lang | append: '/' -%}{%- endif -%}
 {% if site.ecommerce == true %}
 <div id="nz-carrello-pag">
-<p id="nz-vuoto">Il carrello è vuoto. <a href="{{ nz_lh | append: 'negozio/' | relative_url }}">Vai al negozio</a></p>
+<p id="nz-vuoto">Il carrello è vuoto. <a href="{% include url-ref.html ref="shop-negozio" %}">Vai al negozio</a></p>
 <div id="nz-pieno" hidden>
 <table class="nz-tab">
 <thead><tr><th>Prodotto</th><th>Quantità</th><th>Totale</th><th></th></tr></thead>

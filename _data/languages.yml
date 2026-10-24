@@ -2,6 +2,7 @@ it:
   name: Italiano
 en:
   name: English
+  description: "Short description of the site (shown in search engines)."
 de:
   name: Deutsch
 fr:

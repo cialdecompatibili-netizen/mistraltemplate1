@@ -6,7 +6,7 @@ lang: en
 locale: en
 tr: tradotto
 tr_hash: 16wv8zh
-permalink: /en/contatti/
+permalink: /en/contact/
 ---
 
 {%- comment -%}

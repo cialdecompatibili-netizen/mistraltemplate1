@@ -4,8 +4,8 @@ main:
   - title: "Journal"
     url: /en/blog/
   - title: "Shop"
-    url: /en/negozio/
+    url: /en/shop/
   - title: "About us"
-    url: /en/chi-siamo/
+    url: /en/about-us/
   - title: "Contact"
-    url: /en/contatti/
+    url: /en/contact/

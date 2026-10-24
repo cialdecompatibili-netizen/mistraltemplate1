@@ -13,6 +13,8 @@
 
 {% assign seo_title = page.seo_title | default: page.title %}
 {% assign seo_image = page.seo_image | default: site.og_image %}
+{% comment %} MULTILINGUA-SEO: lingua della pagina (serve per description e og:locale) {% endcomment %}
+{% assign seo_lang = page.lang | default: site.default_lang %}
 {% assign seo_url   = page.canonical | default: page.url | absolute_url %}
 
 {% comment %} Description: seo_description → inizio del post (excerpt) → descrizione sito {% endcomment %}
@@ -21,7 +23,12 @@
 {% elsif page.excerpt %}
   {% assign seo_description = page.excerpt | strip_html | normalize_whitespace | truncate: 160 %}
 {% else %}
-  {% assign seo_description = site.description %}
+  {% comment %} description di default: quella del sito per la lingua base; per le altre lingue quella di _data/languages.yml (chiave description). Se manca NON si scrive (meglio nessuna che in italiano su pagina inglese). {% endcomment %}
+  {% if seo_lang == site.default_lang %}
+    {% assign seo_description = site.description %}
+  {% else %}
+    {% assign seo_description = site.data.languages[seo_lang].description %}
+  {% endif %}
 {% endif %}
 
 {% if seo_title %}
@@ -33,7 +40,8 @@
 <!-- CMSPush SEO Plugin -->
 <title>{{ seo_title_full | escape }}</title>
 
-{% if page.noindex %}
+{% comment %} una pagina ancora "copia da tradurre" (tr: copia) NON si indicizza finche' non e' segnata tradotta {% endcomment %}
+{% if page.noindex or page.tr == 'copia' %}
   <meta name="robots" content="noindex, nofollow">
 {% else %}
   <meta name="robots" content="index, follow">
@@ -51,6 +59,7 @@
 <meta property="og:type"        content="{% if page.date %}article{% else %}website{% endif %}">
 <meta property="og:title"       content="{{ seo_title | escape }}">
 <meta property="og:url"         content="{{ seo_url }}">
+<meta property="og:locale"      content="{{ page.locale | default: seo_lang }}">
 <meta property="og:site_name"   content="{{ site_name | escape }}">
 {% if seo_description %}
   <meta property="og:description" content="{{ seo_description | truncate: 200 | escape }}">

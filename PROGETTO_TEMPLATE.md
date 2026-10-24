@@ -1,4 +1,4 @@
-# mistraltemplate1 - progetto template stabile e adattivo
+﻿# mistraltemplate1 - progetto template stabile e adattivo
 
 Creata il 24/10/2026. Base: clone di `gamingcorp` (che a sua volta deriva da edilextreme4/renzoferrucci con motore multilingua). Account GitHub `cialdecompatibili-netizen`, cartella `C:\Users\mirco\Desktop\repository\mistraltemplate1`.
 
@@ -40,3 +40,11 @@ Un template STABILE e ADATTIVO che qualsiasi nuova repo possa prendere, con tutt
 - FATTO: admin senza repo fisso (detectRepo, su dominio personalizzato chiede il repo una volta); publish.py senza percorsi/URL fissi (repo = cartella del file, URL dal remote git); CLAUDE.md riscritto come guida ai cloni.
 - FATTO (24/10/2026): multilingua automatico dalle cartelle (selettore, admin Lingue, lingua di lavoro in admin); punto 4: `..\nuovo_sito.ps1 -Nome x -Brand "X" -Lingue it,en [-Shop] [-Whatsapp N]` copia il template, imposta solo i campi identita' in _config.yml, attiva l'hook (core.hooksPath), crea la repo e Pages.
 - RESTA: punto 5 (interruttori Shop/Tour/Blog nell'admin), punto 7 (prova di clone), commenti guida nei layout/include/JS/CSS ancora da completare, attivare l'hook nei cloni (lo fara' nuovo_sito.ps1).
+
+## PIANO MULTILINGUA 2 (deciso da Mirco 24/10/2026, ordine fisso) - PUNTI 1-3 FATTI il 24/10/2026 (non provati con build Jekyll: controllare online sitemap.xml, hreflang, /en/shop/, redirect da browser in inglese)
+Ispirato a WPML, Polylang, TranslatePress, Weglot. Da sviluppare in quest'ordine:
+1. SEO per lingua: hreflang corretto (solo pagine tradotte), canonical, titolo e meta description per lingua, sitemap per lingua, "copia" = noindex finche' non segnata tradotta.
+2. Slug tradotti per pagine e categorie (es. /en/shop/ invece di /en/negozio/), gestibili da admin; base: automation/permalink_lingue.py + _data/i18n/xx/categorie.yml di renzoferrucci.
+3. Lingua preferita del browser: alla PRIMA visita porta da solo alla lingua del browser (se esiste), ricorda la scelta (localStorage), la scelta manuale col selettore vince sempre, niente redirect per i bot.
+Idee per dopo (non decise): traduzione AI con un tasto, elenco contenuti per lingua cliccabile, editor affiancato, editor stringhe UI, fallback selettore, glossario, export .po/.csv, immagini per lingua.
+

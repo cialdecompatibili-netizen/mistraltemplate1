@@ -11,7 +11,7 @@ lang: en
 locale: en
 tr: tradotto
 tr_hash: 1emaan
-permalink: /en/negozio/
+permalink: /en/shop/
 ---
 {%- assign nz_lh = '/' -%}{%- if page.lang and page.lang != site.default_lang -%}{%- assign nz_lh = '/' | append: page.lang | append: '/' -%}{%- endif -%}
 {% if site.ecommerce == true %}

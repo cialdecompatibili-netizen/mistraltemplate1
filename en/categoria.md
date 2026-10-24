@@ -8,7 +8,7 @@ lang: en
 locale: en
 tr: tradotto
 tr_hash: 1o0n0q9
-permalink: /en/categoria/
+permalink: /en/category/
 ---
 {%- assign posts_l = site.posts | where: "lang", page.lang -%}
 

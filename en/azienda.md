@@ -8,7 +8,7 @@ lang: en
 locale: en
 tr: tradotto
 tr_hash: 6x7zb
-permalink: /en/chi-siamo/
+permalink: /en/about-us/
 ---
 
 {%- comment -%} PAGINA ESEMPIO. `ref: azienda` collega le traduzioni (stesso ref in /en/...): non cambiarlo. {%- endcomment -%}
@@ -20,4 +20,4 @@ Write the presentation of the site here: who you are, what you do, how you work.
 - First service or activity.
 - Second service or activity.
 
-[Contact]({{ '/en/contatti/' | relative_url }}){: .btn .btn--primary}
+[Contact]({{ '/en/contact/' | relative_url }}){: .btn .btn--primary}

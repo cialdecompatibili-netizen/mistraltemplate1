@@ -484,6 +484,48 @@ document.addEventListener('DOMContentLoaded', function(){
   });
 });
 </script>
-{%- comment -%} MULTILINGUA: hreflang tra versioni con lo stesso ref; noindex sulle pagine ancora "copia" {%- endcomment -%}
-{%- if page.ref -%}{%- assign alts = site.pages | concat: site.posts | where: "ref", page.ref -%}{%- if alts.size > 1 -%}{%- for a in alts -%}<link rel="alternate" hreflang="{{ a.lang | default: site.default_lang }}" href="{{ a.url | absolute_url }}">{%- if a.lang == site.default_lang or a.lang == nil -%}<link rel="alternate" hreflang="x-default" href="{{ a.url | absolute_url }}">{%- endif -%}{%- endfor -%}{%- endif -%}{%- endif -%}
-{%- if page.tr == 'copia' -%}<meta name="robots" content="noindex,follow">{%- endif -%}
+{%- comment -%}
+  MULTILINGUA (SEO + lingua browser). Alternativa = pagina con lo stesso `ref` in un'altra lingua.
+  - hreflang: SOLO versioni gia' tradotte (le `tr: copia` sono noindex e non vanno dichiarate); x-default = lingua base.
+  - robots/noindex per le "copia": lo gestisce _includes/seo.html (un solo meta robots).
+  - redirect lingua browser: vedi lo script qui sotto. NON toccare i nomi window.* e la chiave localStorage lang_pref.
+{%- endcomment -%}
+{%- if page.ref and page.tr != 'copia' -%}
+{%- assign ml_all = site.pages | concat: site.documents | where: "ref", page.ref -%}
+{%- assign ml_n = 0 -%}
+{%- capture ml_json -%}{%- for a in ml_all -%}{%- if a.tr == 'copia' or a.noindex -%}{%- continue -%}{%- endif -%}{%- assign ml_n = ml_n | plus: 1 -%}"{{ a.lang | default: site.default_lang }}":"{{ a.url | relative_url }}",{%- endfor -%}{%- endcapture -%}
+{%- if ml_n > 1 -%}
+{%- for a in ml_all -%}{%- if a.tr == 'copia' or a.noindex -%}{%- continue -%}{%- endif -%}{%- assign ml_al = a.lang | default: site.default_lang -%}<link rel="alternate" hreflang="{{ ml_al }}" href="{{ a.url | absolute_url }}">{%- if ml_al == site.default_lang -%}<link rel="alternate" hreflang="x-default" href="{{ a.url | absolute_url }}">{%- endif -%}{%- endfor -%}
+<script>
+/* LINGUA PREFERITA DEL BROWSER (solo prima visita, solo da pagine in lingua base).
+   - A = {lingua: url} delle versioni tradotte di QUESTA pagina (se non c'e' la versione, resta dov'e').
+   - localStorage lang_pref = scelta ricordata: la scelta manuale col selettore (bandiera) vince sempre.
+   - niente redirect per bot/anteprime, con ?nolang=1, o se arrivi da un'altra pagina dello stesso sito. */
+(function () {
+  try {
+    var A = {{ '{' }}{{ ml_json }}"_":""{{ '}' }}, DEF = '{{ site.default_lang }}', CUR = '{{ page.lang | default: site.default_lang }}', K = 'lang_pref';
+    document.addEventListener('click', function (e) {
+      var a = e.target && e.target.closest ? e.target.closest('a.nv__lang-item, .lang-switch a') : null;
+      if (a && a.getAttribute('hreflang')) { try { localStorage.setItem(K, a.getAttribute('hreflang')); } catch (x) {} }
+    }, true);
+    if (CUR !== DEF) return;
+    if (/[?&]nolang=1/.test(location.search)) return;
+    if (navigator.webdriver || /bot|crawl|spider|slurp|lighthouse|pagespeed|headless|preview|facebookexternalhit/i.test(navigator.userAgent)) return;
+    var pref = localStorage.getItem(K), pick = null;
+    if (pref) { pick = pref; }
+    else {
+      if (document.referrer && document.referrer.indexOf(location.origin) === 0) return;
+      var ls = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || ''];
+      for (var i = 0; i < ls.length; i++) {
+        var p = String(ls[i]).toLowerCase(), b = p.split('-')[0];
+        var hit = A[p] !== undefined ? p : (A[b] !== undefined ? b : (b === DEF ? DEF : null));
+        if (hit) { pick = hit; break; }
+      }
+      if (pick && pick !== DEF && A[pick]) localStorage.setItem(K, pick);
+    }
+    if (pick && pick !== DEF && A[pick]) location.replace(A[pick] + location.search + location.hash);
+  } catch (e) {}
+})();
+</script>
+{%- endif -%}
+{%- endif -%}
