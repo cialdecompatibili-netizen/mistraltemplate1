@@ -58,3 +58,4 @@ Quando durante un clone scopri una cosa che si ripete (un fix, un grep, un passa
 | Credito webtomars nel footer | metterlo nei 'residui' di `controllo.ps1` -> fallisce sempre | `automation/controllo.ps1` |
 | `-Brand` non cambia il nome nel menu | il nome viene da dominio/repo (`site-name.html`) | `nuovo_sito.ps1` |
 | Commit selettivi nel template | `git add -A` mischia file di altri lavori -> `git commit -m .. -- file1 file2` | sezione 4 |
+| `-Lingue it,en` lanciato con `-File` | arriva come UNA stringa -> `default_lang: it,en` e cartella `en/` cancellata (successo su startupfinance). Ora `nuovo_sito.ps1` spezza sulle virgole; dopo ogni clone controlla `default_lang: it` e che `en/` esista | `nuovo_sito.ps1` |
