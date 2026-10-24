@@ -1,4 +1,5 @@
-/* GamingCorp - stile studio di sviluppo giochi. Sfondo bianco, inchiostro scuro, accento viola. */
+/* KIT BLOCCHI HOME (prefisso .gc-). Nome file storico (arriva da gamingcorp): NON rinominare, e' caricato da _includes/head/custom.html.
+   Usato dai blocchi di _data/blocks_home.json. Colori nelle variabili --gc-* qui sotto: per cambiare accento basta --gc-acc. */
 :root{--gc-ink:#0e1116;--gc-mut:#56606b;--gc-acc:#4f35e8;--gc-acc-s:#efecff;--gc-soft:#f5f6fa;--gc-line:#e6e8ee;--gc-head:'Space Grotesk','Inter',system-ui,sans-serif;--gc-sans:'Inter',system-ui,sans-serif}
 .gc{font-family:var(--gc-sans);color:var(--gc-ink)}
 .gc *{box-sizing:border-box}

@@ -822,7 +822,13 @@ function detectRepo(){
   const h=location.hostname; // es. pippo.github.io
   const p=location.pathname; // es. /miosito/admin/index.html
   const match=h.match(/^([^.]+)\.github\.io$/);
-  if(!match)return localStorage.getItem('cms_repo')||'cialdecompatibili-netizen/edilextreme4'; // dominio personalizzato (edilextreme.com): repo di default
+  // TEMPLATE: nessun repo scritto a mano. Su dominio personalizzato (non *.github.io) il repo
+  // "utente/nome" si chiede UNA volta e resta in localStorage (chiave cms_repo).
+  if(!match){
+    let r=localStorage.getItem('cms_repo');
+    if(!r){ r=(prompt('Dominio personalizzato: scrivi il repo GitHub (utente/nome-repo)')||'').trim(); if(r)localStorage.setItem('cms_repo',r); }
+    return r||'';
+  }
   const user=match[1];
   const parts=p.split('/').filter(Boolean); // ['miosito','admin','index.html']
   // Se il primo segmento NON è 'admin' è il nome del repo

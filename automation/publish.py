@@ -23,8 +23,27 @@ import urllib.request
 import urllib.error
 from datetime import date, datetime
 
-REPO = r"C:\Users\mirco\Desktop\cmspush2"  # root del progetto
-SITE_BASE = "https://cialdecompatibili-netizen.github.io/cmspush2"
+# TEMPLATE: nessun percorso/URL fisso. Funziona in qualsiasi clone.
+# REPO = radice del progetto = cartella sopra automation/ (dove sta questo file).
+REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+def _site_base():
+    """URL pubblico ricavato dal remote git (https://utente.github.io/repo). Vuoto se non c'e' remote."""
+    try:
+        url = subprocess.check_output(["git", "-C", REPO, "remote", "get-url", "origin"],
+                                      text=True, stderr=subprocess.DEVNULL).strip()
+        m = re.search(r"github\.com[:/]([^/]+)/([^/]+?)(?:\.git)?$", url)
+        if m:
+            user, repo = m.group(1), m.group(2)
+            # repo speciale utente.github.io -> nessun sottopercorso
+            return f"https://{user}.github.io" + ("" if repo.lower() == f"{user.lower()}.github.io" else f"/{repo}")
+    except Exception:
+        pass
+    return ""
+
+
+SITE_BASE = _site_base()
 LOG_PATH = os.path.join(REPO, "automation", "publish_log.jsonl")
 
 

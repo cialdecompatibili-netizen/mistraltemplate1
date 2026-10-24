@@ -1,82 +1,19 @@
 {
-  "_nota": "Catalogo GamingCorp: vendiamo i NOSTRI giochi e i loro extra (non merch, non prodotti di altri). Pre-ordine, nessun pagamento ora. Prezzi in centesimi. I giochi gratuiti non sono qui: si giocano da /giochi/. L'id categoria e' riservato.",
+  "_nota": "Catalogo dello shop (serve solo con ecommerce: true in _config.yml). Prezzi in CENTESIMI. Ogni prodotto/categoria ha anche una pagina in _negozio/ (layout negozio-prodotto con pid=<id>, negozio-categoria con cid=<id>). L'id categoria e' riservato. tipo: digitale (niente spedizione) o fisico. visibile:false nasconde senza cancellare.",
   "categorie": [
-    { "nome": "PC", "id": "pc", "icona": "🖥️" },
-    { "nome": "Android", "id": "android", "icona": "📱" },
-    { "nome": "Online", "id": "online", "icona": "🌐" },
-    { "nome": "Extra e bundle", "id": "extra", "icona": "🎁" }
+    { "nome": "Esempio", "id": "esempio", "icona": "🛍️" }
   ],
   "prodotti": [
     {
       "tipo": "digitale",
-      "id": "neon-circuit-pc",
-      "nome": "Neon Circuit – Edizione PC",
-      "categoria": "pc",
-      "prezzo_centesimi": 799,
-      "descrizione": "Corse arcade al neon per Windows. Acquisto una tantum, senza pubblicità.",
-      "descrizione_completa": "Neon Circuit è il nostro gioco di corse arcade per PC.\nPiste brevi, giri da trenta secondi, tempi da migliorare.\nAcquisto una tantum, gioco completo, nessuna pubblicità.\nPre-ordine: nessun pagamento ora. Ti avvisiamo all'uscita.",
+      "id": "prodotto-esempio",
+      "nome": "Prodotto di esempio",
+      "categoria": "esempio",
+      "prezzo_centesimi": 1000,
+      "descrizione": "Descrizione breve del prodotto di esempio.",
+      "descrizione_completa": "Descrizione completa del prodotto.\nOgni riga diventa un paragrafo.",
       "immagine": "",
-      "icona": "⌁",
-      "visibile": true
-    },
-    {
-      "tipo": "digitale",
-      "id": "neon-circuit-extra",
-      "nome": "Neon Circuit – Colonna sonora e pista Notte",
-      "categoria": "extra",
-      "prezzo_centesimi": 399,
-      "descrizione": "La colonna sonora originale e una pista extra per Neon Circuit.",
-      "descrizione_completa": "Contenuto extra facoltativo per Neon Circuit.\nColonna sonora originale e una pista in più, ambientata di notte.\nRichiede il gioco base.\nPre-ordine: nessun pagamento ora.",
-      "immagine": "",
-      "icona": "♪",
-      "visibile": true
-    },
-    {
-      "tipo": "digitale",
-      "id": "pixel-harvest-senza-pubblicita",
-      "nome": "Pixel Harvest – Senza pubblicità",
-      "categoria": "android",
-      "prezzo_centesimi": 299,
-      "descrizione": "Gioca a Pixel Harvest senza alcuna pubblicità, per sempre.",
-      "descrizione_completa": "Pixel Harvest è gratis. Con questo acquisto una tantum togli per sempre la pubblicità dal gioco.\nPer Android.\nPre-ordine: nessun pagamento ora.",
-      "immagine": "",
-      "icona": "❖",
-      "visibile": true
-    },
-    {
-      "tipo": "digitale",
-      "id": "pixel-harvest-pass-stagione-1",
-      "nome": "Pixel Harvest – Pass Stagione 1",
-      "categoria": "android",
-      "prezzo_centesimi": 499,
-      "descrizione": "Contenuti extra, decorazioni e premi per tutta la Stagione 1.",
-      "descrizione_completa": "Il Pass Stagione 1 aggiunge decorazioni per la fattoria, premi extra e nuovi livelli per tutta la stagione.\nPer Android.\nPre-ordine: nessun pagamento ora.",
-      "immagine": "",
-      "icona": "🎟️",
-      "visibile": true
-    },
-    {
-      "tipo": "digitale",
-      "id": "orbit-run-senza-pubblicita",
-      "nome": "Orbit Run – Senza pubblicità",
-      "categoria": "online",
-      "prezzo_centesimi": 299,
-      "descrizione": "Orbit Run è gratis. Con un acquisto togli la pubblicità per sempre.",
-      "descrizione_completa": "Orbit Run si gioca gratis nel browser. Con questo acquisto una tantum togli la pubblicità opzionale per sempre.\nOnline, da telefono e da computer.\nPre-ordine: nessun pagamento ora.",
-      "immagine": "",
-      "icona": "◎",
-      "visibile": true
-    },
-    {
-      "tipo": "digitale",
-      "id": "bundle-studio",
-      "nome": "Bundle GamingCorp – tutti i nostri giochi",
-      "categoria": "extra",
-      "prezzo_centesimi": 1099,
-      "descrizione": "Neon Circuit, Pixel Harvest senza pubblicità e Orbit Run senza pubblicità in un solo pacchetto.",
-      "descrizione_completa": "Tutti e tre i nostri giochi in un solo pacchetto.\nNeon Circuit per PC, Pixel Harvest senza pubblicità per Android, Orbit Run senza pubblicità online.\nRisparmi rispetto all'acquisto separato.\nPre-ordine: nessun pagamento ora.",
-      "immagine": "",
-      "icona": "🎁",
+      "icona": "🛍️",
       "visibile": true
     }
   ]

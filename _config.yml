@@ -1,12 +1,37 @@
-# --- MULTILINGUA (vedi CLAUDE.md) ---
+# =====================================================================================
+# _config.yml  -  UNICO PUNTO DA CAMBIARE PER CLONARE IL TEMPLATE SU UN NUOVO SITO
+# (mistraltemplate1, vedi CLAUDE.md e PROGETTO_TEMPLATE.md)
+#
+# REGOLE D'ORO (leggere prima di toccare)
+#  - NON scrivere qui `url:` e `baseurl:`: su GitHub Pages li imposta da solo (owner.github.io/repo
+#    oppure dominio personalizzato da CNAME). Il sito e l'admin si adattano senza valori fissi.
+#    Eccezione: serve una build locale con sottocartella -> usare `--baseurl` da riga di comando.
+#  - Un valore vuoto ("") significa "funzione spenta", mai "errore": i layout controllano
+#    sempre se il campo e' pieno prima di usarlo.
+#  - L'admin (admin/index.html) riscrive alcune parti di questo file (sezione LANG-DEFAULTS e
+#    campi lingua): non cambiare a mano il commento "LANG-DEFAULTS", l'admin lo cerca per
+#    inserire le nuove lingue.
+#  - Dopo ogni modifica a questo file GitHub Pages ricostruisce tutto: nessuna anteprima locale
+#    (la build locale non parte su questo PC), si controlla il sito online.
+# =====================================================================================
+
+# --- MULTILINGUA (dettagli: docs/MULTILINGUA.md) ---------------------------------------
+# default_lang = lingua alla radice (/). Le altre stanno in /xx/ e le crea l'admin > Lingue.
+# languages = elenco lingue attive: sono i nomi delle cartelle (it alla radice, en in /en/).
 locale: "it"
 default_lang: it
 languages: [it]
 
-brand: "GamingCorp"
+# --- IDENTITA' DEL SITO (da cambiare per ogni clone) -----------------------------------
+# brand: nome mostrato nel sito; description: testo SEO di default (meta description).
+# Il nome "tecnico" (dominio/repo) NON va scritto qui: lo calcola _includes/site-name.html.
+brand: "Nome Sito"
 related_posts: 3
 email: ""
-description: "GamingCorp: studio indipendente di sviluppo giochi. Giochi nostri, sviluppati da noi, per browser, Android e PC."
+description: "Descrizione breve del sito (compare nei motori di ricerca)."
+
+# --- TEMA (Minimal Mistakes, caricato da remoto) ----------------------------------------
+# I COLORI veri del sito NON stanno qui ma in _data/tema.json (accento, menu, testo).
 minimal_mistakes_skin: default
 search: true
 
@@ -17,17 +42,29 @@ author:
 social:
   links: []
 
-
 markdown: kramdown
 remote_theme: mmistakes/minimal-mistakes
+
+# File/cartelle NON pubblicati nel sito (restano nella repo: l'admin li legge via API GitHub).
+# ATTENZIONE: NON aggiungere version.json ne' template-map.json: l'admin li legge anche via fetch dal sito.
 exclude:
   - vendor
   - docs
+  - automation
+  - CLAUDE.md
+  - PROGETTO_TEMPLATE.md
+  - README.md
 
+# Permalink di default degli articoli (categoria + titolo). Le lingue lo sovrascrivono in defaults.
 permalink: /:categories/:title/
 
 timezone:
 
+# --- COLLEZIONI -------------------------------------------------------------------------
+# negozio  -> pagine prodotto/categoria dello shop NUOVO (dati in _data/catalogo.json), layout negozio-*
+# products -> shop VECCHIO (output:false = spento), gestito da admin > Prodotti
+# servizi / progetti -> collezioni opzionali (cartelle _servizi/ e _progetti/ da creare se servono,
+#                       gestite da admin > Servizi / Progetti). Se la cartella non esiste: nessun effetto.
 collections:
   negozio:
     output: true
@@ -42,6 +79,7 @@ collections:
     output: true
     permalink: /progetti/:name/
 
+# _pages/ contiene le pagine del sito (il tema non le vede se non e' elencata qui).
 include:
   - _pages
 
@@ -55,6 +93,8 @@ plugins:
 footer:
   links: []
 
+# --- DEFAULTS (front matter automatico per path/tipo) ----------------------------------
+# ORDINE IMPORTANTE: gli scope piu' specifici (lingue) stanno SOPRA lo scope generale path "".
 defaults:
   # LANG-DEFAULTS (l'admin aggiunge qui gli scope delle lingue: path = cartella lingua)
   - scope:
@@ -73,6 +113,7 @@ defaults:
     values:
       layout: single
       permalink: /en/:categories/:title/
+  # lingua di base: tutto cio' che non e' in una cartella lingua e' `it` (filtra elenchi e selettore)
   - scope:
       path: ""
     values:
@@ -123,14 +164,22 @@ tag_archive:
 
 cms_homepage:
 
-# Numero WhatsApp con prefisso, senza + e senza spazi (es. 393331234567). Vuoto + whatsapp_demo: true = bottoni visibili ma inerti (DEMO). Vuoto + whatsapp_demo: false = bottoni nascosti
+# --- CONTATTI --------------------------------------------------------------------------
+# whatsapp: numero con prefisso, senza + e senza spazi (es. 393331234567).
+#   Vuoto + whatsapp_demo:true  = bottoni visibili ma inerti (solo per demo ai clienti)
+#   Vuoto + whatsapp_demo:false = bottoni nascosti (DEFAULT del template)
+# Chi lo usa: _includes/footer/custom.html (bottone fluttuante), servizio-cta.html, _pages/contatti.md
 whatsapp: ""
-whatsapp_demo: true
-# Indirizzo del servizio che inoltra il modulo di contatto (worker). Vuoto = il modulo non appare.
+whatsapp_demo: false
+# contact_endpoint: indirizzo del servizio (worker) che inoltra il modulo contatti. Vuoto = il modulo non appare.
 contact_endpoint: ""
 
-
-ecommerce: true
-# Ordini (SMOKE TEST, nessun pagamento): URL dell'Apps Script. Vuoto = il pulsante 'Invia richiesta d'ordine' resta spento.
+# --- SHOP (interruttore unico) ---------------------------------------------------------
+# ecommerce: true accende TUTTO lo shop: voce "Shop" nel menu (masthead.html), css/js del carrello
+# (head/custom.html), pagine /negozio/ /carrello/ /ordine/ /grazie/. false = nessuna traccia nel sito.
+# Prodotti e categorie: _data/catalogo.json (+ una pagina in _negozio/ per ognuno, vedi CLAUDE.md).
+ecommerce: false
+# ordini.tracker: URL dell'Apps Script che riceve gli ordini (SMOKE TEST, nessun pagamento).
+# Vuoto = il pulsante 'Invia richiesta d'ordine' resta spento.
 ordini:
   tracker: ""

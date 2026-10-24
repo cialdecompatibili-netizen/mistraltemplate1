@@ -34,3 +34,9 @@ Un template STABILE e ADATTIVO che qualsiasi nuova repo possa prendere, con tutt
 - Prima di modificare JSON: backup, poi rileggere e verificare.
 
 - WORKFLOW DA AGGIUNGERE: .github/workflows/traduzioni.yml e' presente in locale ma NON ancora su GitHub (il token gh non ha lo scope workflow). Fare: gh auth refresh -s workflow, poi git add -f .github/workflows; commit; push.
+
+## STATO (24/10/2026)
+- FATTO: contenuti gaming rimossi (giochi, _negozio, post, .bak, crea_shop_gaming.py), sostituiti da esempi minimi (post, prodotto e categoria shop); _config.yml unico punto di configurazione con commenti guida; shop spento di default.
+- FATTO: admin senza repo fisso (detectRepo, su dominio personalizzato chiede il repo una volta); publish.py senza percorsi/URL fissi (repo = cartella del file, URL dal remote git); CLAUDE.md riscritto come guida ai cloni.
+- RESTA: punto 4 (script 
+uovo_sito.ps1), punto 5 (interruttori Shop/Tour/Blog nell'admin), punto 7 (prova di clone), commenti guida nei layout/include/JS/CSS ancora da completare, workflow traduzioni su GitHub.

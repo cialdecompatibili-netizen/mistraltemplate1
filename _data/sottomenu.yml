@@ -31,14 +31,3 @@
 # Per levare una tendina: cancella il blocco, la voce torna un link normale.
 # Documentazione del funzionamento: commento in testa a _includes/masthead.html.
 # =====================================================================================
-
-Giochi:
-  - title: "Tutti i giochi"
-    url: /giochi/
-  - divider: true
-  - title: "Orbit Run (Online)"
-    url: /giochi/orbit-run/
-  - title: "Pixel Harvest (Android)"
-    url: /giochi/pixel-harvest/
-  - title: "Neon Circuit (PC)"
-    url: /giochi/neon-circuit/
