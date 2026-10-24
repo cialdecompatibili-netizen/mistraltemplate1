@@ -1581,11 +1581,12 @@ function tornaListaArticoli(){
   document.getElementById('art-lista-view').style.display='block';
   caricaLista();
 }
+function oggiLocale(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function apriNuovoArticolo(){
   ['titolo','excerpt','teaser','tags','corpo'].forEach(id=>document.getElementById(id).value='');
   document.getElementById('categorie').value='';
   document.getElementById('vis-editor').innerHTML='';
-  document.getElementById('data').value=new Date().toISOString().split('T')[0];
+  document.getElementById('data').value=oggiLocale();
   document.getElementById('preview-box').style.display='none';
   document.getElementById('msg-art').style.display='none';
   document.getElementById('art-editor-title').textContent='Nuovo articolo';
@@ -1597,7 +1598,9 @@ function apriNuovoArticolo(){
 function nuovoArticolo(){apriNuovoArticolo();}
 function buildContent(){
   const titolo=document.getElementById('titolo').value.trim();
-  const data=document.getElementById('data').value;
+  let data=document.getElementById('data').value;
+  // Mai data vuota o futura: Jekyll nasconde i post con data futura (il sito "sparisce" l'articolo)
+  if(!data||data>oggiLocale()){data=oggiLocale();document.getElementById('data').value=data;}
   let cat=document.getElementById('categorie').value;
   const tags=document.getElementById('tags').value.split(',').map(s=>s.trim()).filter(Boolean);
   const excerpt=document.getElementById('excerpt').value.trim();
@@ -2348,7 +2351,7 @@ function salvaTokenOnboarding(){
   caricaCategorie();caricaLista();
 }// INIT
 window.onload=function(){
-  document.getElementById('data').value=new Date().toISOString().split('T')[0];
+  document.getElementById('data').value=oggiLocale();
   document.getElementById('quill-box').style.display='block';
   document.getElementById('corpo').style.display='none';
   if(!tok()){document.getElementById('onboarding-overlay').style.display='flex';}
