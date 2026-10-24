@@ -20,7 +20,7 @@
 # languages = elenco lingue attive: sono i nomi delle cartelle (it alla radice, en in /en/).
 locale: "it"
 default_lang: it
-languages: [it]
+languages: [it, en]
 
 # --- IDENTITA' DEL SITO (da cambiare per ogni clone) -----------------------------------
 # brand: nome mostrato nel sito; description: testo SEO di default (meta description).

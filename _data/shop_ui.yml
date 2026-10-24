@@ -120,3 +120,5 @@ en:
   "Errore: la richiesta Satispay è scaduta senza conferma.": "Error: the Satispay request expired without confirmation."
   "Errore: impossibile generare le coordinate per il bonifico.": "Error: unable to generate the bank transfer details."
   "I moduli di pagamento sono momentaneamente fuori servizio. Nessun importo è stato addebitato. Riprova più tardi. Rif. ": "Payment forms are temporarily unavailable. No amount has been charged. Please try again later. Ref. "
+  "Nel carrello ci sono ": "There are "
+  "Nel carrello c’è 1 prodotto": "There is 1 product in your cart"

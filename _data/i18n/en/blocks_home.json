@@ -1,0 +1,20 @@
+[
+  {
+    "id": "hero",
+    "nome": "Hero",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-hero\"><div class=\"gc-wrap gc-hero-in\"><div><p class=\"gc-eyebrow\">Short subtitle</p><h1 class=\"gc-h1\">Main title of the site. <em>Keyword.</em></h1><p class=\"gc-lead\">One sentence explaining what the site does and for whom. It can be edited from admin &gt; Home (blocks).</p><div class=\"gc-act\"><a class=\"gc-btn gc-btn-a\" href=\"__BASEURL__/en/chi-siamo/\">About us</a><a class=\"gc-btn gc-btn-o\" href=\"__BASEURL__/en/contatti/\">Contact</a></div></div><div class=\"gc-hero-art\"><div class=\"gc-art\" style=\"--c1:#4f35e8;--c2:#22d3ee\" aria-hidden=\"true\">&#9678;</div><div class=\"gc-art\" style=\"--c1:#16a34a;--c2:#facc15\" aria-hidden=\"true\">&#10070;</div><div class=\"gc-art\" style=\"--c1:#0e1116;--c2:#ec4899\" aria-hidden=\"true\">&#8960;</div></div></div></section></div>"
+  },
+  {
+    "id": "servizi-esempio",
+    "nome": "Three strengths",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-soft\" id=\"punti\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">What we offer</p><h2 class=\"gc-h2\">Three strengths</h2><div class=\"gc-plat\"><div class=\"gc-pl\"><span class=\"n\">1</span><b>First point</b><p>Short description of the first point.</p></div><div class=\"gc-pl\"><span class=\"n\">2</span><b>Second point</b><p>Short description of the second point.</p></div><div class=\"gc-pl\"><span class=\"n\">3</span><b>Third point</b><p>Short description of the third point.</p></div></div></div></section></div>"
+  },
+  {
+    "id": "contatti",
+    "nome": "Contact",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-dark\" id=\"contatti\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Contact</p><h2 class=\"gc-h2\">Let's talk</h2><p class=\"gc-lead\">Write to us: we reply as soon as possible.</p><a class=\"gc-btn\" href=\"__BASEURL__/en/contatti/\">Write to us</a></div></section></div>"
+  }
+]
