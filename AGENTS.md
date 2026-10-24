@@ -3,9 +3,11 @@
 Template Jekyll per GitHub Pages. Si clona, si cambia quasi solo `_config.yml` e `_data/tema.json`, e il sito si adatta (lingua, URL, brand, colori, menu, shop).
 Si gestisce dal CMS nel browser (`admin/`), che scrive su GitHub con le API. Non esiste build locale su questo PC: si controlla online dopo il deploy.
 
+**FRETTA? Leggi solo `docs/START_1_MINUTO.md` (comandi, tabella "cosa cambiare dove", 8 regole). Controllo completo prima di pubblicare: `powershell -NoProfile -ExecutionPolicy Bypass -File automation\controllo.ps1` deve dire TUTTO OK.**
+
 ## Leggi in quest'ordine (poi lavora)
 1. Questo file.
-2. `docs/MAPPA.md` - dove sta cosa e "voglio cambiare X, quale file tocco".
+2. `docs/START_1_MINUTO.md` (riassunto), poi `docs/MAPPA.md` - dove sta cosa e "voglio cambiare X, quale file tocco".
 3. `docs/RICETTE.md` - procedure passo passo (nuova pagina, nuova lingua, colori, home, prodotto, pubblicazione).
 4. `docs/ERRORI_NOTI.md` - errori gia' fatti che rompono il sito. Leggilo PRIMA di toccare Liquid, admin o traduzioni.
 5. `CLAUDE.md` (regole di dettaglio), `docs/MULTILINGUA.md` (sistema lingue), `PROGETTO_TEMPLATE.md` (stato e piano).

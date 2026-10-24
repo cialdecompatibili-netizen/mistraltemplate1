@@ -361,34 +361,6 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 
 .author__avatar img{border-radius:50% !important;object-fit:cover;aspect-ratio:1/1}
 
-/* ============================================================
-   FOOTER: credito webtomars.it con aura dorata e terzo occhio (21/10/2026)
-   ============================================================ */
-.page__footer a[href*="webtomars.it"] {
-  display: inline-flex; align-items: center; gap: .4em;
-  padding: .12em .7em .12em .5em; margin-left: .15em;
-  font-weight: 700; letter-spacing: .02em; text-decoration: none !important;
-  color: #6b4700 !important;
-  background: linear-gradient(180deg, #fffaf0 0%, #ffeab0 100%);
-  border: 1px solid rgba(200, 148, 10, .55); border-radius: 999px;
-  box-shadow: 0 0 10px rgba(255, 190, 40, .55), 0 0 22px rgba(255, 170, 0, .3), inset 0 0 6px rgba(255, 255, 255, .8);
-  text-shadow: 0 0 8px rgba(255, 200, 60, .85);
-  transition: transform .2s ease, box-shadow .2s ease;
-}
-.page__footer a[href*="webtomars.it"]::before {
-  content: ""; width: 1.25em; height: 1.25em; flex: none;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23b87a00' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 13.5C5 8.5 8.5 6.5 12 6.5s7 2 10 7c-3 5-6.500 7-10 7s-7-2-10-7z'/%3E%3Ccircle cx='12' cy='13.500' r='3.200' fill='%23f2b705'/%3E%3Ccircle cx='12' cy='13.500' r='1.100' fill='%236b4700' stroke='none'/%3E%3Cpath d='M12 1.500v2.500M5.500 4l1.300 1.800M18.500 4l-1.300 1.800'/%3E%3C/svg%3E") center / contain no-repeat;
-  filter: drop-shadow(0 0 4px rgba(255, 190, 40, .95));
-}
-.page__footer a[href*="webtomars.it"]:hover,
-.page__footer a[href*="webtomars.it"]:focus-visible {
-  transform: translateY(-1px);
-  box-shadow: 0 0 14px rgba(255, 200, 60, .9), 0 0 30px rgba(255, 170, 0, .55), inset 0 0 8px rgba(255, 255, 255, .9);
-}
-@media (prefers-reduced-motion: reduce) {
-  .page__footer a[href*="webtomars.it"] { animation: none; }
-}
-
 /* VIDEO YOUTUBE: sempre a larghezza piena, proporzione 16:9 (gli iframe del vecchio WordPress avevano width/height fissi) */
 .video-shortcode{position:relative;width:100%;aspect-ratio:16/9;margin:1.6rem 0}
 .video-shortcode iframe,.page__content iframe[src*="youtube"]{width:100%;height:100%;border:0}
