@@ -17,7 +17,7 @@
 .gc-btn-o{background:transparent;color:var(--gc-ink)}.gc-btn-o:hover{background:var(--gc-ink);color:#fff}
 .gc-btn:focus-visible,.gc a:focus-visible{outline:3px solid var(--gc-acc);outline-offset:3px}
 .gc-act{display:flex;gap:.9rem;flex-wrap:wrap}
-.gc-hero{padding:clamp(2.5rem,6vw,5rem) 0;background:#fff}
+.gc-hero{padding:clamp(1.5rem,4vh,3.5rem) 0;background:#fff;min-height:calc(100vh - 80px);min-height:calc(100svh - 80px);display:flex;align-items:center}.gc-hero>.gc-wrap,.ent-hero>.gc-wrap{width:100%}
 .gc-hero-in{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(2rem,5vw,4rem);align-items:center}
 .gc-hero-art{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .gc-hero-art .gc-art{border-radius:18px;aspect-ratio:1/1;font-size:clamp(2.4rem,6vw,4.2rem)}
@@ -54,8 +54,8 @@
 .gc-buy{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;padding:.9rem 1.1rem;border:1px solid var(--gc-line);border-radius:12px;margin:.6rem 0;background:#fff}
 .gc-buy a{font-weight:600}
 /* --- Home "corporate" (hero scuro, ciclo in 4 passi, fascia dati, colonne a 4). Colori: --gc-ink e --gc-acc (da _data/tema.json) --- */
-.ent-hero{background:var(--gc-ink);background:linear-gradient(160deg,var(--gc-ink),color-mix(in srgb,var(--gc-ink) 78%,var(--gc-acc)));color:#fff;padding:clamp(3rem,8vw,6rem) 0}
-.ent-hero .gc-h1{color:#fff}.ent-hero .gc-h1 em{color:#fff;color:color-mix(in srgb,var(--gc-acc) 55%,#fff)}.ent-hero .gc-lead{color:#c9d0d8}.ent-hero .gc-eyebrow{color:#fff;color:color-mix(in srgb,var(--gc-acc) 55%,#fff)}
+.ent-hero{background:var(--gc-ink);background:linear-gradient(160deg,var(--gc-ink),color-mix(in srgb,var(--gc-ink) 78%,var(--gc-acc)));color:#fff;padding:clamp(1.5rem,4vh,3.5rem) 0;min-height:calc(100vh - 80px);min-height:calc(100svh - 80px);display:flex;align-items:center}
+.ent-hero .gc-h1{color:#fff;font-size:clamp(2rem,3.2vw + 1.2vh,3.6rem)}.ent-hero .gc-h1 em{color:#fff;color:color-mix(in srgb,var(--gc-acc) 55%,#fff)}.ent-hero .gc-lead{color:#c9d0d8}.ent-hero .gc-eyebrow{color:#fff;color:color-mix(in srgb,var(--gc-acc) 55%,#fff)}
 .ent-hero .gc-btn-o{color:#fff;border-color:#fff}.ent-hero .gc-btn-o:hover{background:#fff;color:var(--gc-ink)}.ent-hero .gc-btn-a:hover{background:transparent;color:#fff}
 .ent-cycle{display:grid;gap:.8rem}.ent-cycle div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);border-radius:14px;padding:1rem 1.2rem}
 .ent-cycle b{display:block;color:#fff;font-size:1.05rem}.ent-cycle span{color:#c9d0d8;font-size:.93rem}
