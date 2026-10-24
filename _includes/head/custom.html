@@ -503,7 +503,7 @@ document.addEventListener('DOMContentLoaded', function(){
    - niente redirect per bot/anteprime, con ?nolang=1, o se arrivi da un'altra pagina dello stesso sito. */
 (function () {
   try {
-    var A = {{ '{' }}{{ ml_json }}"_":""{{ '}' }}, DEF = '{{ site.default_lang }}', CUR = '{{ page.lang | default: site.default_lang }}', K = 'lang_pref';
+    var A = { {{ ml_json }}"_":"" }, DEF = '{{ site.default_lang }}', CUR = '{{ page.lang | default: site.default_lang }}', K = 'lang_pref';
     document.addEventListener('click', function (e) {
       var a = e.target && e.target.closest ? e.target.closest('a.nv__lang-item, .lang-switch a') : null;
       if (a && a.getAttribute('hreflang')) { try { localStorage.setItem(K, a.getAttribute('hreflang')); } catch (x) {} }
