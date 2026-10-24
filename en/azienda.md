@@ -6,7 +6,7 @@ author_profile: false
 ref: azienda
 lang: en
 locale: en
-tr: tradotto
+tr: da_aggiornare
 tr_hash: 6x7zb
 permalink: /en/about-us/
 ---

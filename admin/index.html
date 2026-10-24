@@ -1387,7 +1387,7 @@ function renderPagBlocchi(){
 function pagBlockSu(i){if(i===0)return;var t=_pagBlocchi.splice(i,1)[0];_pagBlocchi.splice(i-1,0,t);renderPagBlocchi();}
 function pagBlockGiu(i){if(i===_pagBlocchi.length-1)return;var t=_pagBlocchi.splice(i,1)[0];_pagBlocchi.splice(i+1,0,t);renderPagBlocchi();}
 function aggiungiPagBlocco(){
-  _pagBlocchi.push({id:'box'+Date.now(),nome:'Nuovo box',enabled:true,html:'<section style="padding:40px;text-align:center">\n  <h2>Nuovo box</h2>\n  <p>Scrivi qui il tuo HTML.</p>\n</section>'});
+  _pagBlocchi.push({id:'box'+Date.now(),nome:'Nuovo box',enabled:true,html:'<h2>Nuovo box</h2>\n<p>Scrivi qui il tuo HTML.</p>'});
   renderPagBlocchi();
 }
 
