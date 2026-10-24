@@ -7,17 +7,18 @@ author_profile: false
 PAGINA CATEGORIA DEL NEGOZIO (porting da _plugins/ecommerce.rb > PaginaCategoria). Come la scheda prodotto: il file _negozio/categoria-<id>.md ha solo
 front matter (layout, title, cid, permalink); i prodotti vengono da _data/catalogo.json. Creato/rimosso dall'admin (E-commerce > Categorie).
 {%- endcomment -%}
+{%- assign nz_lh = '/' -%}{%- if page.lang and page.lang != site.default_lang -%}{%- assign nz_lh = '/' | append: page.lang | append: '/' -%}{%- endif -%}
 {%- assign nz_k = site.data.catalogo.categorie | where: 'id', page.cid | first -%}
 {%- if site.ecommerce != true or nz_k == nil -%}
-<p>Questa categoria non &egrave; disponibile. <a href="{{ '/negozio/' | relative_url }}">Torna al negozio</a></p>
+<p>Questa categoria non &egrave; disponibile. <a href="{{ nz_lh | append: 'negozio/' | relative_url }}">Torna al negozio</a></p>
 {%- else -%}
 <div id="negozio" data-tracker="{{ site.ordini.tracker }}" data-worker="">
-<nav class="nz-brd" aria-label="Percorso"><a href="{{ '/negozio/' | relative_url }}">Negozio</a> &rsaquo; <span>{{ nz_k.nome }}</span></nav>
-<div class="nz-pills"><a class="nz-cpill" href="{{ '/negozio/' | relative_url }}">Tutti</a>
+<nav class="nz-brd" aria-label="Percorso"><a href="{{ nz_lh | append: 'negozio/' | relative_url }}">Negozio</a> &rsaquo; <span>{{ nz_k.nome }}</span></nav>
+<div class="nz-pills"><a class="nz-cpill" href="{{ nz_lh | append: 'negozio/' | relative_url }}">Tutti</a>
 {%- for c in site.data.catalogo.categorie -%}
 {%- assign nz_n = site.data.catalogo.prodotti | where: 'categoria', c.id | where_exp: 'x', 'x.visibile != false' | size -%}
 {%- if nz_n > 0 %}
-<a class="nz-cpill{% if c.id == nz_k.id %} on{% endif %}" href="{{ '/negozio/categoria/' | append: c.id | append: '/' | relative_url }}">{{ c.icona }} {{ c.nome }}</a>
+<a class="nz-cpill{% if c.id == nz_k.id %} on{% endif %}" href="{{ nz_lh | append: 'negozio/categoria/' | append: c.id | append: '/' | relative_url }}">{{ c.icona }} {{ c.nome }}</a>
 {%- endif -%}
 {%- endfor %}
 </div>
@@ -28,6 +29,6 @@ front matter (layout, title, cid, permalink); i prodotti vengono da _data/catalo
 {% include negozio-riga.html b=b cat=nz_k %}
 {%- endfor -%}
 </div>
-<p class="nz-vai"><a class="btn btn-outline-secondary" href="{{ '/carrello/' | relative_url }}">Vai al carrello</a></p>
+<p class="nz-vai"><a class="btn btn-outline-secondary" href="{{ nz_lh | append: 'carrello/' | relative_url }}">Vai al carrello</a></p>
 </div>
 {%- endif -%}

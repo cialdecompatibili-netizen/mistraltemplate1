@@ -1,4 +1,5 @@
 ---
+ref: shop-ordine
 layout: single
 classes: wide
 author_profile: false
@@ -8,6 +9,7 @@ description: Completa il tuo ordine.
 ecommerce: true
 noindex: true
 ---
+{%- assign nz_lh = '/' -%}{%- if page.lang and page.lang != site.default_lang -%}{%- assign nz_lh = '/' | append: page.lang | append: '/' -%}{%- endif -%}
 {% if site.ecommerce == true %}
 {% comment %}
 NOTE PER CHI MODIFICA QUESTA PAGINA (la logica e' in assets/js/carrello.js, blocco ORDINE):
@@ -19,7 +21,7 @@ NOTE PER CHI MODIFICA QUESTA PAGINA (la logica e' in assets/js/carrello.js, bloc
 - I testi del riepilogo laterale (#nz-sum-fiducia) e l'hint del telefono (#nz-o-tel-h) li riscrive il JS in base a fisico/digitale.
 {% endcomment %}
 <div id="nz-ordine-pag" data-tracker="{{ site.ordini.tracker }}">
-<p id="nz-vuoto">Il carrello è vuoto. <a href="{{ '/negozio/' | relative_url }}">Vai al negozio</a></p>
+<p id="nz-vuoto">Il carrello è vuoto. <a href="{{ nz_lh | append: 'negozio/' | relative_url }}">Vai al negozio</a></p>
 <div id="nz-pieno" hidden>
 <ol class="nz-steps">
 <li data-step="1" class="on"><span class="nz-sn">1</span> <span class="nz-sl">Dati</span></li>
@@ -39,7 +41,7 @@ NOTE PER CHI MODIFICA QUESTA PAGINA (la logica e' in assets/js/carrello.js, bloc
 <div class="nz-f"><label for="nz-o-email">Email</label><input type="email" id="nz-o-email" maxlength="150" required autocomplete="email" placeholder="nome@esempio.it"></div>
 <div class="nz-f"><label for="nz-o-tel">Telefono <span class="nz-opz" id="nz-o-tel-h">(facoltativo, utile al corriere)</span></label><input type="tel" id="nz-o-tel" maxlength="30" autocomplete="tel" inputmode="tel"></div>
 <p class="nz-err" role="alert"></p>
-<div class="nz-az-ord"><a class="btn nz-b nz-b-neutro" href="{{ '/carrello/' | relative_url }}">Torna al carrello</a> <button type="button" class="btn nz-b nz-b-vai" data-nav="avanti">Continua</button></div>
+<div class="nz-az-ord"><a class="btn nz-b nz-b-neutro" href="{{ nz_lh | append: 'carrello/' | relative_url }}">Torna al carrello</a> <button type="button" class="btn nz-b nz-b-vai" data-nav="avanti">Continua</button></div>
 </section>
 
 <section class="nz-passo" data-passo="2" hidden>

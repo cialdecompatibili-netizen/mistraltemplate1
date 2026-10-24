@@ -35,7 +35,7 @@
 
   var KEY = "nz_carrello";
   var MAX = 20;
-  var euro = new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR" });
+  var euro = new Intl.NumberFormat((document.documentElement.lang || "it").replace("_", "-"), { style: "currency", currency: "EUR" }) /* lingua dalla pagina (shop multilingua) */;
 
   function leggi() {
     try {
