@@ -128,7 +128,7 @@ share: false
 }
 </style>
 
-<ul class="blog-list">
+<ul class="blog-list" data-pg data-pg-item="li.blog-item" data-per="{{ site.per_page | default: 20 }}">
   {% for post in posts_l %}
   <li class="blog-item">
     <div class="blog-img">

@@ -531,9 +531,9 @@ tr:hover td{background:#f0f6fc}
       <div class="card">
         <div class="card-title">Visualizzazione liste</div>
         <div class="field">
-          <label>Prodotti per pagina <span style="font-weight:400;color:#bbb">(lista nella tab Prodotti)</span></label>
-          <input type="number" id="cfg-limite-prodotti" min="1" placeholder="50" onchange="setLimiteProdotti(this.value)">
-          <div class="hint">Quante righe mostrare prima di far comparire le frecce ← Precedente / Successiva →. Salvato solo su questo browser (non sincronizzato tra dispositivi).</div>
+          <label>Elementi per pagina <span style="font-weight:400;color:#bbb">(admin e sito: articoli, pagine, prodotti, blog, negozio)</span></label>
+          <select id="cfg-per-page" onchange="setPerPage(this.value)"><option>10</option><option>20</option><option>50</option><option>100</option><option>200</option><option>500</option></select>
+          <div class="hint">Quante voci mostrare prima della paginazione. Nell'admin vale subito; sul sito dopo "Salva" (chiave per_page di _config.yml). Con 200-500 le miniature dell'admin si caricano a gruppi.</div>
         </div>
       </div>
 
@@ -1863,7 +1863,8 @@ async function caricaImpostazioni(){
   document.getElementById('cfg-author-name').value=get('  name','');
   document.getElementById('cfg-bio').value=get('  bio','');
   document.getElementById('cfg-avatar').value=get('  avatar','');
-  document.getElementById('cfg-limite-prodotti').value=getLimiteProdotti();
+  const ppCfg=parseInt((y.match(/^per_page:\s*(\d+)/m)||[])[1]); if(ppCfg)localStorage.setItem('cms_per_page',ppCfg);
+  document.getElementById('cfg-per-page').value=String(getPerPage());
   // social — cerca gli url dopo i label
   const socialMatch=(label)=>{const m=y.match(new RegExp(`label: "${label}"[\\s\\S]*?url: "?([^"\\n]+)"?`));return m?m[1].trim():'';}
   document.getElementById('cfg-website').value=socialMatch('Website');
@@ -1917,6 +1918,11 @@ async function salvaImpostazioni(){
   const footerVal=document.getElementById('cfg-footer-text').value.trim();
   if(y.match(/^footer_text:/m)) y=y.replace(/^footer_text:.*$/m,`footer_text: "${footerVal}"`);
   else y+=`\nfooter_text: "${footerVal}"`;
+
+  // elementi per pagina (admin e sito)
+  const ppVal=document.getElementById('cfg-per-page').value||'20';
+  if(y.match(/^per_page:/m)) y=y.replace(/^per_page:.*$/m,`per_page: ${ppVal}`);
+  else y+=`\nper_page: ${ppVal}`;
 
   // autore nome, bio, avatar
   y=y.replace(/(author:\s*\n\s*name\s*:\s*)(".+?"|[^\n]+)/,`$1"${document.getElementById('cfg-author-name').value.trim()}"`);
@@ -2150,12 +2156,12 @@ function tornaListaProdotti(){
 // ── Paginazione lista prodotti ──────────────────────────────────────────
 // Limite configurabile dalla tab Impostazioni (default 50), salvato in localStorage.
 // getLimiteProdotti()/setLimiteProdotti() sono usate anche dal campo in Impostazioni.
-function getLimiteProdotti(){
-  return parseInt(localStorage.getItem('cms_limite_prodotti'))||50;
-}
-function setLimiteProdotti(n){
-  localStorage.setItem('cms_limite_prodotti', Math.max(1, parseInt(n)||50));
-}
+// GUIDA-SVILUPPO: UN solo valore per tutte le liste = per_page di _config.yml (copia in localStorage 'cms_per_page' per l'admin).
+// Lo leggono anche js/wp-elenchi.js (articoli, pagine) e il sito (assets/js/paginazione.js). Non reintrodurre limiti separati per elenco.
+function getPerPage(){return parseInt(localStorage.getItem('cms_per_page'))||20;}
+function setPerPage(n){localStorage.setItem('cms_per_page', Math.max(1, parseInt(n)||20));}
+function getLimiteProdotti(){return getPerPage();}
+function setLimiteProdotti(n){setPerPage(n);}
 let _prodPaginaCorrente=1;
 
 async function caricaProdotti(){
@@ -2386,7 +2392,7 @@ window.onload=function(){
 <script src="js/seo-panel.js?v=20261024d"></script>
 <script src="js/automatico.js?v=20261024e"></script>
 <script src="js/dashboard.js"></script>
-<script src="js/wp-elenchi.js"></script>
+<script src="js/wp-elenchi.js?v=20261024f"></script>
 <script src="js/lingue.js?v=20261024c"></script>
 <script src="js/lingua-admin.js?v=20261024c"></script>
 </body>

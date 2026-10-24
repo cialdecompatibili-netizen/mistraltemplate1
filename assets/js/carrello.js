@@ -370,6 +370,8 @@
       radice.querySelectorAll(".nz-lista .nz-box").forEach(function (r) {
         r.hidden = !!pill.dataset.cat && r.dataset.cat !== pill.dataset.cat;
       });
+      /* GUIDA-SVILUPPO: le voci nascoste dal filtro non contano nelle pagine; senza questa riga la paginazione resterebbe quella di "Tutti". */
+      if (window.PgLista) window.PgLista.refresh(radice.querySelector(".nz-lista"), true);
       return;
     }
     var b = ev.target.closest("button");
