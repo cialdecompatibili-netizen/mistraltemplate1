@@ -59,7 +59,7 @@ window.caricaPagine=async function(){
   if(!tok())return; const el=$('lista-pagine'); if(!el)return;
   let res; try{res=await ghGet('_pages');}catch(e){return;} if(!res.ok)return;
   const sys=typeof PAGINE_SISTEMA!=='undefined'?PAGINE_SISTEMA:[];
-  const files=(await res.json()).filter(f=>f.type==='file'&&/\.(md|html)$/.test(f.name)&&!sys.includes(f.name)).sort((a,b)=>a.name.localeCompare(b.name));
+  const files=(await res.json()).filter(f=>f.type==='file'&&/\.(md|html)$/.test(f.name)&&!sys.includes(f.name)&&f.name!=='index.html').sort((a,b)=>a.name.localeCompare(b.name));
   lista({el:'lista-pagine',files,ph:'Cerca pagine',heads:['Titolo','Indirizzo'],pp:30,
     pre:'<tr><td><a class="wp-t" onclick="modificaPaginaBox(\'home\',null)">Home</a> <span class="wp-n">— pagina principale</span><div class="wp-ra"><a onclick="modificaPaginaBox(\'home\',null)">Modifica</a> | <a href="'+BASE+'" target="_blank" rel="noopener">Visualizza</a></div></td><td class="wp-n">/</td></tr>',
     meta:raw=>{const f=fmOf(raw);return {title:gv(f,'title'),perm:gv(f,'permalink')};},
