@@ -71,3 +71,9 @@ Lezioni dal primo clone reale (sito corporate cybersecurity IT+EN). Ordine di la
 Dopo l'implementazione: provare un clone di prova (punto 7 del piano generale) e controllare online.
 
 - FATTO (24/10/2026) ottimizzazione da clone cybersecurity: punti 1-10 della sezione sopra (home corporate IT/EN con stile in gaming.css, tema.json pilota --gc-acc/--gc-ink, Servizi di esempio, Chi siamo EN a blocchi, esempi puliti, colori fissi tolti da blog/contatti, automation/allinea_hash.py, pubblica.ps1 con -Files a virgole, nuovo_sito.ps1 con -Accento e promemoria). RESTA: prova di clone online (punto 7 del piano generale).
+
+## PUNTO DI RIPRESA (24/10/2026) - da riprendere
+- Mirco ha detto "non adesso, appunta, ci torniamo": la PROVA DI CLONE e' rimandata.
+- Prossimo passo: `..\nuovo_sito.ps1 -Nome prova -Brand "Prova" -Lingue it,en -Accento "#0b6cf0"` e controllare online home IT/EN, Servizi, Chi siamo, selettore lingua, colori da tema.json, hreflang/sitemap, ricerca.
+- Poi: interruttori Shop/Tour/Blog nell'admin (punto 5 del piano), commenti guida ancora mancanti (layout product, publish.py, traduci_lingua.py, js admin).
+- Sito cybersecurity (clone fatto prima di queste ottimizzazioni, ha stile inline suo): contatti spenti (mancano email/WhatsApp/contact_endpoint), da scrivere altri articoli avvisi (GitLab 10/10, LiteLLM su PyPI, CVE-2026-115560 segnalata da ACN: verificare sul web prima), altre lingue da admin > Lingue.
