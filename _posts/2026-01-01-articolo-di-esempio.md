@@ -1,7 +1,7 @@
 ---
 layout: single
 title: "Articolo di esempio"
-date: 2026-10-25
+date: 2026-10-24
 excerpt: "Sostituisci questo articolo con il tuo primo contenuto."
 categories:
   - journal
