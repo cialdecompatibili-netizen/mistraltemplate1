@@ -74,6 +74,13 @@ async function lgLoadDocs() {
   const bm = cfg.match(/^default_lang:\s*(\S+)/m); LG.base = bm ? bm[1].replace(/["']/g, '') : 'it';
   const lm = cfg.match(/^languages:\s*\[([^\]]*)\]/m); LG.langs = lm ? lm[1].split(',').map(s => s.trim().replace(/["']/g, '')).filter(Boolean) : [LG.base];
   if (!LG.langs.includes(LG.base)) LG.langs.unshift(LG.base);
+  // RILEVAMENTO AUTOMATICO: la lingua e' la CARTELLA. Ogni cartella-lingua nella repo (es. "de/" clonata a mano)
+  // diventa una lingua anche se non e' in `languages:` del config; una lingua del config senza piu' cartella
+  // (cartella rinominata/cancellata) sparisce. La registrazione nei file la fa lgNormalizza().
+  const det = lgDetect();
+  LG.orphans = LG.langs.filter(c => c !== LG.base && !det.includes(c));
+  LG.detected = det.filter(c => !LG.langs.includes(c));
+  LG.langs = LG.langs.filter(c => !LG.orphans.includes(c)).concat(LG.detected);
   const lyml = await lgReadPath('_data/languages.yml');
   if (lyml) { const re = /^([a-z-]+):\s*\r?\n\s+name:\s*(.+)$/gm; let m; while ((m = re.exec(lyml))) LG.names[m[1]] = m[2].trim().replace(/["']/g, ''); }
   LG.docs = {};
@@ -85,6 +92,72 @@ async function lgLoadDocs() {
     });
     LG.docs[lang] = {}; loaded.forEach(d => { LG.docs[lang][d.ref] = d; });
   }
+}
+
+// ---- RILEVAMENTO + NORMALIZZAZIONE AUTOMATICA DELLE LINGUE (clono la cartella, rinomino, e' fatta) ----
+// Una lingua = cartella alla radice "xx" o "xx-yy" con index.html / *.md / _posts, oppure _data/i18n/xx/.
+function lgDetect() {
+  const found = {};
+  LG.tree.forEach(f => {
+    let m = f.path.match(/^([a-z]{2}(?:-[a-z]{2})?)\/(?:index\.html$|_posts\/|[^\/]+\.md$)/);
+    if (!m) m = f.path.match(/^_data\/i18n\/([a-z]{2}(?:-[a-z]{2})?)\//);
+    if (m && m[1] !== LG.base) found[m[1]] = 1;
+  });
+  return Object.keys(found);
+}
+// blocco `defaults:` del config per una lingua (lang/locale/layout + permalink articoli /xx/...)
+function lgScope(code) {
+  return '  - scope:\n      path: "' + code + '"\n    values:\n      lang: ' + code + '\n      locale: ' + code + '\n  - scope:\n      path: "' + code + '"\n      type: pages\n    values:\n      layout: single\n  - scope:\n      path: "' + code + '"\n      type: posts\n    values:\n      layout: single\n      permalink: /' + code + '/:categories/:title/\n';
+}
+// Rende coerente con la CARTELLA tutto il resto: config (languages + defaults), languages.yml, ui-text.yml,
+// `lang`/`locale`/`permalink` nel front matter dei file della cartella, url in _data/i18n/xx/.
+// Idempotente: committa SOLO se qualcosa cambia (una sola commit). Ritorna il numero di file aggiornati.
+async function lgNormalizza() {
+  const others = LG.langs.filter(l => l !== LG.base);
+  const entries = [];
+  const put = async (path, content) => { const old = await lgReadPath(path); if (old !== content) entries.push({ path, content }); };
+  const langRe = /^\/([a-z]{2}(?:-[a-z]{2})?)\//;
+  // 1) config: elenco lingue = cartelle reali + blocco defaults per ogni lingua che non ce l'ha
+  let cfg = await lgReadPath('_config.yml');
+  if (cfg) {
+    cfg = cfg.replace(/^languages:.*$/m, 'languages: [' + [LG.base].concat(others).join(', ') + ']');
+    others.forEach(code => { if (!new RegExp('path:\\s*["\']' + code + '["\']').test(cfg)) cfg = cfg.replace(/^(  # LANG-DEFAULTS[^\r\n]*\r?\n)/m, '$1' + lgScope(code)); });
+    await put('_config.yml', cfg);
+  }
+  // 2) nome lingua (selettore) e testi interfaccia (copia del blocco `en:` come punto di partenza)
+  let lyml = await lgReadPath('_data/languages.yml');
+  if (lyml !== null) {
+    others.forEach(code => { if (!new RegExp('^' + code + ':', 'm').test(lyml)) lyml = lyml.replace(/\s+$/, '') + '\n' + code + ':\n  name: ' + (LG.names[code] || code.toUpperCase()) + '\n'; });
+    await put('_data/languages.yml', lyml);
+  }
+  let ui = await lgReadPath('_data/ui-text.yml');
+  if (ui) {
+    others.forEach(code => { if (!new RegExp('^' + code + ':', 'm').test(ui)) { const blk = lgUiBlock(ui, code); if (blk) ui = ui.replace(/\s+$/, '') + '\n\n' + blk; } });
+    await put('_data/ui-text.yml', ui);
+  }
+  // 3) file della cartella: lang/locale e permalink devono dire la lingua della cartella (dopo un clone dicono quella vecchia)
+  for (const code of others) {
+    const files = LG.tree.filter(f => f.path.startsWith(code + '/') && /\.(md|html)$/.test(f.path));
+    await lgPool(files, async f => {
+      const s = lgSplit(await lgText(f.sha)); if (!s.fm) return;
+      let fm = s.fm;
+      if (lgGet(fm, 'lang') !== code) fm = lgSet(fm, 'lang', code);
+      if (lgGet(fm, 'locale') !== code) fm = lgSet(fm, 'locale', code);
+      const pl = lgGet(fm, 'permalink'); const pm = pl.match(langRe);
+      if (pm && pm[1] !== code) fm = lgSet(fm, 'permalink', pl.replace(langRe, '/' + code + '/'));
+      if (fm !== s.fm) entries.push({ path: f.path, content: '---\n' + fm.replace(/\s+$/, '') + '\n---\n' + s.body });
+    }, 6);
+    // 4) url dei menu/blocchi tradotti: /vecchia-lingua/... -> /code/...
+    const dfiles = LG.tree.filter(f => f.path.startsWith('_data/i18n/' + code + '/'));
+    await lgPool(dfiles, async f => {
+      const t = await lgText(f.sha);
+      const n = t.replace(/(url:\s*["']?)\/([a-z]{2}(?:-[a-z]{2})?)\//g, (all, a, l) => (l !== code && (LG.langs.includes(l) || LG.orphans.includes(l) || LG.names[l])) ? a + '/' + code + '/' : all);
+      if (n !== t) entries.push({ path: f.path, content: n });
+    }, 6);
+  }
+  if (!entries.length) return 0;
+  await lgCommit(entries, 'Multilingua: lingue rilevate dalle cartelle registrate (' + others.join(', ') + ')');
+  return entries.length;
 }
 
 function lgStato(lang, ref) {
@@ -170,7 +243,7 @@ async function lgNuova() {
     if (lyml !== null && !new RegExp('^' + code + ':', 'm').test(lyml)) add({ path: '_data/languages.yml', content: lyml.replace(/\s+$/, '') + '\n' + code + ':\n  name: ' + (LG.names[code] || code.toUpperCase()) + '\n' });
     let cfg = await lgReadPath('_config.yml');
     cfg = cfg.replace(/^languages:.*$/m, 'languages: [' + LG.langs.concat([code]).join(', ') + ']');
-    const scope = '  - scope:\n      path: "' + code + '"\n    values:\n      lang: ' + code + '\n      locale: ' + code + '\n  - scope:\n      path: "' + code + '"\n      type: pages\n    values:\n      layout: single\n  - scope:\n      path: "' + code + '"\n      type: posts\n    values:\n      layout: single\n      permalink: /' + code + '/:categories/:title/\n';
+    const scope = lgScope(code); // blocco defaults: stessa funzione usata da lgNormalizza
     cfg = cfg.replace(/^(  # LANG-DEFAULTS[^\r\n]*\r?\n)/m, '$1' + scope);
     add({ path: '_config.yml', content: cfg });
     await lgCommit(entries, 'Multilingua: nuova lingua ' + code + ' clonata da ' + src);
@@ -204,6 +277,13 @@ async function caricaLingue(force) {
   box.innerHTML = '<span style="color:#999">Carico...</span>';
   try {
     await lgLoadDocs();
+    // AUTOMATICO: cartelle-lingua nuove/rinominate/clonate vengono registrate (config, nomi, front matter, url)
+    // una volta per sessione; se e' tutto gia' a posto non committa nulla.
+    if (!LG.normTried) {
+      LG.normTried = true;
+      const n = await lgNormalizza();
+      if (n) { await lgLoadDocs(); showMsg('msg-lingue', 'Lingue rilevate dalle cartelle e registrate (' + n + ' file aggiornati). Il sito si aggiorna tra 1-2 minuti.', 'ok'); }
+    }
     const sel = document.getElementById('lg-src'); sel.innerHTML = LG.langs.map(l => '<option value="' + l + '">' + lgEsc(LG.names[l] || l) + ' (' + l + ')</option>').join('');
     document.getElementById('lg-codes').innerHTML = Object.keys(LG.names).filter(k => !LG.langs.includes(k)).map(k => '<option value="' + k + '">' + lgEsc(LG.names[k]) + '</option>').join('');
     const refs = []; const baseDocs = Object.values(LG.docs[LG.base]);

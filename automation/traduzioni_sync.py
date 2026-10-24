@@ -94,6 +94,13 @@ def main():
     base = bm.group(1).strip('"\'') if bm else 'it'
     lm = re.search(r'^languages:\s*\[([^\]]*)\]', cfg, re.M)
     langs = [x.strip().strip('"\'') for x in lm.group(1).split(',') if x.strip()] if lm else [base]
+    # RILEVAMENTO AUTOMATICO: ogni cartella alla radice con nome-lingua (xx o xx-yy) che contiene
+    # index.html o .md e' una lingua, anche se non e' ancora elencata in `languages:` (es. cartella
+    # clonata/rinominata a mano). L'admin > Lingue poi la registra in config; qui basta per le traduzioni.
+    for d in sorted(ROOT.iterdir()):
+        if d.is_dir() and re.fullmatch(r'[a-z]{2}(-[a-z]{2})?', d.name) and d.name not in langs \
+                and ((d / 'index.html').exists() or any(d.glob('*.md'))):
+            langs.append(d.name)
 
     base_docs = {}
     for kind, p in collect(base, base):

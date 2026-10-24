@@ -24,6 +24,10 @@ Il `tr_hash` e' l'hash del testo originale quando e' stato tradotto. Lo stesso a
 
 ## Aggiungere una lingua (es. tedesco)
 
+**Metodo veloce (automatico): clona la cartella.** Copia `en/` in `de/` (e, se c'e', `_data/i18n/en/` in `_data/i18n/de/`), poi fai commit e push. Il sito la rileva da solo (bandiera nel selettore, `_includes/lingue-attive.html`). Apri admin > **Lingue**: l'admin la registra in `_config.yml`, `languages.yml`, `ui-text.yml` e corregge `lang`/`permalink` dei file clonati e gli url dei menu, poi la lingua compare nella tabella con "modifica" su ogni pagina. Funziona anche rinominando una cartella esistente (la vecchia lingua senza cartella sparisce dall'elenco). Regola: la CARTELLA e' la fonte di verita'. Nome mostrato e bandiera: vedi i punti 2 sotto.
+
+**Metodo da admin:**
+
 1. Admin > **Lingue** > **Nuova lingua**: scegli `de`, scegli da quale lingua clonare. Crea in un solo commit `de/` con pagine e articoli (`tr: copia`, `ref`, permalink e scope in `_config.yml`).
 2. Se la lingua non e' in `_data/languages.yml`, aggiungila (nome) e metti la bandiera in `assets/images/flags/de.svg`.
 3. Crea i file del menu in `_data/i18n/de/` (copia quelli di `en` e traduci le etichette) e, se serve, `blocks_home.json`.
