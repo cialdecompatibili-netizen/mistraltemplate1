@@ -3,18 +3,42 @@
     "id": "hero",
     "nome": "Hero",
     "enabled": true,
-    "html": "<div class=\"gc\"><section class=\"gc-hero\"><div class=\"gc-wrap gc-hero-in\"><div><p class=\"gc-eyebrow\">Short subtitle</p><h1 class=\"gc-h1\">Main title of the site. <em>Keyword.</em></h1><p class=\"gc-lead\">One sentence explaining what the site does and for whom. It can be edited from admin &gt; Home (blocks).</p><div class=\"gc-act\"><a class=\"gc-btn gc-btn-a\" href=\"__BASEURL__/en/about-us/\">About us</a><a class=\"gc-btn gc-btn-o\" href=\"__BASEURL__/en/contact/\">Contact</a></div></div><div class=\"gc-hero-art\"><div class=\"gc-art\" style=\"--c1:#4f35e8;--c2:#22d3ee\" aria-hidden=\"true\">&#9678;</div><div class=\"gc-art\" style=\"--c1:#16a34a;--c2:#facc15\" aria-hidden=\"true\">&#10070;</div><div class=\"gc-art\" style=\"--c1:#0e1116;--c2:#ec4899\" aria-hidden=\"true\">&#8960;</div></div></div></section></div>"
+    "html": "<div class=\"gc\"><section class=\"ent-hero\"><div class=\"gc-wrap gc-hero-in\"><div><p class=\"gc-eyebrow\">Sector or category</p><h1 class=\"gc-h1\">Main title of the site. <em>Keyword.</em></h1><p class=\"gc-lead\">One sentence explaining what the site does and for whom. Edit it from admin &gt; Home (blocks).</p><div class=\"gc-act\"><a class=\"gc-btn gc-btn-a\" href=\"__BASEURL__/en/contact/\">Contact us</a><a class=\"gc-btn gc-btn-o\" href=\"__BASEURL__/en/services/\">Our services</a></div></div><div class=\"ent-cycle\"><div><b>Step one</b><span>Short description</span></div><div><b>Step two</b><span>Short description</span></div><div><b>Step three</b><span>Short description</span></div><div><b>Step four</b><span>Short description</span></div></div></div></section></div>"
   },
   {
-    "id": "servizi-esempio",
-    "nome": "Three strengths",
+    "id": "contesto",
+    "nome": "Context",
     "enabled": true,
-    "html": "<div class=\"gc\"><section class=\"gc-sec gc-soft\" id=\"punti\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">What we offer</p><h2 class=\"gc-h2\">Three strengths</h2><div class=\"gc-plat\"><div class=\"gc-pl\"><span class=\"n\">1</span><b>First point</b><p>Short description of the first point.</p></div><div class=\"gc-pl\"><span class=\"n\">2</span><b>Second point</b><p>Short description of the second point.</p></div><div class=\"gc-pl\"><span class=\"n\">3</span><b>Third point</b><p>Short description of the third point.</p></div></div></div></section></div>"
+    "html": "<div class=\"gc\"><section class=\"gc-sec\" id=\"contesto\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Context</p><h2 class=\"gc-h2\">Title of the data strip</h2><p class=\"gc-lead\">One sentence of context. Use only real, verifiable numbers, with the source.</p><div class=\"ent-stats\"><div><b>00</b><span>First figure</span></div><div><b>00</b><span>Second figure</span></div><div><b>00</b><span>Third figure</span></div></div><p class=\"ent-src\">Source: state the source of the data here.</p></div></section></div>"
+  },
+  {
+    "id": "servizi",
+    "nome": "Services",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-soft\" id=\"servizi\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Services</p><h2 class=\"gc-h2\">Title of the services</h2><div class=\"gc-plat ent-4\"><div class=\"gc-pl ent-pl\"><span class=\"n\">01</span><b>First service</b><ul><li>Point one</li><li>Point two</li><li>Point three</li></ul></div><div class=\"gc-pl ent-pl\"><span class=\"n\">02</span><b>Second service</b><ul><li>Point one</li><li>Point two</li><li>Point three</li></ul></div><div class=\"gc-pl ent-pl\"><span class=\"n\">03</span><b>Third service</b><ul><li>Point one</li><li>Point two</li><li>Point three</li></ul></div><div class=\"gc-pl ent-pl\"><span class=\"n\">04</span><b>Fourth service</b><ul><li>Point one</li><li>Point two</li><li>Point three</li></ul></div></div><p style=\"margin-top:1.6rem\"><a class=\"gc-link\" href=\"__BASEURL__/en/services/\">Full details of our services</a></p></div></section></div>"
+  },
+  {
+    "id": "perchi",
+    "nome": "Who we work for",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec\" id=\"perchi\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Who we work for</p><h2 class=\"gc-h2\">Title for the audience</h2><div class=\"gc-plat ent-4\"><div class=\"gc-pl ent-pl\"><b>First audience</b><ul><li>Example one</li><li>Example two</li></ul></div><div class=\"gc-pl ent-pl\"><b>Second audience</b><ul><li>Example one</li><li>Example two</li></ul></div><div class=\"gc-pl ent-pl\"><b>Third audience</b><ul><li>Example one</li><li>Example two</li></ul></div><div class=\"gc-pl ent-pl\"><b>Fourth audience</b><ul><li>Example one</li><li>Example two</li></ul></div></div></div></section></div>"
+  },
+  {
+    "id": "metodo",
+    "nome": "How we work",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-soft\" id=\"metodo\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Method</p><h2 class=\"gc-h2\">How an engagement works</h2><div class=\"gc-plat ent-4\"><div class=\"gc-pl\"><span class=\"n\">01</span><b>First step</b><p>Short description of the first step.</p></div><div class=\"gc-pl\"><span class=\"n\">02</span><b>Second step</b><p>Short description of the second step.</p></div><div class=\"gc-pl\"><span class=\"n\">03</span><b>Third step</b><p>Short description of the third step.</p></div><div class=\"gc-pl\"><span class=\"n\">04</span><b>Fourth step</b><p>Short description of the fourth step.</p></div></div></div></section></div>"
+  },
+  {
+    "id": "avvisi",
+    "nome": "Blog",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec\" id=\"avvisi\"><div class=\"gc-wrap gc-2c\"><div><p class=\"gc-eyebrow\">Blog</p><h2 class=\"gc-h2\">Title of the blog</h2><p class=\"gc-lead\">One sentence introducing the articles.</p><a class=\"gc-btn gc-btn-k\" href=\"__BASEURL__/en/blog/\">Read the blog</a></div><div class=\"gc-pl\"><span class=\"n\">LATEST ARTICLE</span><b>Title of the latest article</b><p>Short description.</p></div></div></section></div>"
   },
   {
     "id": "contatti",
     "nome": "Contact",
     "enabled": true,
-    "html": "<div class=\"gc\"><section class=\"gc-sec gc-dark\" id=\"contatti\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Contact</p><h2 class=\"gc-h2\">Let's talk</h2><p class=\"gc-lead\">Write to us: we reply as soon as possible.</p><a class=\"gc-btn\" href=\"__BASEURL__/en/contact/\">Write to us</a></div></section></div>"
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-dark\" id=\"contatti\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Contact</p><h2 class=\"gc-h2\">Let us talk</h2><p class=\"gc-lead\">Write to us: we reply as soon as possible.</p><a class=\"gc-btn\" href=\"__BASEURL__/en/contact/\">Contact us</a></div></section></div>"
   }
 ]

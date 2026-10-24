@@ -3,18 +3,42 @@
     "id": "hero",
     "nome": "Hero",
     "enabled": true,
-    "html": "<div class=\"gc\"><section class=\"gc-hero\"><div class=\"gc-wrap gc-hero-in\"><div><p class=\"gc-eyebrow\">Sottotitolo breve</p><h1 class=\"gc-h1\">Titolo principale del sito. <em>Parola chiave.</em></h1><p class=\"gc-lead\">Una frase che spiega cosa fa il sito e per chi. Si modifica da admin &gt; Home (blocchi).</p><div class=\"gc-act\"><a class=\"gc-btn gc-btn-a\" href=\"__BASEURL__/chi-siamo/\">Chi siamo</a><a class=\"gc-btn gc-btn-o\" href=\"__BASEURL__/contatti/\">Contatti</a></div></div><div class=\"gc-hero-art\"><div class=\"gc-art\" style=\"--c1:#4f35e8;--c2:#22d3ee\" aria-hidden=\"true\">&#9678;</div><div class=\"gc-art\" style=\"--c1:#16a34a;--c2:#facc15\" aria-hidden=\"true\">&#10070;</div><div class=\"gc-art\" style=\"--c1:#0e1116;--c2:#ec4899\" aria-hidden=\"true\">&#8960;</div></div></div></section></div>"
+    "html": "<div class=\"gc\"><section class=\"ent-hero\"><div class=\"gc-wrap gc-hero-in\"><div><p class=\"gc-eyebrow\">Settore o categoria</p><h1 class=\"gc-h1\">Titolo principale del sito. <em>Parola chiave.</em></h1><p class=\"gc-lead\">Una frase che spiega cosa fa il sito e per chi. Si modifica da admin &gt; Home (blocchi).</p><div class=\"gc-act\"><a class=\"gc-btn gc-btn-a\" href=\"__BASEURL__/contatti/\">Contattaci</a><a class=\"gc-btn gc-btn-o\" href=\"__BASEURL__/servizi/\">Scopri i servizi</a></div></div><div class=\"ent-cycle\"><div><b>Passo uno</b><span>Descrizione breve</span></div><div><b>Passo due</b><span>Descrizione breve</span></div><div><b>Passo tre</b><span>Descrizione breve</span></div><div><b>Passo quattro</b><span>Descrizione breve</span></div></div></div></section></div>"
   },
   {
-    "id": "servizi-esempio",
-    "nome": "Tre punti di forza",
+    "id": "contesto",
+    "nome": "Il contesto",
     "enabled": true,
-    "html": "<div class=\"gc\"><section class=\"gc-sec gc-soft\" id=\"punti\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Cosa offriamo</p><h2 class=\"gc-h2\">Tre punti di forza</h2><div class=\"gc-plat\"><div class=\"gc-pl\"><span class=\"n\">1</span><b>Primo punto</b><p>Descrizione breve del primo punto.</p></div><div class=\"gc-pl\"><span class=\"n\">2</span><b>Secondo punto</b><p>Descrizione breve del secondo punto.</p></div><div class=\"gc-pl\"><span class=\"n\">3</span><b>Terzo punto</b><p>Descrizione breve del terzo punto.</p></div></div></div></section></div>"
+    "html": "<div class=\"gc\"><section class=\"gc-sec\" id=\"contesto\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Il contesto</p><h2 class=\"gc-h2\">Titolo della fascia dati</h2><p class=\"gc-lead\">Una frase di contesto. Usa solo numeri reali e verificabili, con la fonte.</p><div class=\"ent-stats\"><div><b>00</b><span>Primo dato</span></div><div><b>00</b><span>Secondo dato</span></div><div><b>00</b><span>Terzo dato</span></div></div><p class=\"ent-src\">Fonte: indica qui la fonte dei dati.</p></div></section></div>"
+  },
+  {
+    "id": "servizi",
+    "nome": "Servizi",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-soft\" id=\"servizi\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Servizi</p><h2 class=\"gc-h2\">Titolo dei servizi</h2><div class=\"gc-plat ent-4\"><div class=\"gc-pl ent-pl\"><span class=\"n\">01</span><b>Primo servizio</b><ul><li>Punto uno</li><li>Punto due</li><li>Punto tre</li></ul></div><div class=\"gc-pl ent-pl\"><span class=\"n\">02</span><b>Secondo servizio</b><ul><li>Punto uno</li><li>Punto due</li><li>Punto tre</li></ul></div><div class=\"gc-pl ent-pl\"><span class=\"n\">03</span><b>Terzo servizio</b><ul><li>Punto uno</li><li>Punto due</li><li>Punto tre</li></ul></div><div class=\"gc-pl ent-pl\"><span class=\"n\">04</span><b>Quarto servizio</b><ul><li>Punto uno</li><li>Punto due</li><li>Punto tre</li></ul></div></div><p style=\"margin-top:1.6rem\"><a class=\"gc-link\" href=\"__BASEURL__/servizi/\">Tutti i dettagli sui servizi</a></p></div></section></div>"
+  },
+  {
+    "id": "perchi",
+    "nome": "Per chi",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec\" id=\"perchi\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Per chi lavoriamo</p><h2 class=\"gc-h2\">Titolo per chi</h2><div class=\"gc-plat ent-4\"><div class=\"gc-pl ent-pl\"><b>Primo target</b><ul><li>Esempio uno</li><li>Esempio due</li></ul></div><div class=\"gc-pl ent-pl\"><b>Secondo target</b><ul><li>Esempio uno</li><li>Esempio due</li></ul></div><div class=\"gc-pl ent-pl\"><b>Terzo target</b><ul><li>Esempio uno</li><li>Esempio due</li></ul></div><div class=\"gc-pl ent-pl\"><b>Quarto target</b><ul><li>Esempio uno</li><li>Esempio due</li></ul></div></div></div></section></div>"
+  },
+  {
+    "id": "metodo",
+    "nome": "Come lavoriamo",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-soft\" id=\"metodo\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Metodo</p><h2 class=\"gc-h2\">Come si svolge un incarico</h2><div class=\"gc-plat ent-4\"><div class=\"gc-pl\"><span class=\"n\">01</span><b>Primo passo</b><p>Descrizione breve del primo passo.</p></div><div class=\"gc-pl\"><span class=\"n\">02</span><b>Secondo passo</b><p>Descrizione breve del secondo passo.</p></div><div class=\"gc-pl\"><span class=\"n\">03</span><b>Terzo passo</b><p>Descrizione breve del terzo passo.</p></div><div class=\"gc-pl\"><span class=\"n\">04</span><b>Quarto passo</b><p>Descrizione breve del quarto passo.</p></div></div></div></section></div>"
+  },
+  {
+    "id": "avvisi",
+    "nome": "Blog",
+    "enabled": true,
+    "html": "<div class=\"gc\"><section class=\"gc-sec\" id=\"avvisi\"><div class=\"gc-wrap gc-2c\"><div><p class=\"gc-eyebrow\">Blog</p><h2 class=\"gc-h2\">Titolo del blog</h2><p class=\"gc-lead\">Una frase che presenta gli articoli.</p><a class=\"gc-btn gc-btn-k\" href=\"__BASEURL__/blog/\">Leggi il blog</a></div><div class=\"gc-pl\"><span class=\"n\">ULTIMO ARTICOLO</span><b>Titolo dell&#39;ultimo articolo</b><p>Breve descrizione.</p></div></div></section></div>"
   },
   {
     "id": "contatti",
     "nome": "Contatti",
     "enabled": true,
-    "html": "<div class=\"gc\"><section class=\"gc-sec gc-dark\" id=\"contatti\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Contatti</p><h2 class=\"gc-h2\">Parliamone</h2><p class=\"gc-lead\">Scrivici: rispondiamo il prima possibile.</p><a class=\"gc-btn\" href=\"__BASEURL__/contatti/\">Scrivici</a></div></section></div>"
+    "html": "<div class=\"gc\"><section class=\"gc-sec gc-dark\" id=\"contatti\"><div class=\"gc-wrap\"><p class=\"gc-eyebrow\">Contatti</p><h2 class=\"gc-h2\">Parliamone</h2><p class=\"gc-lead\">Scrivici: rispondiamo il prima possibile.</p><a class=\"gc-btn\" href=\"__BASEURL__/contatti/\">Contattaci</a></div></section></div>"
   }
 ]

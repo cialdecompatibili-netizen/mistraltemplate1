@@ -54,3 +54,20 @@ Idee per dopo (non decise): traduzione AI con un tasto, elenco contenuti per lin
 - FATTO/IN CORSO oggi: fix categorie sparite (causa: SeoPanel chiamato a livello globale prima del caricamento di seo-panel.js, bloccava lo script; NON chiamare mai SeoPanel fuori da funzioni), date automatiche (created_at/last_modified_at), redirect 301 (redirect/ + admin Redirect).
 - DA FARE oggi, in ordine: SEO articolo di nuovo editabile, commit del lavoro date/redirect, elementi per pagina (10,20,50,100,200,500) in Impostazioni valido per liste admin e frontend, redirect 301 completi, date automatiche.
 - NON OGGI (in pausa, deciso da Mirco): punto 7 = bozze/programmazione, cestino e storico, commit unico + conflitti, immagini WebP, audit SEO, traduzione AI con un tasto, editor stringhe interfaccia.
+
+
+## OTTIMIZZAZIONE DA CLONE "cybersecurity" (24/10/2026) - cosa cambiare per i prossimi cloni
+Lezioni dal primo clone reale (sito corporate cybersecurity IT+EN). Ordine di lavoro, tutto nel template:
+1. Home pronta "corporate/enterprise" generica (hero scuro + ciclo in 4 passi, fascia dati, servizi in 4 colonne, per chi, metodo, blog, CTA), IT ed EN, con testi segnaposto neutri. Lo stile `ent-*` va in `assets/css/gaming.css`, NON inline nei blocchi.
+2. Colori da UN solo punto: `_data/tema.json` (accent, accent_dark) deve pilotare anche `--gc-acc` e `--gc-ink` (in `_includes/head/custom.html`). Oggi per cambiare colore ai blocchi serviva un `<style>` nel blocco.
+3. Pagina Servizi di esempio (IT `_pages/servizi.md`, EN `en/servizi.md`, slug /servizi/ e /en/services/, `ref: servizi`) e voce di menu Servizi.
+4. Pagina Chi siamo a blocchi anche in EN (`_data/i18n/en/blocks_azienda.json`) e blocchi azienda IT puliti (oggi "Nuovo box").
+5. Contenuti di esempio puliti: articolo IT/EN senza testo di prova, senza immagine marte e senza URL con il nome del template (violava ZERO valori fissi).
+6. Colori fissi residui in blog.md (verde/marrone) e contatti.md (#3f6b00) -> variabili del tema; testo contatti generico (era "magazine").
+7. `automation/allinea_hash.py`: per ogni lingua imposta `tr: tradotto` e `tr_hash` corretto sui file tradotti a mano (prima si faceva con uno script usa e getta). Da lanciare dopo aver scritto le pagine EN.
+8. `..\pubblica.ps1`: `-Files a,b,c` falliva se lanciato con `-File` (la virgola diventava una sola stringa). Ora separa da solo.
+9. `..\nuovo_sito.ps1`: nuovo parametro `-Accento "#rrggbb"` (scrive tema.json) e promemoria finale con cio' che resta vuoto (contact_endpoint, whatsapp, email) perche' il modulo contatti resta spento finche' contact_endpoint e' vuoto. Default lingue resta it,en: se si passa solo `it` la cartella `en/` viene tolta (e' successo a cybersecurity: da non ripetere senza motivo).
+10. CLAUDE.md: regole nuove (vedi sezione "Cose che funzionano" in fondo).
+Dopo l'implementazione: provare un clone di prova (punto 7 del piano generale) e controllare online.
+
+- FATTO (24/10/2026) ottimizzazione da clone cybersecurity: punti 1-10 della sezione sopra (home corporate IT/EN con stile in gaming.css, tema.json pilota --gc-acc/--gc-ink, Servizi di esempio, Chi siamo EN a blocchi, esempi puliti, colori fissi tolti da blog/contatti, automation/allinea_hash.py, pubblica.ps1 con -Files a virgole, nuovo_sito.ps1 con -Accento e promemoria). RESTA: prova di clone online (punto 7 del piano generale).

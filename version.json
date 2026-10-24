@@ -1,5 +1,5 @@
-{
-  "version": "1.1.1",
-  "date": "2026-04-30",
-  "changelog": "Fix layout articolo: testo occupa tutta la larghezza disponibile accanto alla sidebar."
+﻿{
+  "version": "1.2.0",
+  "date": "2026-10-24",
+  "changelog": "Home corporate a blocchi IT/EN, pagina Servizi, colori da tema.json, esempi puliti, allinea_hash.py."
 }

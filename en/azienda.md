@@ -6,18 +6,9 @@ author_profile: false
 ref: azienda
 lang: en
 locale: en
-tr: da_aggiornare
-tr_hash: 6x7zb
+tr: tradotto
+tr_hash: 2if1jh
 permalink: /en/about-us/
 ---
 
-{%- comment -%} PAGINA ESEMPIO. `ref: azienda` collega le traduzioni (stesso ref in /en/...): non cambiarlo. {%- endcomment -%}
-
-Write the presentation of the site here: who you are, what you do, how you work.
-
-## What we do
-
-- First service or activity.
-- Second service or activity.
-
-[Contact]({{ '/en/contact/' | relative_url }}){: .btn .btn--primary}
+{% include render-blocks.html data="blocks_azienda" %}

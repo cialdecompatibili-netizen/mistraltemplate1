@@ -10,6 +10,8 @@
 main:
   - title: "Home"
     url: /
+  - title: "Servizi"
+    url: /servizi/
   - title: "Journal"
     url: /blog/
   - title: "Shop"
