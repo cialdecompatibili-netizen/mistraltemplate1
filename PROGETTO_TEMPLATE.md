@@ -38,5 +38,5 @@ Un template STABILE e ADATTIVO che qualsiasi nuova repo possa prendere, con tutt
 ## STATO (24/10/2026)
 - FATTO: contenuti gaming rimossi (giochi, _negozio, post, .bak, crea_shop_gaming.py), sostituiti da esempi minimi (post, prodotto e categoria shop); _config.yml unico punto di configurazione con commenti guida; shop spento di default.
 - FATTO: admin senza repo fisso (detectRepo, su dominio personalizzato chiede il repo una volta); publish.py senza percorsi/URL fissi (repo = cartella del file, URL dal remote git); CLAUDE.md riscritto come guida ai cloni.
-- RESTA: punto 4 (script 
-uovo_sito.ps1), punto 5 (interruttori Shop/Tour/Blog nell'admin), punto 7 (prova di clone), commenti guida nei layout/include/JS/CSS ancora da completare, attivare l'hook nei cloni (lo fara' nuovo_sito.ps1).
+- FATTO (24/10/2026): multilingua automatico dalle cartelle (selettore, admin Lingue, lingua di lavoro in admin); punto 4: `..\nuovo_sito.ps1 -Nome x -Brand "X" -Lingue it,en [-Shop] [-Whatsapp N]` copia il template, imposta solo i campi identita' in _config.yml, attiva l'hook (core.hooksPath), crea la repo e Pages.
+- RESTA: punto 5 (interruttori Shop/Tour/Blog nell'admin), punto 7 (prova di clone), commenti guida nei layout/include/JS/CSS ancora da completare, attivare l'hook nei cloni (lo fara' nuovo_sito.ps1).
