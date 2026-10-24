@@ -1,0 +1,13 @@
+main:
+  - title: "Home"
+    url: /
+  - title: "Giochi"
+    url: /giochi/
+  - title: "Negozio"
+    url: /negozio/
+  - title: "Journal"
+    url: /blog/
+  - title: "Chi siamo"
+    url: /chi-siamo/
+  - title: "Contatti"
+    url: /contatti/

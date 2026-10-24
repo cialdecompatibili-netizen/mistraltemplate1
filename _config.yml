@@ -1,0 +1,136 @@
+# --- MULTILINGUA (vedi CLAUDE.md) ---
+locale: "it"
+default_lang: it
+languages: [it]
+
+brand: "GamingCorp"
+related_posts: 3
+email: ""
+description: "GamingCorp: studio indipendente di sviluppo giochi. Giochi nostri, sviluppati da noi, per browser, Android e PC."
+minimal_mistakes_skin: default
+search: true
+
+# SEO globale
+author:
+  name: ""
+
+social:
+  links: []
+
+
+markdown: kramdown
+remote_theme: mmistakes/minimal-mistakes
+exclude:
+  - vendor
+  - docs
+
+permalink: /:categories/:title/
+
+timezone:
+
+collections:
+  negozio:
+    output: true
+    permalink: /negozio/:name/
+  products:
+    output: false
+    permalink: /shop/:name/
+  servizi:
+    output: true
+    permalink: /servizi/:name/
+  progetti:
+    output: true
+    permalink: /progetti/:name/
+
+include:
+  - _pages
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-gist
+  - jekyll-feed
+  - jemoji
+  - jekyll-include-cache
+
+footer:
+  links: []
+
+defaults:
+  # LANG-DEFAULTS (l'admin aggiunge qui gli scope delle lingue: path = cartella lingua)
+  - scope:
+      path: "en"
+    values:
+      lang: en
+      locale: en
+  - scope:
+      path: "en"
+      type: pages
+    values:
+      layout: single
+  - scope:
+      path: "en"
+      type: posts
+    values:
+      layout: single
+      permalink: /en/:categories/:title/
+  - scope:
+      path: ""
+    values:
+      lang: it
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      author_profile: false
+      read_time: true
+      comments: true
+      share: true
+      related: true
+  - scope:
+      path: "_pages"
+      type: pages
+    values:
+      layout: single
+      author_profile: false
+  - scope:
+      path: ""
+      type: products
+    values:
+      layout: product
+      classes: wide
+  - scope:
+      path: ""
+      type: servizi
+    values:
+      layout: single
+      author_profile: false
+      read_time: true
+      share: true
+  - scope:
+      path: ""
+      type: progetti
+    values:
+      layout: single
+      author_profile: false
+
+category_archive:
+  type: liquid
+  path: /categories/
+tag_archive:
+  type: liquid
+  path: /tags/
+
+cms_homepage:
+
+# Numero WhatsApp con prefisso, senza + e senza spazi (es. 393331234567). Vuoto + whatsapp_demo: true = bottoni visibili ma inerti (DEMO). Vuoto + whatsapp_demo: false = bottoni nascosti
+whatsapp: ""
+whatsapp_demo: true
+# Indirizzo del servizio che inoltra il modulo di contatto (worker). Vuoto = il modulo non appare.
+contact_endpoint: ""
+
+
+ecommerce: true
+# Ordini (SMOKE TEST, nessun pagamento): URL dell'Apps Script. Vuoto = il pulsante 'Invia richiesta d'ordine' resta spento.
+ordini:
+  tracker: ""
