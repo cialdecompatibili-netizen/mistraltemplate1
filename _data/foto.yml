@@ -1,3 +1,6 @@
-# _data/foto.yml - galleria foto (gestita da admin > Foto). Vuota = nessuna galleria mostrata.
-# Ogni voce: f = nome file in assets/foto/ (senza .jpg), t = lista temi. Usata da _includes/ex-galleria.html.
-[]
+- f: "anteprima-marte-realistico"
+  cap: "Anteprima marte realistico"
+  t: [team]
+  team: true
+  w: 900
+  h: 540
