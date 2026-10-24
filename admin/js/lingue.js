@@ -112,7 +112,7 @@ function lgDetect() {
 }
 // blocco `defaults:` del config per una lingua (lang/locale/layout + permalink articoli /xx/...)
 function lgScope(code) {
-  return '  - scope:\n      path: "' + code + '"\n    values:\n      lang: ' + code + '\n      locale: ' + code + '\n  - scope:\n      path: "' + code + '"\n      type: pages\n    values:\n      layout: single\n  - scope:\n      path: "' + code + '"\n      type: posts\n    values:\n      layout: single\n      permalink: /' + code + '/:categories/:title/\n';
+  return '  - scope:\n      path: "' + code + '"\n    values:\n      lang: ' + code + '\n      locale: ' + code + '\n  - scope:\n      path: "' + code + '"\n      type: pages\n    values:\n      layout: single\n  - scope:\n      path: "' + code + '"\n      type: posts\n    values:\n      layout: single\n      permalink: /:categories/:title/\n';
 }
 // Rende coerente con la CARTELLA tutto il resto: config (languages + defaults), languages.yml, ui-text.yml,
 // `lang`/`locale`/`permalink` nel front matter dei file della cartella, url in _data/i18n/xx/.
