@@ -62,3 +62,20 @@ Lezioni dal clone "cybersecurity" (24/10/2026)
 - Il modulo contatti resta spento finche' `contact_endpoint` e' vuoto: chiederlo subito al cliente. Lo stesso per `whatsapp` ed `email`.
 - Clone: `..\nuovo_sito.ps1` tiene `en/` di default (it,en). Con `-Lingue it` la cartella `en/` viene tolta: farlo solo se richiesto. `-Accento "#rrggbb"` imposta il colore.
 - Pubblicare piu' file: `& ..\pubblica.ps1 -Repo x -Msg "..." -Files 'a','b'` (ora accetta anche `-Files a,b` da `-File`).
+
+
+Lezioni dalla migrazione "pelletteria" -> "pelletteria2" (24/10/2026)
+- Migrare un sito esistente in un clone: 1) mappare le due repo (menu, `_data/catalogo.json`, `_negozio/`, `blocks_home.json`, `_posts/`); 2) generare TUTTO con script node (accenti come `\uXXXX`, nei blocchi HTML entita' numeriche con una funzione `ent()`; JSON con `JSON.stringify` e rilettura); 3) `python automation/allinea_hash.py en`; 4) pubblicare con `..\pubblica.ps1 -Files ...`. Script di esempio: `claudetemp\build_pelletteria2\` (`dati.js` = categorie IT/EN, `build.js` = dati/menu, `build2.js` = blocchi/pagine/patch).
+- Categorie a DUE LIVELLI: campo `genitore` in `catalogo.json` (il reparto non ha genitore; la sua pagina mostra le sottocategorie e i prodotti di tutte). Nome inglese in `tr.en.nome`. Ogni categoria ha DUE file con `ref: shop-cat-<id>`: `_negozio/categoria-<id>.md` (permalink `/negozio/categoria/<id>/`) e `en/negozio/categoria/<id>.md` (permalink `/en/shop/category/<slug-inglese>/`).
+- Link dello shop: MAI `nz_lh | append: 'negozio/'` (in inglese puntava a `/en/negozio/`, che non esiste). Usare `{% include shop-url.html k="shop" %}`, `k="cat" id=...`, `k="prod" id=...`: cerca il `ref` (`shop-negozio`, `shop-cat-<id>`, `shop-prod-<id>`) nella lingua della pagina, poi nella base, poi la vecchia formula. Prodotti/categorie creati da admin senza `ref` in inglese ricadono sulla formula: aggiungere il `ref` a mano ai file.
+- Il clone con `nuovo_sito.ps1 -File` storpia le virgole (`default_lang: it,en`) e CANCELLA `en/` e `_data/i18n/en`: dopo il clone controllare `default_lang` e che `en/` esista, altrimenti ripristinare dal template.
+- Non portare nei blocchi i `<style>` del vecchio sito: si usano le classi `gc-*`/`ent-*` e `_data/tema.json` (copiare il tema.json del vecchio sito per mantenere i colori).
+- Togliere i segnaposto che non servono (`_pages/servizi.md`, articolo di esempio, categoria/prodotto di esempio): restano online e indicizzati.
+- Il modulo contatti resta spento senza `contact_endpoint` (il vecchio sito usava il worker del modello: non riusarlo, serve il worker del cliente).
+- Questo template ha molti file non committati: le modifiche shop (shop-url.html, negozio-categoria, patch ai link) sono nel working tree ma NON committate; non usare `pubblica.ps1 -Tutto` qui.
+
+## Lezioni dal clone pelletteria2 (24/10/2026)
+- FOOTER: _includes/footer/custom.html mette di default © anno nome-sito - Design, Development & Digital Marketing by webtomars.it; site.footer_text nel _config.yml lo sovrascrive. Nei cloni non serve rifarlo.
+- TEMA/COLORI: mai hex hardcoded (niente azzurri/teal/ghiaccio in menu.css, gaming.css, head/custom.html, layout): usare _data/tema.json (accent, accent_dark). Dopo il clone: cercare con grep i vecchi colori e sostituirli con la palette del nuovo sito.
+- HOME: sfondo hero = assets/images/*-hero.jpg referenziato in gaming.css (.ent-hero). Nei cloni sostituirlo con una texture a tema (esempio: automation/genera_texture.py di pelletteria2, Pillow+numpy) e cambiare logo con automation/genera_logo.py.
+- ORDINE CLONE: 1) tema.json 2) logo+texture 3) menu/categorie IT+EN 4) home/chi siamo 5) footer e segnaposto 6) commit+push+verifica online.
