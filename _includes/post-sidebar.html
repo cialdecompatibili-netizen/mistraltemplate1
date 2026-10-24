@@ -63,7 +63,7 @@ Gli stili stanno qui dentro in <style> con !important perche' devono vincere sul
   </section>
   {%- endif %}
 
-  <button type="button" class="ps-search" onclick="var t=document.querySelector('.search__toggle');if(t){t.click();}">Cerca nel Journal <span aria-hidden="true">&#128269;</span></button>
+  <button type="button" class="ps-search" onclick="var t=document.querySelector('.search__toggle');if(t){t.click();}">Cerca nel Blog <span aria-hidden="true">&#128269;</span></button>
 
   <section class="ps-card">
     <h2>Post recenti</h2>
@@ -83,7 +83,7 @@ Gli stili stanno qui dentro in <style> con !important perche' devono vincere sul
   <section class="ps-card">
     <h2>Rubriche</h2>
     <ul class="ps-list ps-cats">
-      {%- for v in site.data.sottomenu.Journal -%}
+      {%- for v in site.data.sottomenu.Blog -%}
         {%- if v.url contains '/categoria/?cat=' -%}
           {%- assign slug = v.url | split: 'cat=' | last -%}
           {%- assign n = posts_l | where_exp: "p","p.categories contains slug" | size -%}

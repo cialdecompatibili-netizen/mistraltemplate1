@@ -4,7 +4,7 @@ title: "Articolo di esempio"
 date: 2026-01-01
 excerpt: "Sostituisci questo articolo con il tuo primo contenuto."
 categories:
-  - journal
+  - blog
 ref: articolo-di-esempio
 ---
 

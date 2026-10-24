@@ -1,7 +1,7 @@
 ---
 ref: blog
 layout: single
-title: Journal
+title: Blog
 permalink: /blog/
 author_profile: false
 classes: wide

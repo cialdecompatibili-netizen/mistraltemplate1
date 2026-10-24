@@ -4,7 +4,7 @@ title: "Sample article"
 date: 2026-01-01
 excerpt: "Replace this article with your first piece of content."
 categories:
-  - journal
+  - blog
 lang: en
 locale: en
 tr: tradotto
