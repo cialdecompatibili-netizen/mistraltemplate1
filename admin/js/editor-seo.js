@@ -240,7 +240,7 @@ function mount(k){
   if(grid){
     const fp=document.createElement('div');
     fp.innerHTML='<div class="field"><label>Foto principale</label><div class="sx-fp"><div class="sx-fpi" id="sx-fpi-'+k+'"><span>Nessuna foto</span></div><div class="sx-fpa"><button type="button" class="btn btn-secondary btn-sm" id="sx-fpb-'+k+'">Scegli foto</button> <button type="button" class="btn btn-secondary btn-sm" id="sx-fpr-'+k+'" style="display:none">Rimuovi</button><div class="hint">Compare nell’elenco. Se non la scegli, il sito ne sceglie una in automatico.</div></div></div><input type="hidden" id="c-'+k+'-foto"></div>'
-      +(k==='progetti'?'<div class="field"><label>Etichette</label><input type="text" id="c-'+k+'-chips" placeholder="Grondaie, In giornata, Senza ponteggio"><div class="hint">Separate da virgola: compaiono come pillole nell’elenco.</div></div>':'');
+      +(k==='progetti'?'<div class="field"><label>Etichette</label><input type="text" id="c-'+k+'-chips" placeholder="Etichetta 1, Etichetta 2"><div class="hint">Separate da virgola: compaiono come pillole nell’elenco.</div></div>':'');
     grid.insertAdjacentElement('afterend',fp);
     $('sx-fpb-'+k).onclick=()=>openMedia({mode:'pick',onSelect:it=>{$('c-'+k+'-foto').value=it.f;renderFoto(k,it.f);}});
     $('sx-fpr-'+k).onclick=()=>{$('c-'+k+'-foto').value='';renderFoto(k,'');};
@@ -262,7 +262,7 @@ function mount(k){
   // pannello SEO
   const p=document.createElement('div');p.className='sx';
   p.innerHTML='<details open><summary>Anteprima su Google</summary><div class="sx-in"><div class="sx-snip"><div class="u" id="sx-u-'+k+'"></div><div class="t" id="sx-t-'+k+'"></div><div class="d" id="sx-d-'+k+'"></div></div><div id="sx-f-'+k+'"></div></div></details>'
-   +'<details open><summary>Parola chiave</summary><div class="sx-in"><div class="field" style="margin:0"><input type="text" id="c-'+k+'-fkw" placeholder="es. pulizia grondaie su fune"><div class="hint">La frase che un cliente scrive su Google per trovare questo lavoro.</div></div></div></details>'
+   +'<details open><summary>Parola chiave</summary><div class="sx-in"><div class="field" style="margin:0"><input type="text" id="c-'+k+'-fkw" placeholder="es. nome del servizio + citta"><div class="hint">La frase che un cliente scrive su Google per trovare questo lavoro.</div></div></div></details>'
    +'<details open><summary><i class="sx-dot" id="sx-ds-'+k+'"></i>Analisi SEO</summary><div class="sx-in"><ul class="sx-ul" id="sx-s-'+k+'"></ul></div></details>'
    +'<details><summary><i class="sx-dot" id="sx-dr-'+k+'"></i>Leggibilità</summary><div class="sx-in"><ul class="sx-ul" id="sx-r-'+k+'"></ul></div></details>';
   field.insertAdjacentElement('afterend',p);

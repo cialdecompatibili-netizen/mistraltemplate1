@@ -9,8 +9,8 @@ noindex: false
 ref: shop-negozio
 lang: en
 locale: en
-tr: da_aggiornare
-tr_hash: 1emaan
+tr: tradotto
+tr_hash: wpv4hy
 permalink: /en/shop/
 ---
 {%- assign nz_lh = '/' -%}{%- if page.lang and page.lang != site.default_lang -%}{%- assign nz_lh = '/' | append: page.lang | append: '/' -%}{%- endif -%}

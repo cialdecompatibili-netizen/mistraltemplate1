@@ -1,6 +1,14 @@
 ---
 layout: default
 ---
+{%- comment -%}
+GUIDA-SVILUPPO: LAYOUT "single" = pagina standard del sito (pagine _pages e en/, articoli _posts, servizi/progetti; i layout negozio-* lo estendono).
+Estende il layout del tema (minimal-mistakes, remote_theme). ORDINE di cio' che stampa: hero (se header.overlay_*), briciole, titolo, contenuto,
+[solo servizi/progetti: galleria foto + FAQ + CTA], piede (tassonomia + date da page__date.html), share (solo se page.share), paginazione,
+barra laterale articoli (post-sidebar.html, solo per i post), articoli correlati, "altri servizi".
+NON TOCCARE: la classe has-postside su #main (la usa post-sidebar.html) e posts_l (articoli della lingua della pagina: ogni articolo deve avere lang).
+PER CAMBIARE COSA COMPARE usa il front matter della pagina (header, share, related, breadcrumbs), non questo file. Testi di interfaccia: _data/ui-text.yml.
+{%- endcomment -%}
 {%- assign posts_l = site.posts | where: "lang", page.lang -%}
 {%- assign locale = page.locale | default: layout.locale | default: site.locale %}
 
@@ -64,7 +72,7 @@ layout: default
         {%- comment -%} Pagine servizio: FAQ + dati strutturati, poi blocco CTA finale (WhatsApp, telefono, modulo) {%- endcomment -%}
         {% if page.collection == "servizi" or page.collection == "progetti" %}
           {% assign ft = site.data.foto_temi[page.slug] | default: "team" %}
-          {% include ex-galleria.html temi=ft max=6 gruppo="pagina" titolo="Foto dai nostri cantieri" %}
+          {% include ex-galleria.html temi=ft max=6 gruppo="pagina" %}
         {% endif %}
         {% if page.collection == "servizi" %}
           {% include servizio-faq.html %}

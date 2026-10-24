@@ -66,7 +66,7 @@ function build(id){
    <div class="sp-sec"><label>Anteprima nei risultati di Google</label>
      <div class="sp-tg"><button type="button" data-v="d" class="on">Desktop</button><button type="button" data-v="m">Mobile</button></div>
      <div class="sp-prev" data-r="prev"><div class="sp-url" data-r="pu"></div><div class="sp-t" data-r="pt"></div><div class="sp-d" data-r="pd"></div></div></div>
-   <div class="sp-sec"><label>Parola chiave principale</label><input type="text" data-k="seo_kw" placeholder="es. villa con piscina a Roma">
+   <div class="sp-sec"><label>Parola chiave principale</label><input type="text" data-k="seo_kw" placeholder="es. la frase che un cliente cerca su Google">
      <div class="sp-cnt">La frase con cui vuoi essere trovato su Google. Una sola per pagina.</div></div>
    <div class="sp-sec"><label>Titolo SEO</label><input type="text" data-k="seo_title" placeholder="Se vuoto usa il titolo della pagina">
      <div class="sp-bar"><i data-r="tb"></i></div><div class="sp-cnt" data-r="tc"></div></div>

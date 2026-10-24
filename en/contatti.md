@@ -4,8 +4,8 @@ title: "Contact"
 ref: contatti
 lang: en
 locale: en
-tr: da_aggiornare
-tr_hash: 9dwyhl
+tr: tradotto
+tr_hash: e563ea
 permalink: /en/contact/
 ---
 

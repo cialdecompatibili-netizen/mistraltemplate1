@@ -1,3 +1,13 @@
+{%- comment -%}
+GUIDA-SVILUPPO: SOMMARIO DI QUESTO FILE (_includes/head/custom.html, finisce nel head di OGNI pagina). In ordine:
+ 1) SHOP MULTILINGUA: dizionario NZ_DICT da _data/shop_ui.yml (lo applica assets/js/shop-i18n.js) e link ai CSS del sito (menu, post-cover, negozio, gaming).
+ 2) VARIABILI COLORE --t-accent, --t-link ecc. lette da _data/tema.json. E' l'UNICO posto dove cambiare i colori: i valori di ripiego servono solo da sicurezza.
+ 3) CSS INLINE critico (niente lampeggi su menu e footer): icona carrello, dropdown shop, sottomenu, bottone WhatsApp, torna su, immagine articolo, box Indice.
+ 4) INTEGRAZIONI opzionali (GA4, Search Console, Meta Pixel, Hotjar): si accendono da _config.yml > integrations; campo vuoto = spento.
+ 5) JS: BASE url ricavato dall'URL (nessun nome repo fisso), copertina articolo, traduzione delle etichette del tema (Share on, Previous...), INDICE AUTOMATICO (da 3 titoli H2, mai su shop/carrello/ordine), dropdown shop solo desktop.
+ 6) LINGUA PREFERITA DEL BROWSER: redirect solo alla prima visita, solo da pagine in lingua base, mai per i bot (vedi la guida in quel punto).
+REGOLE: dentro le doppie graffe di output di Liquid non scrivere MAI una graffa chiusa (la build si rompe e il sito va giu'). Dopo ogni modifica pubblicare con -Aspetta e controllare la build.
+{%- endcomment -%}
 {%- comment -%} SHOP MULTILINGUA: NZ_DICT = tabella it->lingua della pagina (_data/shop_ui.yml); shop-i18n.js la applica, DEVE stare prima di carrello.js. Pagina italiana: nessun dizionario. {%- endcomment -%}
 {% if site.ecommerce == true %}{% assign nz_d = site.data.shop_ui[page.lang] %}<script>window.NZ_ECOM=true;{% if nz_d %}window.NZ_DICT={{ nz_d | jsonify }};{% endif %}</script><link rel="stylesheet" href="{{ '/assets/css/negozio.css' | relative_url }}"><script src="{{ '/assets/js/shop-i18n.js' | relative_url }}" defer></script><script src="{{ '/assets/js/carrello.js' | relative_url }}" defer></script>{% endif %}
 <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon.svg' | relative_url }}">

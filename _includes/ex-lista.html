@@ -1,3 +1,7 @@
+{%- comment -%}
+GUIDA-SVILUPPO: ELENCO di una collection (servizi, progetti...). Parametri: coll="servizi" (nome collection), ord="ordine" (campo di ordinamento), vista="riga" (righe con foto) oppure vuoto (card semplici).
+Le foto delle righe arrivano da _data/foto.yml scegliendo il tema della pagina (_data/foto_temi.yml, slug -> tema); se manca usa il tema "team". Stili in <style> qui dentro.
+{%- endcomment -%}
 {% assign items = site[include.coll] | sort: include.ord %}
 {% if include.vista == "riga" %}
 <style>

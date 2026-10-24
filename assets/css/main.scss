@@ -1,6 +1,8 @@
 ---
 # Front matter vuoto obbligatorio per Jekyll
 ---
+// GUIDA-SVILUPPO: CSS PRINCIPALE. Importa il tema (minimal-mistakes) e poi lo ritocca, a sezioni datate. Colori: usa le variabili --t-accent / --t-link (da _data/tema.json via head/custom.html), mai esadecimali nuovi.
+// Altri CSS: menu.css (menu), negozio.css (shop), gaming.css (blocchi home .gc-), galleria.css, post-cover.css. Nome file e front matter vuoto sono obbligatori per Jekyll.
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";

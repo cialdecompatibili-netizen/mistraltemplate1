@@ -1,3 +1,7 @@
+{%- comment -%}
+GUIDA-SVILUPPO: PULSANTI "Condividi su" (WhatsApp, Telegram, Facebook, LinkedIn, X, Pinterest, email, copia link). Incluso da _layouts/single.html SOLO se la pagina ha "share: true" nel front matter.
+Legge page.url e page.title; il nome sito viene da site-name.html. Stili e piccolo JS (copia link) sono in fondo a questo file. Il titolo "Condividi su" va tradotto in _data/ui-text.yml / head/custom.html.
+{%- endcomment -%}
 {%- include site-name.html -%}
 {%- assign share_url = page.url | absolute_url | url_encode -%}
 {%- assign share_title = page.title | default: site_name | strip_html | url_encode -%}

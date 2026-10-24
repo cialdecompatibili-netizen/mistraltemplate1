@@ -6,8 +6,8 @@ classes: wide
 ref: categoria
 lang: en
 locale: en
-tr: da_aggiornare
-tr_hash: 1o0n0q9
+tr: tradotto
+tr_hash: 1bk11xf
 permalink: /en/category/
 ---
 {%- assign posts_l = site.posts | where: "lang", page.lang -%}

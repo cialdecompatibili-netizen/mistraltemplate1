@@ -4,8 +4,11 @@
 // Usa le funzioni globali di index.html: tok, ghGet, dec, showMsg, startDeployPolling, REPO.
 (function(){
 const DIR='assets/foto', YML='_data/foto.yml', MAXW=1800;
-const TEMI=[['tinteggiatura','Tinteggiature'],['tetti','Tetti'],['impermeabilizzazione','Impermeabilizzazioni'],['grondaie','Grondaie'],['facciate','Facciate e balconi'],['vetri','Vetri'],['verde','Verde e potature'],['team','Andrew in arancione']];
-const KW={tetti:'tetto|coppi|camin|comignol|cupola|chiesa',grondaie:'gronda|grondai',vetri:'vetri|vetrat',facciate:'facciat|cornicion|balcon|mattoni',impermeabilizzazione:'impermeab|guaina|muffa|terrazzo',verde:'potatur|albero|vegetaz',tinteggiatura:'tinteggi',team:'andrew|arancione'};
+// GUIDA-SVILUPPO: TEMI = tipi di foto tra cui scegliere in admin > Foto ([slug, etichetta]). 'team' e' il tema di RISERVA: le pagine che non hanno foto del loro tema mostrano queste.
+// Per un nuovo sito aggiungi qui i tuoi temi (es. ['cucina','Cucina']): la galleria crea da sola i bottoni filtro dai temi presenti in _data/foto.yml.
+// KW = parole nel NOME del file che fanno indovinare il tema in automatico (slug: 'parola1|parola2'), facoltativo.
+const TEMI=[['team','Generale']];
+const KW={};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s).replace(/\\/g,'\\\\').replace(/"/g,'\\"');
 const attr=s=>String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;');

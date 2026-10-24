@@ -1,6 +1,11 @@
 ---
 layout: default
 ---
+{%- comment -%}
+GUIDA-SVILUPPO: LAYOUT LEGACY, NON USATO. La home vera e' index.html e en/index.html con layout "default" + _includes/home-content.html, che stampa
+i blocchi di _data/blocks_home.json (modificabili da admin > Home). Questo file (slider .lx) arriva da un sito precedente: NON modificarlo per cambiare la home.
+Si puo' cancellare dopo aver controllato che nessuna pagina abbia "layout: home".
+{%- endcomment -%}
 <style>
 .lx * { box-sizing: border-box; margin: 0; padding: 0; }
 
