@@ -20,3 +20,6 @@ automation/publish_log.jsonl
 **/.impeccable/live/server.json
 **/.impeccable/live/sessions/
 **/.impeccable/live/previews/
+
+# cache Python
+__pycache__/

@@ -1,6 +1,6 @@
-/* KIT BLOCCHI HOME (prefisso .gc-). Nome file storico (arriva da gamingcorp): NON rinominare, e' caricato da _includes/head/custom.html.
+/* KIT BLOCCHI HOME (prefisso .gc-). Nome file storico (nome ereditato dal template di origine): NON rinominare, e' caricato da _includes/head/custom.html.
    Usato dai blocchi di _data/blocks_home.json. Colori nelle variabili --gc-* qui sotto: per cambiare accento basta --gc-acc. */
-:root{--gc-ink:#0e1116;--gc-mut:#56606b;--gc-acc:#4f35e8;--gc-acc-s:#efecff;--gc-soft:#f5f6fa;--gc-line:#e6e8ee;--gc-head:'Space Grotesk','Inter',system-ui,sans-serif;--gc-sans:'Inter',system-ui,sans-serif}
+:root{--gc-ink:#0e1116;--gc-mut:#56606b;--gc-acc:#0e7490;--gc-acc-s:#e6f6f9;--gc-soft:#f5f6fa;--gc-line:#e6e8ee;--gc-head:'Space Grotesk','Inter',system-ui,sans-serif;--gc-sans:'Inter',system-ui,sans-serif}
 .gc{font-family:var(--gc-sans);color:var(--gc-ink)}
 .gc *{box-sizing:border-box}
 .gc-wrap{max-width:1180px;margin:0 auto;padding:0 1.5rem}
@@ -22,7 +22,7 @@
 .gc-hero-art{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
 .gc-hero-art .gc-art{border-radius:18px;aspect-ratio:1/1;font-size:clamp(2.4rem,6vw,4.2rem)}
 .gc-hero-art .gc-art:first-child{grid-row:span 2;aspect-ratio:auto}
-.gc-art{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--c1,#4f35e8),var(--c2,#22d3ee));color:#fff;font-family:var(--gc-head);font-weight:700;text-shadow:0 2px 14px rgba(0,0,0,.25);overflow:hidden}
+.gc-art{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--c1,#0e7490),var(--c2,#22d3ee));color:#fff;font-family:var(--gc-head);font-weight:700;text-shadow:0 2px 14px rgba(0,0,0,.25);overflow:hidden}
 .gc-head{display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;flex-wrap:wrap}
 .gc-link{font:600 .9rem var(--gc-sans);color:var(--gc-ink);border-bottom:2px solid var(--gc-ink);padding-bottom:2px;text-decoration:none}
 .gc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:2.2rem}

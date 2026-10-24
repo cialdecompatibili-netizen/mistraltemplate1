@@ -1,6 +1,6 @@
-- f: "anteprima-marte-realistico"
-  cap: "Anteprima marte realistico"
+- f: "colline-panorama"
+  cap: "Foto di esempio"
   t: [team]
   team: true
-  w: 900
-  h: 540
+  w: 1400
+  h: 935

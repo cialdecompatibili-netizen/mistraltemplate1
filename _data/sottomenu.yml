@@ -9,7 +9,7 @@
 #      navigation.yml: maiuscole, spazi e accenti compresi.
 #   2) sotto la chiave, una lista: ogni riga "- title" + "url" e' un link.
 #   3) "- divider: true" disegna una riga di separazione (mai in coda, mai due di fila).
-#   4) url interno SENZA nome repo: /servizi/x/  (NON /edilextreme4/servizi/x/).
+#   4) url interno SENZA nome repo: /servizi/x/  (NON /nome-repo/servizi/x/).
 #      Link esterno: url completo, es. https://esempio.it
 #   5) un solo livello: niente sottomenu dentro un sottomenu.
 #   6) la voce padre apre solo la tendina, non e' cliccabile. Per un link alla pagina padre
