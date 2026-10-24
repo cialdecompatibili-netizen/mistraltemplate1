@@ -2,6 +2,8 @@
 
 Leggi solo questo per partire. Dettagli: `AGENTS.md` (regole), `docs/MAPPA.md` (dove sta cosa), `docs/RICETTE.md` (procedure), `docs/ERRORI_NOTI.md` (errori da non rifare).
 
+**CREARE UN SITO DA QUESTO TEMPLATE: leggi PRIMA `docs/CLONAZIONE.md` (un comando `nuovo_sito.ps1` + `personalizza_clone.py` fanno colori, logo, sfondo home; un solo commit). Ogni automazione che impari va scritta come script in `automation/` e annotata li' (regola nella sezione 5): obiettivo meno tempo e meno commit per ogni nuovo sito.**
+
 ## Ambiente (fisso)
 - Cartella repo: `C:\Users\mirco\Desktop\repository\<nome>` | account GitHub: `cialdecompatibili-netizen` | sito: `https://cialdecompatibili-netizen.github.io/<nome>/` | admin: `.../<nome>/admin/`
 - Windows + PowerShell. Strumenti: Desktop Commander (file, processi), `git`, `gh`, `node`, `python`. NESSUNA build Jekyll locale: si controlla online.

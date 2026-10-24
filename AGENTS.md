@@ -3,6 +3,8 @@
 Template Jekyll per GitHub Pages. Si clona, si cambia quasi solo `_config.yml` e `_data/tema.json`, e il sito si adatta (lingua, URL, brand, colori, menu, shop).
 Si gestisce dal CMS nel browser (`admin/`), che scrive su GitHub con le API. Non esiste build locale su questo PC: si controlla online dopo il deploy.
 
+**CREARE UN SITO DA QUESTO TEMPLATE: leggi PRIMA `docs/CLONAZIONE.md` (un comando `nuovo_sito.ps1` + `personalizza_clone.py` fanno colori, logo, sfondo home; un solo commit). Ogni automazione che impari va scritta come script in `automation/` e annotata li' (regola nella sezione 5): obiettivo meno tempo e meno commit per ogni nuovo sito.**
+
 **FRETTA? Leggi solo `docs/START_1_MINUTO.md` (comandi, tabella "cosa cambiare dove", 8 regole). Controllo completo prima di pubblicare: `powershell -NoProfile -ExecutionPolicy Bypass -File automation\controllo.ps1` deve dire TUTTO OK.**
 
 ## Leggi in quest'ordine (poi lavora)
