@@ -12,7 +12,7 @@
 {% endcomment %}
 
 {% assign seo_title = page.seo_title | default: page.title %}
-{% assign seo_image = page.seo_image | default: site.og_image %}
+{% assign seo_image = page.seo_image | default: page.header.teaser | default: site.og_image %}
 {% comment %} MULTILINGUA-SEO: lingua della pagina (serve per description e og:locale) {% endcomment %}
 {% assign seo_lang = page.lang | default: site.default_lang %}
 {% assign seo_url   = page.canonical | default: page.url | absolute_url %}
@@ -20,6 +20,8 @@
 {% comment %} Description: seo_description → inizio del post (excerpt) → descrizione sito {% endcomment %}
 {% if page.seo_description %}
   {% assign seo_description = page.seo_description %}
+{% elsif page.description %}
+  {% assign seo_description = page.description | strip_html | normalize_whitespace | truncate: 160 %}
 {% elsif page.excerpt %}
   {% assign seo_description = page.excerpt | strip_html | normalize_whitespace | truncate: 160 %}
 {% else %}
