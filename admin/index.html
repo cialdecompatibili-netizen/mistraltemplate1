@@ -259,7 +259,7 @@ tr:hover td{background:#f0f6fc}
         <div class="card-title" id="art-editor-title">Nuovo articolo</div>
         <div class="field"><label>Titolo *</label><input type="text" id="titolo" placeholder="Titolo dell'articolo"></div>
         <div class="grid2">
-          <div class="field"><label>Data</label><input type="date" id="data"></div>
+          <input type="hidden" id="data">
           <div class="field">
             <label>Categoria *</label>
             <select id="categorie"><option value="">— Seleziona —</option></select>
@@ -1443,7 +1443,7 @@ async function modificaPaginaBox(slug,path){
   document.getElementById('nome-pagina').textContent=slug==='home'?'Home':slug;
   document.getElementById('msg-pag').style.display='none';
   showMsg('msg-pag','Caricamento...','');document.getElementById('msg-pag').style.display='block';
-  window._paginaFrontmatter='';
+  window._paginaPermOld='';window._paginaFrontmatter='';
   document.getElementById('pag-titolo').value=slug==='home'?'Home':'';
   document.getElementById('pag-description').value=''; SeoPanel.set('seo-pag',{});
   if(path){
@@ -1455,7 +1455,7 @@ async function modificaPaginaBox(slug,path){
       const fm=content.match(/^---\n([\s\S]*?)\n---/);
       const titleMatch=(fm?fm[1]:'').match(/title:\s*"?([^"\n]+)"?/);
       const descMatch=(fm?fm[1]:'').match(/description:\s*"?([^"\n]+)"?/);
-      window._paginaFrontmatter=fm?fm[0]+'\n':'';
+      window._paginaFrontmatter=fm?fm[0]+'\n':'';if(slug!=='home'){const _pm=(fm?fm[1]:'').match(/^permalink:\s*"?([^"\n]+?)"?\s*$/m);window._paginaPermOld=_pm?_pm[1].trim():'';document.getElementById('pag-permalink').value=window._paginaPermOld;document.getElementById('pag-permalink-field').style.display='block';}
       document.getElementById('pag-titolo').value=titleMatch?titleMatch[1].trim():'';
       document.getElementById('pag-description').value=descMatch?descMatch[1].trim():''; {const _s=SeoPanel.read(fm?fm[1]:'');if(!_s.seo_description)_s.seo_description=descMatch?descMatch[1].trim():'';SeoPanel.set('seo-pag',_s);}
     }
@@ -1497,19 +1497,19 @@ async function salvaPagina(){
       let content;
       if(fm){
         fm=fm.replace(/title:\s*"[^"]*"/,'title: "'+titolo+'"');
-        fm=fm.replace(/^description:.*\n?/gm,'');fm=SeoPanel.patch(fm,'seo-pag');
+        fm=fm.replace(/^description:.*\n?/gm,'');fm=SeoPanel.patch(fm,'seo-pag');let _np=((document.getElementById('pag-permalink')||{}).value||'').trim();window._paginaPermNew='';if(_np){_np=Auto.normPath(_np);if(window.ADM&&ADM.lang&&ADM.lang!==ADM.base&&!_np.startsWith('/'+ADM.lang+'/'))_np='/'+ADM.lang+_np;if(/^permalink:/m.test(fm))fm=fm.replace(/^permalink:.*$/m,'permalink: '+_np);else fm=fm.replace(/\n?---\s*$/,'\npermalink: '+_np+'\n---');window._paginaPermNew=_np;}fm=Auto.stamp(fm,true);
         content=fm.trimEnd()+'\n\n{% include render-blocks.html data="blocks_'+slugAttuale+'" %}';
       } else {
         const permalinkInput=document.getElementById('pag-permalink');
         const permalink=(permalinkInput&&permalinkInput.value.trim())||'/'+slugAttuale+'/';
-        content='---\nlayout: single\ntitle: "'+titolo+'"'+(desc?'\ndescription: "'+desc+'"':'')+'\npermalink: '+permalink+'\nauthor_profile: true\n'+SeoPanel.lines('seo-pag')+'---\n\n{% include render-blocks.html data="blocks_'+slugAttuale+'" %}';
+        content='---\nlayout: single\ntitle: "'+titolo+'"'+(desc?'\ndescription: "'+desc+'"':'')+'\npermalink: '+permalink+'\nauthor_profile: true\n'+SeoPanel.lines('seo-pag')+'created_at: '+Auto.nowIso()+'\nlast_modified_at: '+Auto.nowIso()+'\n---\n\n{% include render-blocks.html data="blocks_'+slugAttuale+'" %}';
       }
       _paginaPath=_paginaPath||('_pages/'+slugAttuale+'.md');
       const resPag=await ghPut(_paginaPath,'Aggiorna pagina: '+titolo,content,_paginaSha||undefined);
       const jPag=await resPag.json();
       clearInterval(timer);
       if(!resPag.ok)return showMsg('msg-pag',(jPag.message||'Errore pagina'),'err');
-      _paginaSha=jPag.content.sha;
+      _paginaSha=jPag.content.sha;if(window._paginaPermOld&&window._paginaPermNew&&window._paginaPermOld!==window._paginaPermNew){RD.add(window._paginaPermOld,window._paginaPermNew).then(ok=>{if(!ok)showMsg('msg-pag','\u26A0\uFE0F Salvata, ma il redirect dal vecchio indirizzo non e\' stato creato: aggiungilo in Redirect.','err');});window._paginaPermOld=window._paginaPermNew;}
     } else {
       clearInterval(timer);
     }
@@ -1558,7 +1558,7 @@ function tornaPagine(){
 }
 function apriNuovaPagina(){
   _paginaPath=null;_paginaSha=null;_pagBlocchiSha=null;_pagBlocchiFile=null;
-  window._paginaSlug=null;window._paginaFrontmatter='';
+  window._paginaSlug=null;window._paginaFrontmatter='';window._paginaPermOld='';
   _pagBlocchi=[{id:'main',nome:'Contenuto',enabled:true,html:'<section style="padding:40px;text-align:center">\n  <h2>Nuova pagina</h2>\n  <p>Scrivi qui il tuo contenuto.</p>\n</section>'}];
   document.getElementById('pag-titolo').value='';
   document.getElementById('pag-permalink').value='';
@@ -1582,7 +1582,7 @@ function tornaListaArticoli(){
 }
 function oggiLocale(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 function apriNuovoArticolo(){
-  ['titolo','excerpt','teaser','tags','corpo'].forEach(id=>document.getElementById(id).value=''); SeoPanel.set('seo-art',{});
+  ['titolo','excerpt','teaser','tags','corpo'].forEach(id=>document.getElementById(id).value=''); SeoPanel.set('seo-art',{});window._editExtra='';window._editCat0='';
   document.getElementById('categorie').value='';
   document.getElementById('vis-editor').innerHTML='';
   document.getElementById('data').value=oggiLocale();
@@ -1606,7 +1606,7 @@ function buildContent(){
   const teaser=document.getElementById('teaser').value.trim();
   const corpo=getCorpo();
   let fm=`---\nlayout: single\ntitle: "${titolo}"\ndate: ${data}\n`;
-  if(excerpt)fm+=`excerpt: "${excerpt}"\n`; fm+=SeoPanel.lines('seo-art');
+  if(excerpt)fm+=`excerpt: "${excerpt}"\n`; fm+=SeoPanel.lines('seo-art');fm+='last_modified_at: '+Auto.nowIso()+'\n';fm+=(window._editExtra||'');
   if(teaser)fm+=`header:\n  teaser: "${teaser}"\n`;
   if(cat)fm+=`categories:\n  - ${cat}\n`;
   if(tags.length)fm+=`tags:\n${tags.map(t=>`  - ${t}`).join('\n')}\n`;
@@ -1649,10 +1649,10 @@ async function modificaArticolo(path){
   const get=(k)=>{const m=(fm?fm[1]:'').match(new RegExp(`${k}:\\s*"?([^"\\n]+)"?`));return m?m[1].trim():'';}
   document.getElementById('titolo').value=get('title');
   document.getElementById('data').value=get('date');
-  document.getElementById('excerpt').value=get('excerpt'); {const _s=SeoPanel.read(fm?fm[1]:'');if(!_s.seo_description)_s.seo_description=get('excerpt');SeoPanel.set('seo-art',_s);}
+  document.getElementById('excerpt').value=get('excerpt'); {const _s=SeoPanel.read(fm?fm[1]:'');if(!_s.seo_description)_s.seo_description=get('excerpt');SeoPanel.set('seo-art',_s);}window._editExtra=Auto.extra(fm?fm[1]:'');
   document.getElementById('teaser').value=get('teaser')||'';
   const catM=(fm?fm[1]:'').match(/categories:\n\s*-\s*(.+)/);
-  if(catM)document.getElementById('categorie').value=catM[1].trim();
+  if(catM)document.getElementById('categorie').value=catM[1].trim();window._editCat0=catM?catM[1].trim():'';
   const tagsM=(fm?fm[1]:'').match(/tags:\n([\s\S]*?)(?=\n\w|\n---)/);
   if(tagsM)document.getElementById('tags').value=tagsM[1].replace(/\s*-\s*/g,'').trim().split('\n').join(', ');
   // Carica corpo: HTML diretto, niente conversioni
@@ -1681,7 +1681,7 @@ async function pubblica(){
     if(!corpo)return showMsg('msg-art','⚠️ Scrivi il contenuto!','err');
     const data=document.getElementById('data').value;
     if(!data)return showMsg('msg-art','⚠️ Data mancante!','err');
-    const filename=window._editPath||`_posts/${data}-${slugify(titolo)}.html`;
+    const filename=window._editPath||`_posts/${data}-${slugify(titolo)}.html`; const _rdOld=window._editPath?{p:window._editPath,c:window._editCat0||''}:null;
     showMsg('msg-art','⏳ Pubblicazione in corso...','ok');
     const contenuto=buildContent();
     const body={message:`${window._editSha?'Aggiorna':'Nuovo'} articolo: ${titolo}`,content:enc(contenuto)};
@@ -1693,7 +1693,7 @@ async function pubblica(){
     clearInterval(timer);
     const json=await res.json();
     if(res.ok){
-      window._editSha=null;window._editPath=null;
+      if(_rdOld)Auto.articolo(_rdOld.p,_rdOld.c,cat); window._editSha=null;window._editPath=null;
       showMsg('msg-art','✅ Pubblicato! Torno alla lista...','ok');
       startDeployPolling();
       setTimeout(()=>tornaListaArticoli(),1200);
@@ -2108,7 +2108,8 @@ async function eliminaCatShop(slug){
 
 // ============ SHOP — PRODOTTI ============
 // SHOP PRODOTTI
-let _prodPath=null;SeoPanel.set('seo-prod',{});
+// NON chiamare SeoPanel a livello globale: seo-panel.js si carica DOPO questo script (errore = si blocca tutto il resto, categorie incluse)
+let _prodPath=null;
 
 function nuovoProdotto(){
   ['prod-titolo','prod-prezzo','prod-stock','prod-sku','prod-immagine','prod-corpo'].forEach(id=>document.getElementById(id).value='');
@@ -2243,7 +2244,7 @@ async function pubblicaProdotto(){
   let sha=undefined;
   if(_prodPath){const r=await ghGet(_prodPath);if(r.ok){const d=await r.json();sha=d.sha;}}
   const description=document.getElementById('prod-description').value.trim();
-  const md=`---\ntitle: "${titolo}"\nprice: ${prezzo||0}\nstock: ${stock||''}\nsku: "${sku}"\ncategory: "${categoria}"\ntipo: "${tipo}"\nimage: "${immagine}"\ndescription: "${description}"\n${SeoPanel.lines('seo-prod')}layout: product\n---\n${corpo}`;
+  const md=`---\ntitle: "${titolo}"\nprice: ${prezzo||0}\nstock: ${stock||''}\nsku: "${sku}"\ncategory: "${categoria}"\ntipo: "${tipo}"\nimage: "${immagine}"\ndescription: "${description}"\n${SeoPanel.lines('seo-prod')}last_modified_at: ${Auto.nowIso()}\nlayout: product\n---\n${corpo}`;
   showMsg('msg-prod','⏳ Salvataggio...','');
   const res=await ghPut(path,`Prodotto: ${titolo}`,md,sha);
   if(res.ok){showMsg('msg-prod','✅ Prodotto salvato!','ok');startDeployPolling();_prodPath=path;caricaProdotti();}
@@ -2367,6 +2368,7 @@ window.onload=function(){
 <script src="js/foto.js"></script>
 <script src="js/editor-seo.js"></script>
 <script src="js/seo-panel.js?v=20261024d"></script>
+<script src="js/automatico.js?v=20261024e"></script>
 <script src="js/dashboard.js"></script>
 <script src="js/wp-elenchi.js"></script>
 <script src="js/lingue.js?v=20261024c"></script>

@@ -1,4 +1,4 @@
-﻿# mistraltemplate1 - progetto template stabile e adattivo
+# mistraltemplate1 - progetto template stabile e adattivo
 
 Creata il 24/10/2026. Base: clone di `gamingcorp` (che a sua volta deriva da edilextreme4/renzoferrucci con motore multilingua). Account GitHub `cialdecompatibili-netizen`, cartella `C:\Users\mirco\Desktop\repository\mistraltemplate1`.
 
@@ -48,3 +48,9 @@ Ispirato a WPML, Polylang, TranslatePress, Weglot. Da sviluppare in quest'ordine
 3. Lingua preferita del browser: alla PRIMA visita porta da solo alla lingua del browser (se esiste), ricorda la scelta (localStorage), la scelta manuale col selettore vince sempre, niente redirect per i bot.
 Idee per dopo (non decise): traduzione AI con un tasto, elenco contenuti per lingua cliccabile, editor affiancato, editor stringhe UI, fallback selettore, glossario, export .po/.csv, immagini per lingua.
 
+
+
+## ADMIN CMS - PIANO (24/10/2026)
+- FATTO/IN CORSO oggi: fix categorie sparite (causa: SeoPanel chiamato a livello globale prima del caricamento di seo-panel.js, bloccava lo script; NON chiamare mai SeoPanel fuori da funzioni), date automatiche (created_at/last_modified_at), redirect 301 (redirect/ + admin Redirect).
+- DA FARE oggi, in ordine: SEO articolo di nuovo editabile, commit del lavoro date/redirect, elementi per pagina (10,20,50,100,200,500) in Impostazioni valido per liste admin e frontend, redirect 301 completi, date automatiche.
+- NON OGGI (in pausa, deciso da Mirco): punto 7 = bozze/programmazione, cestino e storico, commit unico + conflitti, immagini WebP, audit SEO, traduzione AI con un tasto, editor stringhe interfaccia.
