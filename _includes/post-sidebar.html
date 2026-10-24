@@ -1,3 +1,8 @@
+{%- comment -%}
+GUIDA-SVILUPPO: BARRA LATERALE degli articoli (impaginazione affiancata dei post). Incluso da _layouts/single.html (riga con post-sidebar).
+Mostra solo articoli della STESSA lingua della pagina (where: "lang", page.lang): ogni articolo deve avere il campo lang.
+Gli stili stanno qui dentro in <style> con !important perche' devono vincere sul tema. La classe .has-postside sul #main la mette single.html SOLO per gli articoli (page.collection == "posts"): non rinominarla.
+{%- endcomment -%}
 {%- assign posts_l = site.posts | where: "lang", page.lang -%}
 <style>
 .has-postside{display:flex;flex-wrap:wrap;gap:2.2rem;align-items:flex-start}

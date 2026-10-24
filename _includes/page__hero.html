@@ -1,3 +1,7 @@
+{%- comment -%}
+GUIDA-SVILUPPO: HERO/INTESTAZIONE di pagina (immagine overlay, titolo, excerpt). Versione locale dell'include omonimo del tema, usata da _layouts/single.html.
+Legge dal front matter della pagina: header.overlay_image, header.overlay_filter (numero, rgba o gradient), header.image/caption/actions, page.title e page.excerpt. Campi vuoti = pezzo omesso, mai errore.
+{%- endcomment -%}
 {%- include site-name.html -%}
 {% assign locale = include.locale | default: site.locale %}
 {% capture overlay_img_path %}{{ page.header.overlay_image | relative_url }}{% endcapture %}

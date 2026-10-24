@@ -1,3 +1,5 @@
+// !!! LEGACY: questo file NON e' caricato da admin/index.html. La logica vera e' nello script inline di index.html
+// (e le liste in js/wp-elenchi.js). Modificare qui non ha alcun effetto.
 // ===== ARTICOLI =====
 
 let _editorMode='visuale';

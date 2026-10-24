@@ -71,6 +71,7 @@ collections:
   negozio:
     output: true
     permalink: /negozio/:name/
+  # GUIDA-SVILUPPO: `products` = shop VECCHIO (layout product, output:false = nessuna pagina generata). Lo shop NUOVO e' `negozio` qui sopra.
   products:
     output: false
     permalink: /shop/:name/

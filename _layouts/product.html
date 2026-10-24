@@ -1,6 +1,14 @@
 ---
 layout: single
 ---
+{%- comment -%}
+GUIDA-SVILUPPO: SCHEDA PRODOTTO DEL SISTEMA "SHOP VECCHIO" (collection `products`, layout: product).
+ATTENZIONE: nel template convivono DUE sistemi shop:
+  - NUOVO (usare questo): collection `negozio`, dati in _data/catalogo.json, pagine in _negozio/, layout negozio-prodotto.html, carrello assets/js/carrello.js.
+  - VECCHIO (questo file): admin > Shop > Prodotti e automation/publish.py scrivono front matter (price, image, ...) con layout: product.
+Per un clone nuovo lavorare solo sul sistema NUOVO. Questo layout legge soprattutto il front matter della pagina (page.*).
+Link fissi /shop/ nel breadcrumb: non seguono la lingua.
+{%- endcomment -%}
 <style>
 *{box-sizing:border-box}
 #page-title{display:none}

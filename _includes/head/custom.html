@@ -503,6 +503,9 @@ document.addEventListener('DOMContentLoaded', function(){
    - niente redirect per bot/anteprime, con ?nolang=1, o se arrivi da un'altra pagina dello stesso sito. */
 (function () {
   try {
+    // ATTENZIONE LIQUID: dentro le doppie graffe di output NON scrivere mai una graffa chiusa (nemmeno come stringa): Liquid la legge come fine tag
+    // e la BUILD SI ROMPE (sito giu'). Per questo l'oggetto JS qui sotto e' aperto FUORI dalle doppie graffe. NON scrivere doppie graffe nei commenti.
+    // Dopo ogni modifica a questo file: push con -Aspetta e controllare la build.
     var A = { {{ ml_json }}"_":"" }, DEF = '{{ site.default_lang }}', CUR = '{{ page.lang | default: site.default_lang }}', K = 'lang_pref';
     document.addEventListener('click', function (e) {
       var a = e.target && e.target.closest ? e.target.closest('a.nv__lang-item, .lang-switch a') : null;

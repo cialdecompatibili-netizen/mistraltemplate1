@@ -1,3 +1,5 @@
+// !!! LEGACY: questo file NON e' caricato da admin/index.html. La logica vera e' nello script inline di index.html.
+// Modificare qui non ha alcun effetto. Tenuto solo come riferimento storico (si puo' cancellare).
 // ===== CORE — utils, API GitHub, navigazione =====
 
 function detectRepo(){

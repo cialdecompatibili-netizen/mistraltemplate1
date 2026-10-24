@@ -800,6 +800,16 @@ tr:hover td{background:#f0f6fc}
 // ~840  tok()/enc()/dec()       — token localStorage + base64 UTF-8 safe (MAI btoa/atob diretti)
 // ~844  ghGet()/ghPut()         — helper GitHub API contenuti (sha obbligatorio per update, mai '')
 // ~886  SELETTORE IMMAGINI      — apriSelettoreImmagini(), galleria+upload+elimina, riutilizzabile
+// ===== GUIDA-SVILUPPO: REGOLE PER NON ROMPERE L'ADMIN (errori gia' fatti) =====
+// 1) Questo script INLINE gira PRIMA dei file js/*.js (si caricano in fondo alla pagina).
+//    Mai chiamare SeoPanel, Auto, RD, FOTOLIB... a livello globale: solo dentro funzioni (eseguite dopo il caricamento).
+//    Un solo ReferenceError qui blocca TUTTO quello che segue (e' successo: categorie sparite).
+// 2) Dopo ogni modifica: node automation/test_admin.js (simula l'admin con dati finti e segnala gli errori di caricamento).
+// 3) window.onload (in fondo) e' l'unico punto di avvio: non ridefinirlo in altri file js, usare addEventListener.
+// 4) Le funzioni qui sotto possono essere RIDEFINITE da js/wp-elenchi.js, js/lingua-admin.js (caricaLista, renderCategorie,
+//    fetch): se una lista "non si comporta come scritto qui", guardare li'.
+// 5) Con una lingua diversa dalla base (selettore in alto) lingua-admin.js rimappa i path di Articoli/Pagine/Menu.
+// ============================================================================
 // ~977  caricaCategorie()       — legge _data/categorie.json (articoli)
 // ~1343 ARTICOLI                — pubblicaArticolo(), editor visuale/HTML, TOC, teaser image
 // ~1806 SHOP CATEGORIE          — _data/shop-categorie.json, aggiungiCatShop()/eliminaCatShop()
@@ -2350,6 +2360,8 @@ function salvaTokenOnboarding(){
   document.getElementById('token-input').value=t;
   caricaCategorie();caricaLista();
 }// INIT
+// AVVIO ADMIN. Carica solo cio' che serve alla scheda iniziale (categorie + articoli): il resto e' lazy in showPage().
+// Se qui non parte nulla, aprire la console del browser: quasi sempre e' un errore JS piu' sopra nello script inline.
 window.onload=function(){
   document.getElementById('data').value=oggiLocale();
   document.getElementById('quill-box').style.display='block';
@@ -2364,6 +2376,10 @@ window.onload=function(){
   }
 };
 </script>
+<!-- GUIDA-SVILUPPO: ORDINE DI CARICAMENTO. Questi file vengono DOPO lo script inline: non cambiare l'ordine alla leggera.
+     lingue.js prima di lingua-admin.js (la usa); wp-elenchi.js ridefinisce caricaLista/caricaPagine/renderCategorie;
+     lingua-admin.js per ultimo (intercetta window.fetch). Cambiando un file js aggiornare il ?v= per rompere la cache.
+     admin/js/core.js e articoli.js NON sono caricati (legacy). -->
 <script src="js/collezioni.js"></script>
 <script src="js/foto.js"></script>
 <script src="js/editor-seo.js"></script>

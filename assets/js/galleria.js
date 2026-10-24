@@ -1,3 +1,7 @@
+/* GUIDA-SVILUPPO: LIGHTBOX + FILTRI DELLA GALLERIA (classi exlb-* e exg-*). Caricato (defer) da _includes/head/custom.html, stili in assets/css/galleria.css.
+   LIGHTBOX: si apre cliccando un link <a data-lb="gruppo" href="foto" data-cap="didascalia">; le foto con lo stesso data-lb formano la serie
+   (frecce, tasti Esc/frecce, swipe). FILTRI: pulsanti in .exg-f con data-f che mostrano/nascondono gli .exg-i in base al loro data-t.
+   Nessuna dipendenza. Se rinomini data-lb / data-cap / exlb-* / exg-* aggiorna anche il CSS e l'HTML che le usa. */
 (function(){
   var box,img,cap,items=[],idx=0;
   function build(){

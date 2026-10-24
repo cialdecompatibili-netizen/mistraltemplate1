@@ -1,6 +1,10 @@
 ---
 layout: archive
 ---
+{%- comment -%}
+GUIDA-SVILUPPO: ELENCO CATEGORIE (usato da _pages/cat-list.md). Le categorie vengono da _data/categorie.json (admin > Categorie), non dagli articoli:
+una categoria senza articoli compare comunque con 0. Sopra: schede con conteggio e link a /categories/#slug; sotto: archivio articoli raggruppati per PRIMA categoria (post.categories | first). Solo articoli della lingua della pagina.
+{%- endcomment -%}
 {%- assign posts_l = site.posts | where: "lang", page.lang -%}
 
 {{ content }}
