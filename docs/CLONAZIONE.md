@@ -42,3 +42,19 @@ Quando durante un clone scopri una cosa che si ripete (un fix, un grep, un passa
 - Categorie IT+EN da una lista (`python automation/crea_categorie.py "Donna:Borse,Scarpe" "Uomo:..."`) invece che a mano.
 - Pagine Home/Chi siamo da un file di testi del cliente (un solo `.md` -> IT+EN).
 - Controllo live automatico di tutte le pagine dopo il push.
+
+## 7) PUNTI CRITICI DEL SISTEMA (con esempi) - leggi prima di cambiare qualcosa
+| Punto critico | Esempio sbagliato -> giusto | Dove e' spiegato |
+|---|---|---|
+| URL interni SENZA nome repo | `/nome-repo/blog/` -> `/blog/` (ci pensa `relative_url`) | `_data/navigation.yml` |
+| Slug di un'altra lingua mai a mano | `/en/shop/` scritto a mano -> `{% include url-ref.html ref="shop-negozio" %}` | `_includes/url-ref.html` |
+| Link shop localizzati | `/en/negozio/..` (non esiste) -> `shop-url.html` | `_includes/shop-url.html` |
+| Chiave sottomenu = title del menu, identica | `Servizi:` in sottomenu vs `Servizio` in navigation -> la tendina sparisce | `_data/sottomenu.yml` |
+| `url:` e `baseurl:` NON in `_config.yml` | scrivere `url: https://..` -> rompe i link su Pages | `_config.yml` (regole d'oro) |
+| Graffa chiusa dentro `{{ }}` | `{{ '}' }}` rompe la build -> `controllo.ps1` lo trova | `automation/controllo.ps1` |
+| Lingua base `it` fissa in `render-blocks.html` | `default_lang: en` alla radice -> blocchi non letti | `_includes/render-blocks.html` |
+| Hash traduzioni | tradurre a mano e non allineare -> `traduzioni_sync` segnala `!= 0` -> `python automation/allinea_hash.py en` | `automation/allinea_hash.py` |
+| Colori solo da `tema.json` | `#0e7490` scritto in un css -> bordino azzurro su sito marrone -> `personalizza_clone.py` | sezione 4 |
+| Credito webtomars nel footer | metterlo nei 'residui' di `controllo.ps1` -> fallisce sempre | `automation/controllo.ps1` |
+| `-Brand` non cambia il nome nel menu | il nome viene da dominio/repo (`site-name.html`) | `nuovo_sito.ps1` |
+| Commit selettivi nel template | `git add -A` mischia file di altri lavori -> `git commit -m .. -- file1 file2` | sezione 4 |

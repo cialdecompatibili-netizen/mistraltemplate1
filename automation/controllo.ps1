@@ -30,7 +30,9 @@ if (Get-Command python -ErrorAction SilentlyContinue) {
 
 # 5) residui di altri siti e graffa chiusa in {{ }}
 $files = Get-ChildItem -Recurse -File -Include *.html,*.md,*.yml,*.json,*.js,*.css,*.scss | Where-Object { $_.FullName -notmatch '\\\.git\\|\\docs\\|catalogo|AGENTS|CLAUDE|PROGETTO|ERRORI|RICETTE|MAPPA|controllo\.ps1' }
-foreach ($m in ($files | Select-String -Pattern '(?i)gamingcorp|edilextreme|ferrucci|webtomars|florbook|ipermark' | Select-Object -First 8)) { $err += "RESIDUO: $($m.Path.Replace($root + '\', '')):$($m.LineNumber)" }
+# CRITICO: cerca nomi di ALTRI siti rimasti per sbaglio nel template (es. un testo copiato da edilextreme). Esempio di errore: 'RESIDUO: _pages/chi-siamo.md:12'.
+# 'webtomars' NON e' nel pattern: e' il credito del footer (_includes/footer/custom.html) voluto in tutti i siti. Se lo rimetti, il controllo fallisce sempre.
+foreach ($m in ($files | Select-String -Pattern '(?i)gamingcorp|edilextreme|ferrucci|florbook|ipermark' | Select-Object -First 8)) { $err += "RESIDUO: $($m.Path.Replace($root + '\', '')):$($m.LineNumber)" }
 foreach ($m in ($files | Where-Object { $_.Extension -eq '.html' } | Select-String -Pattern "\{\{\s*'\}'\s*\}\}" | Select-Object -First 5)) { $err += "LIQUID: graffa chiusa in {{ }} in $($m.Path.Replace($root + '\', '')):$($m.LineNumber)" }
 
 Write-Host '--- git status'; git status --short
