@@ -234,10 +234,9 @@ tr:hover td{background:#f0f6fc}
         <button class="btn btn-primary" onclick="lgNuova()">Crea lingua</button>
         <div id="msg-lingue" class="msg"></div>
       </div>
-      <div class="card">
-        <div class="card-title" style="display:flex;justify-content:space-between">Stato traduzioni <button class="btn btn-secondary btn-sm" onclick="caricaLingue(true)">&#8635; Aggiorna</button></div>
-        <div id="lg-tab"><span style="color:#bbb;font-size:13px">Apri la voce per caricare</span></div>
-      </div>
+      <!-- Tabella "Stato traduzioni" rimossa dalla vista. NON togliere #lg-tab: lingue.js (caricaLingue) ci scrive
+           e, caricando i dati, riempie il menu "Clona da" e registra in automatico le cartelle lingua nuove. -->
+      <div id="lg-tab" style="display:none"></div>
     </div>
 
     <!-- ARTICOLI -->
