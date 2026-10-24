@@ -118,6 +118,13 @@
       }
       li.appendChild(nm);
       li.appendChild(el("span", euro.format((prezzi[id] * c[id]) / 100)));
+      /* ✕ per togliere il prodotto al volo. Il click e' gestito UNA volta sola piu' sotto (rimozione dal mini-carrello), via data-id. */
+      var x = el("button", "\u00d7", "nz-prev-x");
+      x.type = "button";
+      x.dataset.rimuovi = id;
+      x.setAttribute("aria-label", "Rimuovi " + nomi[id]);
+      x.title = "Rimuovi";
+      li.appendChild(x);
       ul.appendChild(li);
     });
     var tot = el("p", undefined, "nz-prev-tot");
@@ -169,6 +176,21 @@
       link.parentNode.addEventListener(ev, tieniDentro);
     });
   }
+  /* ✕ nel mini-carrello: toglie l'intero prodotto e ridisegna. Delegato su document perche' le righe vengono ricreate a ogni badge().
+     Su /carrello/ e /ordine/ (radice presente) richiamo disegna() cosi' anche tabella e riepilogo si aggiornano; altrove basta badge().
+     stopPropagation: il popup non deve seguire il link della riga ne' chiudersi. Se il carrello si svuota il popup sparisce da solo (:empty). */
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest ? e.target.closest(".nz-prev-x") : null;
+    if (!b) return;
+    e.preventDefault();
+    e.stopPropagation();
+    var c = leggi();
+    delete c[b.dataset.rimuovi];
+    salva(c);
+    if (radice) disegna();
+    else badge();
+    tieniDentro();
+  });
 
   var radice = document.getElementById("negozio") || document.getElementById("nz-carrello-pag") || document.getElementById("nz-ordine-pag");
   if (!radice) {
