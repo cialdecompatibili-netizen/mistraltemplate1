@@ -31,5 +31,5 @@ MAI bordi laterali colorati su box, citazioni, avvisi, CTA. Box puliti con sfond
 - Pubblicare con `..\pubblica.ps1` con `-Files` espliciti. Dopo il push NON aspettare la build: Mirco verifica da solo.
 - Sessione interrotta: prima `read_file` e `git status --short`; spesso manca solo commit e push.
 - PowerShell lungo: salvare in .ps1 e lanciare con `-NoProfile -ExecutionPolicy Bypass -File`. Mai chiamare funzioni RD/WR/CD/LS (alias: RD cancella!).
-- Il workflow `.github/workflows/traduzioni.yml` va su GitHub solo dopo `gh auth refresh -s workflow`, poi `git add -f .github/workflows`.
+- Traduzioni: NIENTE GitHub Actions. L'hook `.githooks/pre-commit` lancia `automation/traduzioni_sync.py` a ogni commit (attivo con `git config core.hooksPath .githooks`, una volta per clone).
 - Risposte brevissime, modifiche in una sola chiamata.

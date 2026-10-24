@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Multilingua fase 3: segna `tr: da_aggiornare` nelle traduzioni quando cambia il testo originale.
 
-Gira in automatico (GitHub Actions: .github/workflows/traduzioni.yml) a ogni push che tocca
+Gira in automatico a ogni COMMIT locale (hook .githooks/pre-commit, nessuna GitHub Action) se il commit tocca
 _pages/, _posts/ o index.html. Confronta l'hash del testo originale con `tr_hash` salvato nella
 traduzione (stesso algoritmo di admin/js/lingue.js, funzione lgHash). Non tocca le copie ancora
 da tradurre (`tr: copia`) ne' quelle gia' segnate.

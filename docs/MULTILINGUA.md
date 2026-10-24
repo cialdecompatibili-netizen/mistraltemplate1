@@ -17,7 +17,7 @@ Funziona su Jekyll puro (GitHub Pages), senza plugin. Lingua base alla radice (`
 | SEO | `_includes/head/custom.html` | `hreflang` tra versioni con lo stesso `ref`, `noindex` sulle `copia` |
 | Selettore lingua | `_includes/footer/custom.html`, `masthead.html`, `assets/js/menu.js` | Appare solo se la traduzione esiste |
 | Admin | voce **Lingue** (`admin/js/lingue.js`) | Crea lingua, tabella stato, "Crea copia", "Segna tradotto" |
-| Controllo modifiche | `automation/traduzioni_sync.py` + `.github/workflows/traduzioni.yml` | Se cambia l'italiano, mette `da_aggiornare` alle traduzioni |
+| Controllo modifiche | `automation/traduzioni_sync.py` + hook `.githooks/pre-commit` | Se cambia l'italiano, mette `da_aggiornare` alle traduzioni |
 | Traduzione automatica | `automation/traduci_lingua.py` | Traduce in blocco gli articoli `copia` |
 
 Il `tr_hash` e' l'hash del testo originale quando e' stato tradotto. Lo stesso algoritmo e' in `lingue.js` (`lgHash`) e in `traduzioni_sync.py` (`lg_hash`): se cambi uno, cambia anche l'altro.
@@ -58,7 +58,7 @@ Copia questi file/cartelle, poi cambia solo `_config.yml` (`default_lang`, `lang
 - `_includes/masthead.html`, `_includes/render-blocks.html`, `_includes/head/custom.html`, `_includes/footer/custom.html`
 - `assets/js/menu.js`, `assets/images/flags/`, regole `.lang-switch` in `menu.css`
 - `admin/js/lingue.js` e la voce "Lingue" in `admin/index.html`
-- `automation/traduzioni_sync.py`, `automation/traduci_lingua.py`, `.github/workflows/traduzioni.yml`
+- `automation/traduzioni_sync.py`, `automation/traduci_lingua.py`, `.githooks/pre-commit` (attivo con `git config core.hooksPath .githooks`)
 
 Poi: assicurati che ogni pagina e articolo della lingua base abbia `ref:` (l'admin lo aggiunge da solo quando crei una copia), e che gli elenchi che usano `site.posts` siano filtrati con `where: "lang", page.lang`.
 
