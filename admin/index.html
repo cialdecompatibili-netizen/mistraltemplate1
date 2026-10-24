@@ -234,9 +234,11 @@ tr:hover td{background:#f0f6fc}
         <button class="btn btn-primary" onclick="lgNuova()">Crea lingua</button>
         <div id="msg-lingue" class="msg"></div>
       </div>
-      <!-- Tabella "Stato traduzioni" rimossa dalla vista. NON togliere #lg-tab: lingue.js (caricaLingue) ci scrive
-           e, caricando i dati, riempie il menu "Clona da" e registra in automatico le cartelle lingua nuove. -->
-      <div id="lg-tab" style="display:none"></div>
+      <!-- ELENCO LINGUE: lo riempie lingue.js (caricaLingue) leggendo le CARTELLE della repo. NON togliere #lg-tab. -->
+      <div class="card">
+        <div class="card-title" style="display:flex;justify-content:space-between">Lingue presenti <button class="btn btn-secondary btn-sm" onclick="caricaLingue(true)">&#8635; Aggiorna</button></div>
+        <div id="lg-tab"><span style="color:#bbb;font-size:13px">Carico...</span></div>
+      </div>
     </div>
 
     <!-- ARTICOLI -->
@@ -2368,7 +2370,7 @@ window.onload=function(){
 <script src="js/editor-seo.js"></script>
 <script src="js/dashboard.js"></script>
 <script src="js/wp-elenchi.js"></script>
-<script src="js/lingue.js?v=20261024b"></script>
-<script src="js/lingua-admin.js?v=20261024b"></script>
+<script src="js/lingue.js?v=20261024c"></script>
+<script src="js/lingua-admin.js?v=20261024c"></script>
 </body>
 </html>

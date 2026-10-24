@@ -11,7 +11,9 @@ const LG_DATA = ['navigation.yml', 'sottomenu.yml', 'shop_nav.yml'];
 async function lgApi(path, opt) {
   // Se fetch stesso fallisce ("Failed to fetch": rete, blocco annunci, token con caratteri strani) dice QUALE chiamata.
   let r;
-  try { r = await fetch('https://api.github.com/repos/' + REPO + '/' + path, Object.assign({ headers: { 'Authorization': 'token ' + String(tok()).trim(), 'Content-Type': 'application/json' } }, opt || {})); }
+  // NB: path vuoto = la repo stessa. Niente "/" finale: GitHub risponde con un redirect senza header CORS e il
+  // browser lo vede come "Failed to fetch" (era la causa dell'errore "chiamata GitHub "repo" non riuscita").
+  try { r = await fetch('https://api.github.com/repos/' + REPO + (path ? '/' + path : ''), Object.assign({ headers: { 'Authorization': 'token ' + String(tok()).trim(), 'Content-Type': 'application/json' } }, opt || {})); }
   catch (e) { throw new Error('chiamata GitHub "' + (path || 'repo') + '" non riuscita (' + e.message + '): controlla connessione, estensioni che bloccano, token in admin > Token'); }
   if (!r.ok) throw new Error(path + ' -> ' + r.status + (r.status === 401 ? ' (token non valido: rifallo in admin > Token)' : r.status === 403 ? ' (limite GitHub o token senza permessi: riprova tra qualche minuto)' : ''));
   return r.json();
@@ -203,6 +205,8 @@ function lgAddRef(src) {
 async function lgCommit(entries, message) {
   const tree = [];
   await lgPool(entries, async e => {
+    // e.del = true -> cancella il file (sha:null nella Git Data API)
+    if (e.del) { tree.push({ path: e.path, mode: '100644', type: 'blob', sha: null }); return; }
     const b = await lgApi('git/blobs', { method: 'POST', body: JSON.stringify({ content: e.content, encoding: 'utf-8' }) });
     tree.push({ path: e.path, mode: '100644', type: 'blob', sha: b.sha });
   }, 6);
@@ -255,6 +259,37 @@ async function lgNuova() {
   } catch (e) { showMsg('msg-lingue', 'Errore: ' + e.message, 'err'); }
 }
 
+// ELIMINA una lingua: cancella la cartella xx/ e _data/i18n/xx/ e la toglie da config (languages + defaults).
+// Non tocca la lingua base. Una sola commit: se ci ripensi basta ripristinarla da GitHub (Revert).
+async function lgElimina(code) {
+  if (code === LG.base) return showMsg('msg-lingue', 'La lingua base non si elimina.', 'err');
+  if (!confirm('Eliminare la lingua "' + (LG.names[code] || code) + '" (' + code + ')? Si cancellano la cartella ' + code + '/ e i suoi testi.')) return;
+  try {
+    showMsg('msg-lingue', 'Elimino ' + code + '...', 'ok');
+    await lgLoadDocs();
+    const entries = LG.tree.filter(f => f.path.indexOf(code + '/') === 0 || f.path.indexOf('_data/i18n/' + code + '/') === 0).map(f => ({ path: f.path, del: true }));
+    let cfg = await lgReadPath('_config.yml');
+    if (cfg) {
+      const rest = LG.langs.filter(l => l !== code);
+      cfg = cfg.replace(/^languages:.*$/m, 'languages: [' + rest.join(', ') + ']');
+      // toglie i blocchi `- scope: path: "xx"` scritti da lgScope (righe successive indentate di 4+ spazi)
+      cfg = cfg.replace(new RegExp('^  - scope:[ \\t]*\\r?\\n[ ]{6}path:[ \\t]*["\']' + code + '["\'][ \\t]*\\r?\\n(?:[ ]{4,}.*(?:\\r?\\n|$))*', 'mg'), '');
+      entries.push({ path: '_config.yml', content: cfg });
+    }
+    if (!entries.length) throw new Error('niente da eliminare');
+    await lgCommit(entries, 'Multilingua: eliminata lingua ' + code);
+    showMsg('msg-lingue', 'Lingua ' + code + ' eliminata (' + entries.length + ' file). Il sito si aggiorna tra 1-2 minuti.', 'ok');
+    LG.normTried = true;
+    caricaLingue(true);
+  } catch (e) { showMsg('msg-lingue', 'Errore: ' + e.message, 'err'); }
+}
+// CLONA: precompila il modulo "Nuova lingua" con questa lingua come origine
+function lgClona(code) {
+  document.getElementById('lg-src').value = code;
+  const i = document.getElementById('lg-code'); i.value = ''; i.focus();
+  showMsg('msg-lingue', 'Scrivi il codice della nuova lingua (es. de) e premi "Crea lingua": clona da ' + code + '.', 'ok');
+}
+
 async function lgCreaCopia(dst, ref) {
   try {
     showMsg('msg-lingue', 'Creo la copia...', 'ok');
@@ -291,22 +326,21 @@ async function caricaLingue(force) {
     }
     const sel = document.getElementById('lg-src'); sel.innerHTML = LG.langs.map(l => '<option value="' + l + '">' + lgEsc(LG.names[l] || l) + ' (' + l + ')</option>').join('');
     document.getElementById('lg-codes').innerHTML = Object.keys(LG.names).filter(k => !LG.langs.includes(k)).map(k => '<option value="' + k + '">' + lgEsc(LG.names[k]) + '</option>').join('');
-    const refs = []; const baseDocs = Object.values(LG.docs[LG.base]);
-    ['home', 'page', 'post'].forEach(k => baseDocs.filter(d => d.kind === k).forEach(d => refs.push(d)));
-    const col = { originale: ['#2e7d32', 'Originale'], tradotto: ['#2e7d32', 'Tradotto'], da_aggiornare: ['#b26a00', 'Da aggiornare'], copia: ['#c62828', 'Copia da tradurre'], manca: ['#999', 'Manca'] };
-    let h = '<div style="overflow:auto"><table style="width:100%;border-collapse:collapse;font-size:13px"><tr><th style="text-align:left;padding:6px">Contenuto</th>' + LG.langs.map(l => '<th style="padding:6px">' + lgEsc(LG.names[l] || l) + '</th>').join('') + '</tr>';
-    refs.forEach(b => {
-      h += '<tr style="border-top:1px solid #eee"><td style="padding:6px">' + (b.kind === 'post' ? 'Articolo: ' : b.kind === 'home' ? 'Home: ' : 'Pagina: ') + lgEsc(b.title) + '</td>';
-      LG.langs.forEach(l => {
-        const s = lgStato(l, b.ref); const d = LG.docs[l][b.ref]; const c = col[s];
-        let a = '<span style="color:' + c[0] + ';font-weight:600">' + c[1] + '</span>';
-        if (d) a += ' <a href="https://github.com/' + REPO + '/edit/' + LG.branch + '/' + d.path + '" target="_blank" style="font-size:11px">modifica</a>';
-        if (l !== LG.base && (s === 'copia' || s === 'da_aggiornare')) a += ' <button class="btn btn-secondary btn-sm" onclick="lgSegna(\'' + l + '\',\'' + b.ref.replace(/'/g, "\\'") + '\')">Segna tradotto</button>';
-        if (l !== LG.base && s === 'manca') a += ' <button class="btn btn-secondary btn-sm" onclick="lgCreaCopia(\'' + l + '\',\'' + b.ref.replace(/'/g, "\\'") + '\')">Crea copia</button>';
-        h += '<td style="padding:6px;text-align:center">' + a + '</td>';
-      });
-      h += '</tr>';
+    // ELENCO LINGUE (una riga per lingua = una cartella): bandiera, nome, avanzamento traduzioni, Clona, Elimina.
+    // Bandiera: assets/images/flags/xx.svg (se manca il file l'immagine si nasconde da sola).
+    const baseRefs = Object.values(LG.docs[LG.base]).filter(d => ['home', 'page', 'post'].includes(d.kind));
+    let h = '<div style="display:flex;flex-direction:column;gap:8px">';
+    LG.langs.forEach(l => {
+      const isBase = l === LG.base;
+      const ok = isBase ? baseRefs.length : baseRefs.filter(b => lgStato(l, b.ref) === 'tradotto').length;
+      const stato = isBase ? 'Lingua base (alla radice)' : ok + ' / ' + baseRefs.length + ' contenuti tradotti';
+      h += '<div style="display:flex;align-items:center;gap:12px;padding:10px;border:1px solid #e5e5e5;border-radius:6px;flex-wrap:wrap">'
+        + '<img src="../assets/images/flags/' + lgEsc(l) + '.svg" alt="" style="width:28px;height:20px;object-fit:cover;border-radius:2px" onerror="this.style.display=\'none\'">'
+        + '<div style="flex:1;min-width:140px"><strong>' + lgEsc(LG.names[l] || l) + '</strong> <span style="color:#888">(' + lgEsc(l) + ')</span><div style="font-size:12px;color:#777">' + lgEsc(stato) + '</div></div>'
+        + '<button class="btn btn-secondary btn-sm" onclick="lgClona(\'' + l + '\')">Clona</button>'
+        + (isBase ? '' : ' <button class="btn btn-secondary btn-sm" style="color:#c62828" onclick="lgElimina(\'' + l + '\')">Elimina</button>')
+        + '</div>';
     });
-    box.innerHTML = h + '</table></div>';
+    box.innerHTML = h + '</div>';
   } catch (e) { box.innerHTML = '<span style="color:#c62828">Errore: ' + lgEsc(e.message) + '</span>'; }
 }
