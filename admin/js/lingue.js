@@ -9,8 +9,11 @@ const LG_SKIP = ['404.md', 'categories-redirect.md', 'cat-list.md', 'category-ar
 const LG_DATA = ['navigation.yml', 'sottomenu.yml', 'shop_nav.yml'];
 
 async function lgApi(path, opt) {
-  const r = await fetch('https://api.github.com/repos/' + REPO + '/' + path, Object.assign({ headers: { 'Authorization': 'token ' + tok(), 'Content-Type': 'application/json' } }, opt || {}));
-  if (!r.ok) throw new Error(path + ' -> ' + r.status);
+  // Se fetch stesso fallisce ("Failed to fetch": rete, blocco annunci, token con caratteri strani) dice QUALE chiamata.
+  let r;
+  try { r = await fetch('https://api.github.com/repos/' + REPO + '/' + path, Object.assign({ headers: { 'Authorization': 'token ' + String(tok()).trim(), 'Content-Type': 'application/json' } }, opt || {})); }
+  catch (e) { throw new Error('chiamata GitHub "' + (path || 'repo') + '" non riuscita (' + e.message + '): controlla connessione, estensioni che bloccano, token in admin > Token'); }
+  if (!r.ok) throw new Error(path + ' -> ' + r.status + (r.status === 401 ? ' (token non valido: rifallo in admin > Token)' : r.status === 403 ? ' (limite GitHub o token senza permessi: riprova tra qualche minuto)' : ''));
   return r.json();
 }
 async function lgTree() {
@@ -281,8 +284,10 @@ async function caricaLingue(force) {
     // una volta per sessione; se e' tutto gia' a posto non committa nulla.
     if (!LG.normTried) {
       LG.normTried = true;
-      const n = await lgNormalizza();
-      if (n) { await lgLoadDocs(); showMsg('msg-lingue', 'Lingue rilevate dalle cartelle e registrate (' + n + ' file aggiornati). Il sito si aggiorna tra 1-2 minuti.', 'ok'); }
+      try {
+        const n = await lgNormalizza();
+        if (n) { await lgLoadDocs(); showMsg('msg-lingue', 'Lingue rilevate dalle cartelle e registrate (' + n + ' file aggiornati). Il sito si aggiorna tra 1-2 minuti.', 'ok'); }
+      } catch (e) { console.warn('lgNormalizza', e); showMsg('msg-lingue', 'Registrazione automatica lingue non riuscita (' + e.message + '). La tabella funziona comunque.', 'err'); }
     }
     const sel = document.getElementById('lg-src'); sel.innerHTML = LG.langs.map(l => '<option value="' + l + '">' + lgEsc(LG.names[l] || l) + ' (' + l + ')</option>').join('');
     document.getElementById('lg-codes').innerHTML = Object.keys(LG.names).filter(k => !LG.langs.includes(k)).map(k => '<option value="' + k + '">' + lgEsc(LG.names[k]) + '</option>').join('');
