@@ -7,5 +7,4 @@ author_profile: false
 classes: wide
 share: false
 ---
-{%- assign posts_l = site.posts | where: "lang", page.lang -%}
-{%- include blog-lista.html -%}
+{% include lista-categoria.html %}

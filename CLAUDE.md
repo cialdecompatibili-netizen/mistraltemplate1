@@ -81,3 +81,10 @@ Lezioni dalla migrazione "pelletteria" -> "pelletteria2" (24/10/2026)
 - TEMA/COLORI: mai hex hardcoded (niente azzurri/teal/ghiaccio in menu.css, gaming.css, head/custom.html, layout): usare _data/tema.json (accent, accent_dark). Dopo il clone: cercare con grep i vecchi colori e sostituirli con la palette del nuovo sito.
 - HOME: sfondo hero = assets/images/*-hero.jpg referenziato in gaming.css (.ent-hero). Nei cloni sostituirlo con una texture a tema (esempio: automation/genera_texture.py di pelletteria2, Pillow+numpy) e cambiare logo con automation/genera_logo.py.
 - ORDINE CLONE: 1) tema.json 2) logo+texture 3) menu/categorie IT+EN 4) home/chi siamo 5) footer e segnaposto 6) commit+push+verifica online.
+
+## Articoli e categorie del blog (logica da cybersecurity)
+- Indirizzi: articolo = /blog/<categoria>/<titolo>/ (EN: /en/blog/...), categoria = /blog/<categoria>/, categoria `blog` = /blog/<titolo>/.
+- Dopo ogni nuovo articolo o nuova categoria lancia `python automation/permalink_articoli.py --apply`: scrive il permalink nel front matter, crea i redirect dai vecchi indirizzi e le pagine categoria mancanti (_pages/cat-*.md, en/category-*.md). Idempotente.
+- Nomi EN delle categorie: _data/i18n/en/categorie.json (stesso ordine di _data/categorie.json).
+- Liste: _includes/lista-categoria.html (blog e categorie), link categoria: _includes/page__taxonomy.html, barra laterale: post-sidebar.html.
+- Gli articoli `2026-10-26-*-prova` / `*-test` sono di prova: cancellali (e i loro redirect/ e le categorie Guide/Novità se non servono).

@@ -60,8 +60,9 @@ exclude:
   - PROGETTO_TEMPLATE.md
   - README.md
 
-# Permalink di default degli articoli (categoria + titolo). Le lingue lo sovrascrivono in defaults.
-permalink: /:categories/:title/
+# Permalink di default degli articoli: /blog/categoria/titolo/. Ripiego: l'indirizzo vero lo scrive
+# automation/permalink_articoli.py nel front matter (categoria senza accenti, /en/blog/... per le lingue).
+permalink: /blog/:categories/:title/
 
 timezone:
 

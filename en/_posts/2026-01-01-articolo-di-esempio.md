@@ -2,6 +2,7 @@
 layout: single
 title: "Sample article"
 date: 2026-01-01
+permalink: /en/blog/articolo-di-esempio/
 excerpt: "Replace this article with your first piece of content."
 categories:
   - blog

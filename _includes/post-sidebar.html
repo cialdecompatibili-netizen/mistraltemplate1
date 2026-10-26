@@ -83,13 +83,12 @@ Gli stili stanno qui dentro in <style> con !important perche' devono vincere sul
   <section class="ps-card">
     <h2>Rubriche</h2>
     <ul class="ps-list ps-cats">
-      {%- for v in site.data.sottomenu.Blog -%}
-        {%- if v.url contains '/categoria/?cat=' -%}
-          {%- assign slug = v.url | split: 'cat=' | last -%}
-          {%- assign n = posts_l | where_exp: "p","p.categories contains slug" | size -%}
-          {%- if n > 0 -%}
-          <li><a href="{{ v.url | relative_url }}"><span>{{ v.title }}</span><span class="ps-n">{{ n }}</span></a></li>
-          {%- endif -%}
+      {%- assign ps_cats = posts_l | map: "categories" | join: "," | split: "," | uniq | sort | where_exp: "c","c != page.lang" -%}
+      {%- for c in ps_cats -%}
+        {%- assign ps_page = site.pages | where: "categoria", c | first -%}
+        {%- if ps_page -%}
+          {%- assign n = posts_l | where_exp: "p","p.categories contains c" | size -%}
+          <li><a href="{{ ps_page.url | relative_url }}"><span>{{ c }}</span><span class="ps-n">{{ n }}</span></a></li>
         {%- endif -%}
       {%- endfor -%}
     </ul>
