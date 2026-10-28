@@ -10,8 +10,8 @@
 .blog-item{position:relative;display:flex;gap:1.1rem;align-items:stretch;padding:0;overflow:hidden;background:#fff;border:1px solid var(--gc-line,#e6e8ee);border-radius:14px;transition:border-color .2s,box-shadow .2s,transform .2s}
 .blog-item:hover,.blog-item:focus-within{border-color:var(--gc-acc,#0e7490);box-shadow:0 0 0 1px var(--gc-acc,#0e7490),0 0 18px 2px color-mix(in srgb,var(--gc-acc,#0e7490) 45%,transparent),0 8px 24px rgba(30,40,80,.12);transform:translateY(-1px)}
 /* FOTO: occupa tutta l'altezza della card (a filo, senza margini) e riempie il suo riquadro (cover). Piu' grande = cambia solo flex-basis/min-height. */
-.blog-img{flex:0 0 clamp(220px,32%,320px);min-height:170px;overflow:hidden;background:var(--gc-acc-s,#e6f6f9)}
-.blog-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
+.blog-img{position:relative;flex:0 0 clamp(240px,38%,400px);min-height:200px;overflow:hidden;background:var(--gc-acc-s,#e6f6f9)}
+.blog-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease}
 .blog-item:hover .blog-img img{transform:scale(1.05)}
 .blog-body{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:.3rem;padding:.9rem 0}
 .blog-cats{display:flex;gap:6px;flex-wrap:wrap}
@@ -25,7 +25,7 @@
 .blog-tag{position:relative;z-index:2;color:var(--gc-mut,#56606b);text-decoration:none!important}.blog-tag:hover{color:var(--gc-acc,#0e7490)}
 .blog-go{flex:0 0 auto;align-self:center;font-size:1.3rem;color:var(--gc-acc,#0e7490);padding:0 1rem 0 .2rem;transition:transform .2s}
 .blog-item:hover .blog-go{transform:translateX(3px)}
-@media(max-width:640px){.blog-item{flex-direction:column;gap:0}.blog-img{flex:none;width:100%;min-height:0;aspect-ratio:16/9}.blog-body{padding:.8rem 1rem 1rem}.blog-go{display:none}.blog-excerpt{-webkit-line-clamp:2}}
+@media(max-width:640px){.blog-item{flex-direction:column;gap:0}.blog-img{flex:none;width:100%;min-height:0;aspect-ratio:16/10}.blog-body{padding:.8rem 1rem 1rem}.blog-go{display:none}.blog-excerpt{-webkit-line-clamp:2}}
 </style>
 <ul class="blog-list" data-pg data-pg-item="li.blog-item" data-per="{{ site.per_page | default: 20 }}">
 {%- for post in posts_l %}
