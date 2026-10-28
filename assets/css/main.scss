@@ -366,3 +366,25 @@ a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(-
 .video-shortcode iframe,.page__content iframe[src*="youtube"]{width:100%;height:100%;border:0}
 .page__content iframe[src*="youtube"]:not(.video-shortcode iframe){aspect-ratio:16/9;height:auto}
 .page__content img{max-width:100%;height:auto}
+
+/* ==========================================================================================
+   LARGHEZZA SITO ? REGOLA FISSA (non modificare la logica, solo i due valori qui sotto)
+   Tutto il sito (breadcrumb, contenuto/articoli, footer) deve avere ESATTAMENTE la stessa
+   larghezza del menu: dal LOGO a sinistra fino alla fine del NUMERO DEL CARRELLO a destra.
+   - --nz-wrap-max = larghezza massima del contenitore (menu incluso)
+   - --nz-wrap-pad = margine laterale, SEMPRE in rem (mai em: cambia con il font e sballa l'allineamento)
+   Il menu (assets/css/menu.css .nv__inner) legge le STESSE variabili: se cambi un valore, cambia
+   tutto insieme. NON assegnare max-width/padding diversi a #main, .breadcrumbs o al footer altrove:
+   il tema aveva 1280px + padding 1em, per questo le pagine (es. articoli del blog) risultavano
+   piu' strette del menu.
+   ========================================================================================== */
+:root { --nz-wrap-max: 1360px; --nz-wrap-pad: 1rem; }
+#main, .breadcrumbs, .page__footer footer {
+  max-width: var(--nz-wrap-max) !important;
+  width: 100% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: var(--nz-wrap-pad) !important;
+  padding-right: var(--nz-wrap-pad) !important;
+  box-sizing: border-box !important;
+}
