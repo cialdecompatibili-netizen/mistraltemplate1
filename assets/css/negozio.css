@@ -1,3 +1,4 @@
+/* GUIDA-SVILUPPO: CSS dello shop (lista a righe, filtri, carrello, scheda prodotto). Classi nz-* e #negozio sono usate da carrello.js, shop-i18n.js e dai layout negozio-*: non rinominare. In fondo al file i blocchi piu' recenti: a parita' di specificita' vince l'ultima regola (le foto grandi della lista sono nell'ultimo blocco). */
 /* Negozio (E-commerce): elenco prodotti a righe, filtro categorie, carrello. Colori dal tema (variabili del sito, con ripiego).
    PUNTO CRITICO: e' un file statico caricato con <link> da _pages/negozio.md e dalle pagine prodotto (_plugins/ecommerce.rb). */
 :root, #negozio { --nz-r: 6px; --nz-rl: 10px; --nz-bordo: #dee2e6; --nz-sfondo: var(--global-card-bg-color, #fff); --nz-testo: var(--t-text, #212529); --nz-tema: var(--t-accent-dark, #3f6b00); --nz-muto: var(--global-text-color-light, #6c757d); }

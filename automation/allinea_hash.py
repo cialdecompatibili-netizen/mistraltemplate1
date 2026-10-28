@@ -12,6 +12,10 @@ Il file italiano si trova dal campo `ref:` (stesso ref = stessa pagina). I file 
 originale italiano restano com'erano. NON usare se il testo non e' davvero tradotto: l'hash dice
 "questa traduzione e' allineata all'italiano di adesso".
 """
+# GUIDA-SVILUPPO (punti critici di allinea_hash.py)
+# - Usalo SOLO dopo aver davvero tradotto/aggiornato il testo: dice "questa traduzione e' allineata all'italiano di adesso". Se il testo non e' tradotto, nasconde il problema.
+# - Stesso algoritmo di hash di traduzioni_sync.py e admin/js/lingue.js: non modificarlo da solo.
+# - Caso tipico: hai cambiato il corpo IT e quello EN nello stesso modo (es. un colore dentro uno <style>) -> `python automation/allinea_hash.py en`. Meglio ancora: gli stili vanno in assets/css, non nel corpo.
 import re
 import sys
 from pathlib import Path

@@ -34,6 +34,7 @@
     });
     s.nav.innerHTML = '';
     if (np <= 1) return;
+    s.nav.appendChild(btn('\u00ab', 1, { dis: s.page === 1, aria: EN ? 'First page' : 'Prima pagina' }));
     s.nav.appendChild(btn('\u2039', s.page - 1, { dis: s.page === 1, aria: EN ? 'Previous page' : 'Pagina precedente' }));
     var last = 0;
     for (var p = 1; p <= np; p++) {
@@ -44,6 +45,7 @@
       }
     }
     s.nav.appendChild(btn('\u203a', s.page + 1, { dis: s.page === np, aria: EN ? 'Next page' : 'Pagina successiva' }));
+    s.nav.appendChild(btn('\u00bb', np, { dis: s.page === np, aria: EN ? 'Last page' : 'Ultima pagina' }));
     if (scroll) box.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 

@@ -1,3 +1,5 @@
+// GUIDA-SVILUPPO: due blocchi indipendenti: (1) menu (hamburger, tendine, voce attiva, adattamento larghezza), (2) selettore lingua. Il masthead e' in cache e identico su tutte le pagine: la lingua corrente e i link alla traduzione si calcolano QUI leggendo i <link rel=alternate hreflang> dell'head, mai nel masthead.
+// Non rinominare gli attributi data-nv-* e le classi nv__*: li usano masthead.html e menu.css.
 /* =====================================================================
    MENU DEL SITO (assets/js/menu.js)  -  adattato da nav-toggle.js di al-folio
    Nessuna libreria. Fa tre cose:

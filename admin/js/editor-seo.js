@@ -1,3 +1,6 @@
+// GUIDA-SVILUPPO: caricato da admin/index.html con <script src> in fondo, DOPO lo script inline. Usa le globali definite li' (tok, ghGet, ghPut, dec, showMsg, REPO, startDeployPolling): non chiamarlo a livello globale prima del load.
+// Dopo ogni modifica incrementa il ?v= del suo <script> in admin/index.html (cache del browser) e prova con `node automation/test_admin.js` (nessun errore di avvio, categorie visibili). Regole generali: CLAUDE.md / docs/ERRORI_NOTI.md.
+// QUI: editor di testo + analisi SEO di Servizi/Progetti. Il Markdown e' la fonte unica: md2html() serve SOLO all'anteprima, mai per salvare (i tag Liquid non si devono rompere). Espone window.SEOED e window.openMediaLib (usata da wp-elenchi.js).
 // Editor di testo + analisi SEO e leggibilita' per Servizi e Progetti (stile Yoast, solo admin).
 // Il Markdown resta la fonte unica: niente conversione HTML, quindi i tag Liquid non si rompono.
 (function(){

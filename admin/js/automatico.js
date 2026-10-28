@@ -1,3 +1,6 @@
+// GUIDA-SVILUPPO: caricato da admin/index.html con <script src> in fondo, DOPO lo script inline. Usa le globali definite li' (tok, ghGet, ghPut, dec, showMsg, REPO, startDeployPolling): non chiamarlo a livello globale prima del load.
+// Dopo ogni modifica incrementa il ?v= del suo <script> in admin/index.html (cache del browser) e prova con `node automation/test_admin.js` (nessun errore di avvio, categorie visibili). Regole generali: CLAUDE.md / docs/ERRORI_NOTI.md.
+// QUI: date e front matter. `date` si scrive UNA volta (pubblicazione), `last_modified_at` a ogni salvataggio. Pagine e prodotti usano created_at, MAI date (seo.html la prenderebbe per un articolo). Auto.extra conserva i campi che l'editor non conosce. Espone window.Auto.
 // AUTOMATICI DELL'ADMIN (lavorano in background, senza campi da compilare)
 // 1) DATE: l'articolo conserva la data di pubblicazione (campo `date`, scritto una volta); ad ogni salvataggio
 //    l'admin scrive `last_modified_at` (articoli, pagine, prodotti). Pagine e prodotti hanno anche `created_at`

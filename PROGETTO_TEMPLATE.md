@@ -77,3 +77,19 @@ Dopo l'implementazione: provare un clone di prova (punto 7 del piano generale) e
 - Prossimo passo: `..\nuovo_sito.ps1 -Nome prova -Brand "Prova" -Lingue it,en -Accento "#0b6cf0"` e controllare online home IT/EN, Servizi, Chi siamo, selettore lingua, colori da tema.json, hreflang/sitemap, ricerca.
 - Poi: interruttori Shop/Tour/Blog nell'admin (punto 5 del piano), commenti guida ancora mancanti (layout product, publish.py, traduci_lingua.py, js admin).
 - Sito cybersecurity (clone fatto prima di queste ottimizzazioni, ha stile inline suo): contatti spenti (mancano email/WhatsApp/contact_endpoint), da scrivere altri articoli avvisi (GitLab 10/10, LiteLLM su PyPI, CVE-2026-115560 segnalata da ACN: verificare sul web prima), altre lingue da admin > Lingue.
+
+## STATO 24/10/2026 (fine sessione) - cosa e' fatto e cosa RIMANE
+Fatto e online (commit dbf2839): logo montagna innevata coi colori del tema + `automation/genera_logo.py` (legge `accent` da `_data/tema.json`; rilancia dopo ogni cambio accento: `python automation\genera_logo.py`).
+Fatto solo in LOCALE, non pubblicato: logo con cielo celestino chiaro e senza cappuccio bianco sulla cima di destra (script gia' aggiornato, file rigenerati). Pubblicare con: `..\pubblica.ps1 -Repo mistraltemplate1 -Msg "Logo: cielo celestino" -Files "assets/images/favicon.svg,assets/images/favicon-32.png,assets/images/favicon-192.png,assets/images/favicon-512.png,assets/images/apple-touch-icon.png,assets/images/favicon.ico,favicon.ico,automation/genera_logo.py" -Aspetta`. Poi Ctrl+F5 per la cache.
+Documentazione agenti: `AGENTS.md`, `docs/MAPPA.md`, `RICETTE.md`, `ERRORI_NOTI.md` scritti; testate `GUIDA-SVILUPPO:` messe su seo.html, footer/custom.html, servizio-faq/cta, servizi-correlati, negozio-prodotto, gaming.css, menu.css, negozio.css, ui-text.yml. `automation\controllo.ps1` = TUTTO OK.
+
+### Da fare (in ordine)
+1. Testo HOME troppo robotico/artificiale: riscrivere in modo umano e invitante `_data/blocks_home.json` (IT) e `_data/i18n/en/blocks_home.json` (EN). Sono dati, non pagine: non cambia l'hash delle traduzioni. NON ancora iniziato (richiesta del proprietario, mai partita per limite messaggi).
+2. Pubblicare il logo celestino (comando sopra).
+3. Commit unico dei ~32 file modificati non committati (testate GUIDA-SVILUPPO, AGENTS.md, docs, ui-text.yml, include, css/js). Guardare prima `git status --short`.
+4. `_includes/servizio-cta.html`: testi in italiano fisso (non passano da ui-text.yml) e link WhatsApp che diventa `#` se `site.whatsapp` e' vuoto: renderli traducibili e avvolgere il blocco in `{% if site.whatsapp != '' %}`.
+5. `automation/test_admin.js`: non tracciato, decidere se committarlo.
+6. Residui nome vecchio in commenti: `_data/sidebar.yml:4` e `_includes/head/custom.html:214` ("Renzo Ferrucci").
+7. Non verificati: carrello, ordine, pagine inglesi interne. Stili inline in ~14 file da spostare in gaming.css. Immagini pesanti da ridimensionare.
+8. Opzionale: far scrivere a `nuovo_sito.ps1 -Accento` anche il logo (chiamare genera_logo.py dopo aver scritto tema.json).
+Deploy: https://cialdecompatibili-netizen.github.io/mistraltemplate1/

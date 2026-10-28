@@ -1,4 +1,7 @@
 {%- comment -%}
+GUIDA-SVILUPPO: ALTRI SERVIZI in fondo alla pagina servizio. Il numero di card si cambia con la variabile max_card (resta PARI: la griglia e' a 2 colonne). Legge la collection `servizi` + i post con categoria `servizi`, senza doppioni e senza la pagina corrente.
+{%- endcomment -%}
+{%- comment -%}
   "Altri servizi" in fondo a ogni pagina servizio: stessa grafica delle card del blog
   (grid__wrapper / archive__item), ma con i servizi al posto degli articoli.
   Elenco = collection `servizi` + post con categoria `servizi`, senza doppioni (per url),

@@ -1,3 +1,6 @@
+// GUIDA-SVILUPPO: caricato da admin/index.html con <script src> in fondo, DOPO lo script inline. Usa le globali definite li' (tok, ghGet, ghPut, dec, showMsg, REPO, startDeployPolling): non chiamarlo a livello globale prima del load.
+// Dopo ogni modifica incrementa il ?v= del suo <script> in admin/index.html (cache del browser) e prova con `node automation/test_admin.js` (nessun errore di avvio, categorie visibili). Regole generali: CLAUDE.md / docs/ERRORI_NOTI.md.
+// QUI: elenchi Articoli/Pagine/Categorie e libreria media (window.FOTOLIB, definita in foto.js). Con una lingua di lavoro diversa dalla base i path sono rimappati da lingua-admin.js (fetch intercettato): NON scrivere qui path per lingua.
 
 // Articoli, Pagine e Categorie in stile WordPress: elenchi a tabella con miniatura, ricerca, paginazione e azioni rapide.
 // Libreria media per foto in evidenza e foto nel testo. Usa le funzioni globali di index.html e window.openMediaLib / window.FOTOLIB.

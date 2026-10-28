@@ -1,3 +1,6 @@
+// GUIDA-SVILUPPO: caricato da admin/index.html con <script src> in fondo, DOPO lo script inline. Usa le globali definite li' (tok, ghGet, ghPut, dec, showMsg, REPO, startDeployPolling): non chiamarlo a livello globale prima del load.
+// Dopo ogni modifica incrementa il ?v= del suo <script> in admin/index.html (cache del browser) e prova con `node automation/test_admin.js` (nessun errore di avvio, categorie visibili). Regole generali: CLAUDE.md / docs/ERRORI_NOTI.md.
+// QUI: dashboard in SOLA LETTURA (nessun commit): stato deploy, attivita', salute SEO di _servizi/_progetti. Espone window.dashShow / dashGo.
 // Dashboard (prima voce del menu): riepilogo del sito, stato del deploy, attivita' e salute SEO dei servizi.
 // Usa le funzioni globali di index.html: tok, ghGet, dec, REPO.
 (function(){

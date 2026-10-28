@@ -20,6 +20,12 @@ COSA FA
 
 PER CAMBIARE MOTORE: sostituisci solo la funzione `motore()` (es. DeepL con la tua chiave).
 """
+# GUIDA-SVILUPPO (punti critici di traduci_lingua.py)
+# - Tocca SOLO articoli con `tr: copia` in <lingua>/_posts: le pagine (<lingua>/*.md) si traducono a mano o con l'admin.
+# - Dopo la traduzione imposta `tr: tradotto` MA lascia tr_hash: e' il legame con l'italiano (vedi traduzioni_sync.py). Se cambi il testo a mano, poi `python automation/allinea_hash.py <lingua>`.
+# - I tag HTML diventano segnaposto [1] [2]...: se la verifica (annidamento_ok / unita) fallisce si traduce testo per testo. Non "semplificare" questa parte: e' quella che evita link e immagini rotti.
+# - La cache frasi sta in automation/tmp/cache_tr.json (riprendibile): non cancellarla a meta' lavoro. Non fa commit: controlla il risultato a occhio e poi committa tu.
+# - Per cambiare motore di traduzione modifica solo motore(). PAUSA e' l'anti-blocco verso il servizio: non azzerarla.
 import hashlib
 import html
 import json

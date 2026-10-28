@@ -1,3 +1,9 @@
+{%- comment -%}
+GUIDA-SVILUPPO: SEO DI OGNI PAGINA (title, description, robots, canonical, Open Graph). Incluso da head/custom.html.
+PUNTI CRITICI: og:type diventa 'article' se la pagina ha il campo `date`: per questo pagine e prodotti usano created_at e MAI date (scrive cosi' admin/js/automatico.js).
+La pagina e' noindex se ha noindex:true OPPURE tr: copia (traduzione non ancora fatta): non togliere questa regola, evita contenuti duplicati in Google. I campi seo_* li scrive admin/js/seo-panel.js: stessi nomi.
+Per trovare hreflang e sitemap: cerca 'hreflang' in _includes e il file sitemap.xml alla radice.
+{%- endcomment -%}
 {%- include site-name.html -%}
 {% comment %}
   SEO PLUGIN — CMSPush

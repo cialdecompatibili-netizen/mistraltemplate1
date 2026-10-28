@@ -1,3 +1,6 @@
+// GUIDA-SVILUPPO: caricato da admin/index.html con <script src> in fondo, DOPO lo script inline. Usa le globali definite li' (tok, ghGet, ghPut, dec, showMsg, REPO, startDeployPolling): non chiamarlo a livello globale prima del load.
+// Dopo ogni modifica incrementa il ?v= del suo <script> in admin/index.html (cache del browser) e prova con `node automation/test_admin.js` (nessun errore di avvio, categorie visibili). Regole generali: CLAUDE.md / docs/ERRORI_NOTI.md.
+// QUI: pannelli Servizi e Progetti. La configurazione sta nell'oggetto C (cartella, nome, campo di ordinamento). Una nuova collection = nuova voce in C + `collections:` in _config.yml + un layout/lista (ex-lista.html).
 // Pannelli Servizi e Progetti (collection _servizi / _progetti). Stessa logica di Prodotti, ma generica.
 // Usa le funzioni globali di index.html: tok, ghGet, ghPut, dec, showMsg, startDeployPolling, REPO.
 (function(){

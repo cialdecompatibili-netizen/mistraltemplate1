@@ -1,3 +1,5 @@
+// GUIDA-SVILUPPO: traduce l'interfaccia dello shop. Per una frase nuova: aggiungi "testo italiano": "traduzione" nella sezione della lingua in _data/shop_ui.yml (il testo italiano deve essere IDENTICO a quello scritto nel codice/HTML). Pagina italiana = nessun dizionario = non fa nulla.
+// Traduce solo dentro elementi nz-* e .nv__cart: non allargare il selettore SEL (tradurrebbe anche il contenuto del sito).
 /* =====================================================================================
    assets/js/shop-i18n.js  -  traduce l'interfaccia dello SHOP nella lingua della pagina
    (stessa idea di TranslatePress/Weglot: si traduce l'output gia' disegnato, anche quello creato dal JS).

@@ -1,3 +1,6 @@
+// GUIDA-SVILUPPO: caricato da admin/index.html con <script src> in fondo, DOPO lo script inline. Usa le globali definite li' (tok, ghGet, ghPut, dec, showMsg, REPO, startDeployPolling): non chiamarlo a livello globale prima del load.
+// Dopo ogni modifica incrementa il ?v= del suo <script> in admin/index.html (cache del browser) e prova con `node automation/test_admin.js` (nessun errore di avvio, categorie visibili). Regole generali: CLAUDE.md / docs/ERRORI_NOTI.md.
+// QUI: pannello SEO. Scrive nel front matter seo_title, seo_description, seo_kw, noindex, canonical, seo_image: sono gli stessi nomi che legge _includes/seo.html. Se cambi un nome cambialo in entrambi. Campi vuoti = non scritti. API: window.SeoPanel.
 // SEO PANEL stile Yoast per Articoli, Pagine e Prodotti (solo admin).
 // COSA FA: disegna sotto il testo un pannello con anteprima Google, parola chiave, titolo SEO,
 //   meta description, opzioni avanzate (noindex, canonical, immagine social) e analisi a semaforo.

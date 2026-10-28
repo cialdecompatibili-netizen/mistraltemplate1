@@ -1,3 +1,6 @@
+// GUIDA-SVILUPPO: caricato da admin/index.html con <script src> in fondo, DOPO lo script inline. Usa le globali definite li' (tok, ghGet, ghPut, dec, showMsg, REPO, startDeployPolling): non chiamarlo a livello globale prima del load.
+// Dopo ogni modifica incrementa il ?v= del suo <script> in admin/index.html (cache del browser) e prova con `node automation/test_admin.js` (nessun errore di avvio, categorie visibili). Regole generali: CLAUDE.md / docs/ERRORI_NOTI.md.
+// QUI: admin > Lingue (rilevamento cartelle, Nuova lingua, Clona, Elimina, normalizzazione). lgHash() DEVE restare identico a lg_hash() in automation/traduzioni_sync.py e allinea_hash.py. Dettagli: docs/MULTILINGUA.md.
 // ===== LINGUE (multilingua) =====
 // Modello: lingua base (default_lang) + traduzioni collegate dallo stesso `ref`.
 // Pagine/articoli della lingua L (diversa dalla base) stanno in <L>/ (pagine) e <L>/_posts (articoli).

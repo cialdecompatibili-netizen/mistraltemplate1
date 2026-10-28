@@ -1,3 +1,6 @@
+# GUIDA-SVILUPPO: etichette dell'interfaccia del tema, una sezione per lingua (it con ancora &DEFAULT_IT, en, ...).
+# Una lingua nuova: l'admin > Lingue aggiunge da solo il blocco; a mano copia il blocco it e traduci i valori. Chiave mancante = ripiego sull'italiano.
+# Le etichette dello SHOP stanno in _data/shop_ui.yml, quelle delle date in _data/date_ui.yml. Non cambiare i nomi delle chiavi (li legge il tema).
 # Traduzioni interfaccia tema Minimal Mistakes (Italiano)
 it: &DEFAULT_IT
   skip_links                    : "Vai alla navigazione principale"

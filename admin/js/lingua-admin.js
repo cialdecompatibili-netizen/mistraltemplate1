@@ -1,3 +1,6 @@
+// GUIDA-SVILUPPO: caricato da admin/index.html con <script src> in fondo, DOPO lo script inline. Usa le globali definite li' (tok, ghGet, ghPut, dec, showMsg, REPO, startDeployPolling): non chiamarlo a livello globale prima del load.
+// Dopo ogni modifica incrementa il ?v= del suo <script> in admin/index.html (cache del browser) e prova con `node automation/test_admin.js` (nessun errore di avvio, categorie visibili). Regole generali: CLAUDE.md / docs/ERRORI_NOTI.md.
+// QUI: lingua di lavoro dell'admin. Intercetta window.fetch e rimappa i path (xx/_posts, xx/*.md, _data/i18n/xx/*) solo se lingua != base e sezione attiva. Nuovi file da mappare: aggiungili in mappa(), NON riscrivere path dentro index.html.
 
 // =====================================================================================
 // LINGUA DI LAVORO DELL'ADMIN  (selettore in alto, come WPML / Polylang)

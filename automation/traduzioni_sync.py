@@ -6,6 +6,12 @@ _pages/, _posts/ o index.html. Confronta l'hash del testo originale con `tr_hash
 traduzione (stesso algoritmo di admin/js/lingue.js, funzione lgHash). Non tocca le copie ancora
 da tradurre (`tr: copia`) ne' quelle gia' segnate.
 """
+# GUIDA-SVILUPPO (punti critici di traduzioni_sync.py)
+# - lg_hash() DEVE restare identico a lgHash() in admin/js/lingue.js e a lg_hash() in allinea_hash.py: se uno dei tre cambia, tutte le traduzioni risultano "da aggiornare" o tutte allineate per errore.
+# - Il confronto e' sul CORPO della pagina (dopo il front matter), non sul front matter: cambiare solo titolo/description non fa scattare "da_aggiornare".
+# - Gira dall'hook .githooks/pre-commit a ogni commit che tocca _pages/, _posts/ o index.html. Deve stampare "Traduzioni segnate da aggiornare: 0" quando e' tutto allineato.
+# - Le lingue arrivano da `languages:` in _config.yml PIU' ogni cartella xx/ trovata (rilevamento automatico). Il file originale si trova dal campo `ref:` (stesso ref = stessa pagina).
+# - Salta le copie (`tr: copia`) e quelle gia' `da_aggiornare`. SKIP elenca pagine tecniche senza traduzione.
 import re
 import sys
 from pathlib import Path

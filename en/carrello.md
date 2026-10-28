@@ -10,7 +10,7 @@ ref: shop-carrello
 lang: en
 locale: en
 tr: tradotto
-tr_hash: 1surytw
+tr_hash: 12u8l00
 permalink: /en/carrello/
 ---
 {%- assign nz_lh = '/' -%}{%- if page.lang and page.lang != site.default_lang -%}{%- assign nz_lh = '/' | append: page.lang | append: '/' -%}{%- endif -%}
@@ -25,7 +25,7 @@ permalink: /en/carrello/
 <p>Totale <span id="nz-totale" class="nz-totale"></span></p>
 <p class="nz-az-passo nz-az-carrello">
 <button type="button" id="nz-svuota" class="btn nz-b nz-b-svuota">Svuota il carrello</button>
-<a class="btn nz-b nz-b-continua" href="{{ nz_lh | append: 'negozio/' | relative_url }}">Continua lo shopping</a>
+<a class="btn nz-b nz-b-continua" href="{% include shop-url.html k="shop" %}">Continua lo shopping</a>
 <a class="btn nz-b nz-b-vai" id="nz-vai-ordine" href="{{ nz_lh | append: 'ordine/' | relative_url }}">Procedi all'ordine</a>
 </p>
 </div>

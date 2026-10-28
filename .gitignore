@@ -7,6 +7,7 @@ Gemfile.lock
 .claude.md
 automation/agent.md
 automation/publish_log.jsonl
+automation/tmp/
 
 # Impeccable: motore binario (si riscarica da solo al primo uso) e stato locale
 .claude/skills/impeccable/scripts/bin/

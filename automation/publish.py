@@ -12,6 +12,13 @@ USO PRODOTTO:
 
 Oppure importa le funzioni pubblica_articolo() / pubblica_prodotto() da un altro script.
 """
+# GUIDA-SVILUPPO (punti critici di publish.py)
+# - NESSUN valore fisso: REPO = cartella sopra automation/, SITE_BASE = ricavato dal remote git (_site_base). Funziona in ogni clone: non scrivere utente/repo/URL qui dentro.
+# - _git_push() fa "git add ." = committa TUTTO cio' che e' modificato nella repo. Prima di usarlo guarda `git status --short` (niente file di lavoro nella cartella).
+# - Le categorie devono esistere: articoli in _data/categorie.json, prodotti in _data/shop-categorie.json (_check_categoria_*). Per una nuova categoria aggiungila prima da admin.
+# - _check_yaml_safe() blocca & ? [ ] { } e a-capo nei campi YAML: sono i caratteri che hanno rotto la build in passato. Non toglierlo.
+# - verifica_live(): polling sull'URL pubblico (build Pages 30-90 s). False = lentezza OPPURE build rotta: controlla `gh api repos/<utente>/<repo>/pages/builds/latest`.
+# - automation/publish_log.jsonl e' il registro delle pubblicazioni (ignorato da git, locale).
 import sys
 import os
 import re
