@@ -1,4 +1,4 @@
-# =====================================================================================
+﻿# =====================================================================================
 # _config.yml  -  UNICO PUNTO DA CAMBIARE PER CLONARE IL TEMPLATE SU UN NUOVO SITO
 # (mistraltemplate1, vedi CLAUDE.md e PROGETTO_TEMPLATE.md)
 #
@@ -182,7 +182,7 @@ cms_homepage:
 whatsapp: ""
 whatsapp_demo: false
 # contact_endpoint: indirizzo del servizio (worker) che inoltra il modulo contatti. Vuoto = il modulo non appare.
-contact_endpoint: ""
+contact_endpoint: "https://contatti-form.evabomboniere.workers.dev"
 
 # --- SHOP (interruttore unico) ---------------------------------------------------------
 # ecommerce: true accende TUTTO lo shop: voce "Shop" nel menu (masthead.html), css/js del carrello
