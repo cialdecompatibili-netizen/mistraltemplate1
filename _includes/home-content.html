@@ -4,8 +4,8 @@ Per cambiare la home NON toccare questo file: usa admin > Home oppure modifica s
 {%- endcomment -%}
 <!-- Tailwind (purgato, solo classi usate) -->
 <link rel="stylesheet" href="{{ '/assets/css/home.css' | relative_url }}">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/2.8.0/alpine.js" defer></script>
 
-<main id="main-content">
+<main id="main-content"><span id="main" tabindex="-1"></span>
 {% include render-blocks.html data="blocks_home" %}
 </main>

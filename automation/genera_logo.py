@@ -58,7 +58,7 @@ def render(N, tondo=True):
             seg = []; on = not on; acc_len = 0.0
     f = font(int(M * 0.62)); d.text((M / 2, M * 0.52), ini, font=f, fill=INK + (255,), anchor='mm')
     return im.resize((N, N), Image.LANCZOS)
-for n, name in ((32, 'favicon-32.png'), (192, 'favicon-192.png'), (512, 'favicon-512.png')):
+for n, name in ((32, 'favicon-32.png'), (72, 'logo-72.png'), (192, 'favicon-192.png'), (512, 'favicon-512.png')):
     render(n).save(os.path.join(IMG, name))
 render(180, tondo=False).convert('RGB').save(os.path.join(IMG, 'apple-touch-icon.png'))
 ico = render(256); ico.save(os.path.join(IMG, 'favicon.ico'), sizes=[(16, 16), (32, 32), (48, 48)])
