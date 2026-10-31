@@ -1,5 +1,5 @@
 # Demo microsystem: 1 categoria + 1 prodotto (IT+EN). Genera catalogo.json e le 4 pagine, toglie gli esempi del template.
-# JSON scritto con json.dump (ensure_ascii) e riletto: niente problemi di accenti/emoji.
+# ESEMPIO per nuovi siti: cambia R (cartella repo), categoria e prodotto. JSON con ensure_ascii=False e riletto.
 import json, os
 R = r"C:\Users\mirco\Desktop\repository\microsystem"
 cat_path = os.path.join(R, "_data", "catalogo.json")
@@ -34,7 +34,7 @@ d["prodotti"] = [{
         "descrizione": "Solar-powered LoRa mesh repeater: ESP32-S3 board with SX1262 radio, Meshtastic firmware pre-installed, in a weatherproof case with solar panel. Mount it and it covers the area.",
         "descrizione_completa": "Outdoor-ready repeater for LoRa mesh networks: ESP32-S3 board with SX1262 LoRa radio, external antenna and Meshtastic firmware already configured as a repeater.\nHoused in a weatherproof case with a solar panel and rechargeable battery, so it runs without mains power.\nBuilt for anyone extending a mesh network over hills, mountain huts, farms or areas with no coverage. Real-world range depends on mounting height and obstacles.\nEuropean 868 MHz band. Shipped tested, with assembly instructions."}}
 }]
-json.dump(d, open(cat_path, "w", encoding="utf-8"), ensure_ascii=True, indent=2)
+open(cat_path, "w", encoding="utf-8", newline="\n").write(json.dumps(d, ensure_ascii=False, indent=2))  # MAI ensure_ascii=True: le emoji escape rompono la build Jekyll
 json.load(open(cat_path, encoding="utf-8"))  # rilettura di controllo
 
 def w(rel, txt):
