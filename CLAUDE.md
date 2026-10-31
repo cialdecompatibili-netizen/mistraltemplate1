@@ -92,3 +92,16 @@ Lezioni dalla migrazione "pelletteria" -> "pelletteria2" (24/10/2026)
 
 - 31/10/2026 ERRORE CATALOGO: scrivere `_data/*.json` con `ensure_ascii=False` (emoji letterali). Con le escape `\\ud83d...` la build Jekyll si rompe. Vedi docs/ERRORI_NOTI.md punto 23.
 - 31/10/2026 DOMINIO: prima DNS, poi CNAME. Vedi docs/ERRORI_NOTI.md punto 24 e DOMINIO.md.
+
+
+## Flusso che FUNZIONA: categoria + prodotto con foto, IT+EN (31/10/2026, provato su microsystem)
+Tutto da Desktop Commander sul PC di Mirco, con Python. Il connettore GitHub non serve (non compare); git e `gh` si lanciano da terminale.
+1. Ricerca di mercato sul web PRIMA (cosa si vende davvero), poi scelta di UNA categoria e UN prodotto per la demo.
+2. Foto prodotto: `python C:\Users\mirco\Desktop\gemini_auto\img.py "<soggetto>" --profilo prodotto --nome <id> --out assets\images\prodotti --extra "No text, no logos, no brand names anywhere on the device."` (per elettronica NON usare `foto_sito.py`: il suo prompt e' per bottiglie). Foto categoria: stesso comando con `--profilo categoria --out assets\images\categorie`. Guardare SEMPRE la foto (read_file di Desktop Commander) prima di pubblicare.
+3. Script Python che scrive `_data/catalogo.json` (categoria + prodotto con `tr.en`, prezzi in centesimi, `immagine: assets/images/prodotti/<id>.webp`) e le 4 pagine: `_negozio/categoria-<id>.md`, `en/negozio/categoria/<id>.md`, `_negozio/<id>.md`, `en/negozio/<id>.md` (ref `shop-cat-<id>` / `shop-prod-<id>`, permalink EN `/en/shop/...`). Esempio completo: `automation/esempio_demo_shop.py`. JSON SEMPRE con `ensure_ascii=False` (vedi docs/ERRORI_NOTI.md punto 23).
+4. `python automation/allinea_hash.py en`, poi `git add -A`, commit, push.
+5. Aspettare la build: `gh api repos/<utente>/<repo>/pages/builds/latest` deve dare `built` sul commit giusto. Se `errored`/falliti: `gh run list --limit 3` e `gh run view <id> --log-failed`.
+6. Verificare online con Invoke-WebRequest: shop, categoria, prodotto IT e EN, le due immagini (200 e contenuto giusto), poi dare i link a Mirco. Dire che la resa grafica non e' stata vista.
+- Prezzi e specifiche della demo sono SEGNAPOSTO da confermare con Mirco: nei testi solo cose generiche, niente portate o numeri inventati.
+- Per molti prodotti: lo script e' da generalizzare in `aggiungi_prodotti.py` (input = elenco con nome, categoria, prezzo, testi IT/EN, soggetto foto), proposto a Mirco, non ancora fatto.
+- Idee categorie dal mercato (ricerca 31/10/2026): nodi e schede Meshtastic (Heltec V3/V4, LILYGO T-Beam), ripetitori solari, kit modulari RAK WisBlock, tracker GPS, comunicatori portatili, kit con Raspberry Pi.
