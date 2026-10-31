@@ -89,3 +89,6 @@ Lezioni dalla migrazione "pelletteria" -> "pelletteria2" (24/10/2026)
 - Nomi EN delle categorie: _data/i18n/en/categorie.json (stesso ordine di _data/categorie.json).
 - Liste: _includes/lista-categoria.html (blog e categorie), link categoria: _includes/page__taxonomy.html, barra laterale: post-sidebar.html.
 - Gli articoli `2026-10-26-*-prova` / `*-test` sono di prova: cancellali (e i loro redirect/ e le categorie Guide/Novità se non servono).
+
+- 31/10/2026 ERRORE CATALOGO: scrivere `_data/*.json` con `ensure_ascii=False` (emoji letterali). Con le escape `\\ud83d...` la build Jekyll si rompe. Vedi docs/ERRORI_NOTI.md punto 23.
+- 31/10/2026 DOMINIO: prima DNS, poi CNAME. Vedi docs/ERRORI_NOTI.md punto 24 e DOMINIO.md.
