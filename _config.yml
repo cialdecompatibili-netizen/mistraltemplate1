@@ -42,7 +42,13 @@ search: true
 
 # SEO globale
 author:
-  name: ""
+  name: "Nome autore"
+  avatar: "/assets/images/autore-segnaposto.svg"
+  bio: "Scrivi qui una breve presentazione dell'autore o del sito: chi sei, di cosa ti occupi e come contattarti."
+  links:
+    - label: "Contatti"
+      icon: "fas fa-fw fa-envelope"
+      url: "/contatti/"
 
 social:
   links: []
@@ -133,7 +139,7 @@ defaults:
       type: posts
     values:
       layout: single
-      author_profile: false
+      author_profile: true
       read_time: true
       comments: true
       share: true
