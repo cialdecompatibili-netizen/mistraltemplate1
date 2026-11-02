@@ -112,3 +112,5 @@ Tutto da Desktop Commander sul PC di Mirco, con Python. Il connettore GitHub non
 - Foto prodotti con Gemini API: `docs/IMMAGINI.md` (stile per sito in `_data/foto_prompt.json`, motore unico in `Desktop\gemini_auto`).
 
 - Barra autore a destra negli articoli del blog: attiva nei default (posts: author_profile true). Dati in _config.yml > author (name, avatar, bio, links): nei cloni sostituire nome, foto (assets/images/autore-segnaposto.svg) e bio; per spegnerla su un articolo mettere author_profile: false nel front matter. CSS gia' in assets/css/main.scss (SIDEBAR A DESTRA).
+
+- 02/11/2026 TENDINE: sempre su 2 colonne (masthead.html: wide se kids.size > 1, Shop sempre wide; menu.css: columns:2 anche mobile/compatto, prima voce NON centrata, divider nascosto nelle tendine larghe). Nei cloni non ritoccare: il clone copia menu.css e masthead.html dal template. Se un clone vecchio ha il problema, copiare questi due file dal template.
