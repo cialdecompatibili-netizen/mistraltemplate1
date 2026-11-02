@@ -41,6 +41,36 @@ document.addEventListener('click', function(e) {
   }
 });
 </script>
+<script>
+/* cp-img-zoom: ogni immagine di blog/shop (contenuto, copertina, foto prodotto) si apre a schermo intero al click. Usa openLightbox sopra. */
+(function () {
+  var st = document.createElement('style');
+  st.textContent = '.cp-zoomable{cursor:zoom-in}';
+  document.head.appendChild(st);
+  function ok(img) {
+    if (!img || img.closest('#cp-lightbox,.exlb,nav,header,footer,.masthead,.sp-thumbs,.nz-card,.archive__item,.cp-nozoom')) return false;
+    if (img.hasAttribute('data-nozoom') || img.classList.contains('emoji')) return false;
+    var a = img.closest('a');
+    if (a && !/\.(jpe?g|png|webp|gif|avif|svg)(\?.*)?$/i.test(a.getAttribute('href') || '')) return false;
+    if (img.closest('button,[onclick]') && !img.classList.contains('sp-main-img')) return false;
+    var w = img.naturalWidth || img.width;
+    return w >= 120 || !img.complete;
+  }
+  function mark() {
+    var imgs = document.querySelectorAll('main img, #main img, .page__content img, .page__hero img, article img');
+    for (var i = 0; i < imgs.length; i++) if (ok(imgs[i])) imgs[i].classList.add('cp-zoomable');
+  }
+  document.addEventListener('click', function (e) {
+    var img = e.target.closest && e.target.closest('img.cp-zoomable');
+    if (!img || img.classList.contains('sp-main-img')) return;
+    var a = img.closest('a');
+    e.preventDefault();
+    openLightbox((a && a.getAttribute('href')) || img.currentSrc || img.src, img.alt || '');
+  }, true);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mark); else mark();
+  window.addEventListener('load', mark);
+})();
+</script>
 {%- comment -%}
 =====================================================================================
  REGOLA ETA / ANNI AUTOMATICI  (mai scrivere un'eta' o "da N anni" a mano nei testi)
