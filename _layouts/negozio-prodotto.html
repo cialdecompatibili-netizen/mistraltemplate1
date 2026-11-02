@@ -24,7 +24,8 @@ PUNTI CRITICI
 <div class="nz-pp-grid">
 <div class="nz-pp-media">
 {%- if nz_p.immagine and nz_p.immagine != '' -%}
-<div class="nz-pp-foto"><img src="{% if nz_p.immagine contains '://' %}{{ nz_p.immagine }}{% else %}{{ '/' | append: nz_p.immagine | relative_url }}{% endif %}" alt="{{ nz_p.tr[page.lang].nome | default: nz_p.nome | escape }}"></div>
+{%- capture nz_img -%}{% if nz_p.immagine contains '://' %}{{ nz_p.immagine }}{% else %}{{ '/' | append: nz_p.immagine | relative_url }}{% endif %}{%- endcapture -%}
+<div class="nz-pp-foto"><a href="{{ nz_img }}" data-lb="prodotto" data-cap="{{ nz_p.tr[page.lang].nome | default: nz_p.nome | escape }}" style="display:block;width:100%;height:100%;cursor:zoom-in"><img src="{{ nz_img }}" alt="{{ nz_p.tr[page.lang].nome | default: nz_p.nome | escape }}"></a></div>
 {%- else -%}
 <div class="nz-pp-foto nz-pp-ph" aria-hidden="true">{{ nz_p.icona }}</div>
 {%- endif -%}
