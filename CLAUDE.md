@@ -103,7 +103,7 @@ Tutto da Desktop Commander sul PC di Mirco, con Python. Il connettore GitHub non
 5. Aspettare la build: `gh api repos/<utente>/<repo>/pages/builds/latest` deve dare `built` sul commit giusto. Se `errored`/falliti: `gh run list --limit 3` e `gh run view <id> --log-failed`.
 6. Verificare online con Invoke-WebRequest: shop, categoria, prodotto IT e EN, le due immagini (200 e contenuto giusto), poi dare i link a Mirco. Dire che la resa grafica non e' stata vista.
 - Prezzi e specifiche della demo sono SEGNAPOSTO da confermare con Mirco: nei testi solo cose generiche, niente portate o numeri inventati.
-- Per molti prodotti: lo script e' da generalizzare in `aggiungi_prodotti.py` (input = elenco con nome, categoria, prezzo, testi IT/EN, soggetto foto), proposto a Mirco, non ancora fatto.
+- Per uno o molti prodotti: FATTO, vedi `automation/prodotto.py` (sezione "Prodotto + foto in UN comando" in fondo). Sostituisce i passi 2-4 per i prodotti.
 - Idee categorie dal mercato (ricerca 31/10/2026): nodi e schede Meshtastic (Heltec V3/V4, LILYGO T-Beam), ripetitori solari, kit modulari RAK WisBlock, tracker GPS, comunicatori portatili, kit con Raspberry Pi.
 
 
@@ -114,3 +114,16 @@ Tutto da Desktop Commander sul PC di Mirco, con Python. Il connettore GitHub non
 - Barra autore a destra negli articoli del blog: attiva nei default (posts: author_profile true). Dati in _config.yml > author (name, avatar, bio, links): nei cloni sostituire nome, foto (assets/images/autore-segnaposto.svg) e bio; per spegnerla su un articolo mettere author_profile: false nel front matter. CSS gia' in assets/css/main.scss (SIDEBAR A DESTRA).
 
 - 02/11/2026 TENDINE: sempre su 2 colonne (masthead.html: wide se kids.size > 1, Shop sempre wide; menu.css: columns:2 anche mobile/compatto, prima voce NON centrata, divider nascosto nelle tendine larghe). Nei cloni non ritoccare: il clone copia menu.css e masthead.html dal template. Se un clone vecchio ha il problema, copiare questi due file dal template.
+
+
+## Prodotto + foto in UN comando (03/11/2026, provato su pelletteria2; vale per ogni clone)
+`python automation/prodotto.py --nome "..." --categoria <id o nome, anche parziale> --prezzo <euro> --desc "..." [--completa "..."] [--aspetto "..."] [--nome-tr "en=..."] [--desc-tr "en=..."] [--completa-tr "en=..."] [--id slug]`
+- Dalla radice della repo (`--repo` facoltativo: di default la repo che contiene il file). Fa tutto: prodotto in `_data/catalogo.json` + pagina di OGNI lingua (da `_config.yml`, permalink presi dalle pagine shop della repo) + foto Gemini via API + UN commit + push + verifica + URL online. ~27 s per prodotto nuovo (18 s sono Gemini), ~4 s per solo aggiornamento prezzo.
+- Piu' prodotti: `--lista file.json` (oggetti con nome, categoria, prezzo, desc, completa, aspetto, id, `tr:{"en":{nome,descrizione,descrizione_completa}}`): una sola generazione, un solo commit/push. Prodotto gia' esistente: aggiorna solo i campi passati (`--id x --prezzo 590`) e fa la foto solo se manca.
+- La categoria deve ESISTERE gia' in `catalogo.json` (non le crea). Nome, categoria e prezzo li decide Mirco, mai inventati; se chiede di calcolare i prezzi, cercare sul web fasce reali del segmento e citarle in una riga.
+- Traduzioni: le scrive Claude e le passa con `--*-tr` o `tr` nella lista. Senza traduzione la pagina della lingua e' `tr: copia` (noindex, testo italiano). L'hash usa `automation/traduzioni_sync.py` della repo: NON lanciare `allinea_hash.py` su tutta la lingua per un prodotto solo.
+- Foto: prompt da `_data/foto_prompt.json` (se manca lo crea neutro: sfondo chiaro, niente testo/logo/persone) e l'"aspetto" e' la descrizione del prodotto (o `--aspetto`): per qualunque articolo, non solo bottiglie (il vecchio default di `foto_sito.py` non serve piu'). Per aspetti particolari (es. "senza marchi sul dispositivo") metterli in `--aspetto`.
+- Motore foto: cerca da solo `gemini_auto\core\foto_sito.py` (variabile `GEMINI_AUTO`, poi la cartella `gemini_auto` sopra la repo). Se non c'e', usare `--no-foto`. Prima di generare valgono le regole crediti di `gemini_auto\CLAUDE.md` (un solo generatore alla volta, ~22 crediti a foto, nessun retry a raffica).
+- Si ferma se la repo ha modifiche non committate (foto_sito fa `git add -A`): committarle o usare `--forza`. Se la foto manca non pubblica nulla e lo dice. Opzioni: `--no-foto`, `--no-push`, `--no-api` (watcher Chrome).
+- La foto va online subito: guardarla DOPO su `assets/images/prodotti/<id>.webp` o sul sito e rifarla con `foto_sito.py --repo . --ids <id> --extra "..."` se non va. Dare a Mirco solo l'URL online della categoria e del prodotto.
+- Copia del template: l'originale e' `Desktop\gemini_auto\core\prodotto.py`; se si corregge uno, allineare l'altro.
