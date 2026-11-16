@@ -17,7 +17,7 @@ Gli stili stanno qui dentro in <style> con !important perche' devono vincere sul
 .has-postside .page__related .archive__item-title{grid-area:title;margin:0 !important;padding:1.1rem 1.3rem 0}
 .has-postside .page__related .page__meta{grid-area:meta;margin:0 !important;padding:.3rem 1.3rem 0}
 .has-postside .page__related .archive__item-excerpt{grid-area:exc;margin:0 !important;padding:.5rem 1.3rem 1.1rem}
-.ps{flex:0 0 300px;width:300px;position:sticky;top:5.5rem;display:flex;flex-direction:column;gap:1.1rem;font-family:'Inter',system-ui,sans-serif;color:#141414}
+.ps{margin-top:1.6rem;flex:0 0 300px;width:300px;position:sticky;top:5.5rem;display:flex;flex-direction:column;gap:1.1rem;font-family:'Inter',system-ui,sans-serif;color:#141414}
 .ps *{box-sizing:border-box}
 .ps-card{background:#fff;border:1px solid #e9e3d9;border-radius:18px;padding:1.2rem 1.25rem}
 .ps-card h2{font-family:'Playfair Display',Georgia,serif;font-weight:500;font-size:1.15rem;line-height:1.3;margin:0 0 .8rem;padding:0;border:0}
@@ -52,6 +52,8 @@ Gli stili stanno qui dentro in <style> con !important perche' devono vincere sul
 </style>
 {%- assign sb = site.data.sidebar -%}
 <aside class="ps" aria-label="Barra laterale">
+  <button type="button" class="ps-search" onclick="var t=document.querySelector('.search__toggle');if(t){t.click();}">Cerca nel Blog <span aria-hidden="true">&#128269;</span></button>
+
   {%- if sb.foto != blank %}
   <section class="ps-card ps-about">
     <img src="{{ sb.foto | relative_url }}" alt="{{ sb.titolo | escape }}" loading="lazy">
@@ -62,35 +64,4 @@ Gli stili stanno qui dentro in <style> con !important perche' devono vincere sul
     </div>
   </section>
   {%- endif %}
-
-  <button type="button" class="ps-search" onclick="var t=document.querySelector('.search__toggle');if(t){t.click();}">Cerca nel Blog <span aria-hidden="true">&#128269;</span></button>
-
-  <section class="ps-card">
-    <h2>Post recenti</h2>
-    <ul class="ps-list">
-      {%- assign shown = 0 -%}
-      {%- for p in posts_l -%}
-        {%- if p.url != page.url and shown < 5 -%}
-        <li><a class="ps-post" href="{{ p.url | relative_url }}">
-          {%- if p.header.teaser -%}<img src="{{ p.header.teaser | relative_url }}" alt="" loading="lazy">{%- else -%}<span class="ps-ph"></span>{%- endif -%}
-          <span>{{ p.title }}</span></a></li>
-        {%- assign shown = shown | plus: 1 -%}
-        {%- endif -%}
-      {%- endfor -%}
-    </ul>
-  </section>
-
-  <section class="ps-card">
-    <h2>Rubriche</h2>
-    <ul class="ps-list ps-cats">
-      {%- assign ps_cats = posts_l | map: "categories" | join: "," | split: "," | uniq | sort | where_exp: "c","c != page.lang" -%}
-      {%- for c in ps_cats -%}
-        {%- assign ps_page = site.pages | where: "categoria", c | first -%}
-        {%- if ps_page -%}
-          {%- assign n = posts_l | where_exp: "p","p.categories contains c" | size -%}
-          <li><a href="{{ ps_page.url | relative_url }}"><span>{{ c }}</span><span class="ps-n">{{ n }}</span></a></li>
-        {%- endif -%}
-      {%- endfor -%}
-    </ul>
-  </section>
 </aside>
