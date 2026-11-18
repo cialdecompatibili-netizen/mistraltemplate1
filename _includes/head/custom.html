@@ -543,3 +543,20 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 {%- endif -%}
 {%- endif -%}
+
+
+{%- comment -%} X di chiusura ricerca (overlay .search-content): bottone dentro l'overlay, fisso in alto a destra; clic = stesso toggle del menu. Esc gia' gestito dal tema. {%- endcomment -%}
+<style>
+  .sb-xchiudi{position:fixed;top:1rem;right:1.2rem;z-index:99999;width:2.6rem;height:2.6rem;border:1px solid #d8d2c8;border-radius:50%;background:#fff;color:#333;font-size:1.6rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+  .sb-xchiudi:hover{border-color:var(--t-accent,#0e7490);color:var(--t-accent,#0e7490)}
+</style>
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  var c=document.querySelector('.search-content');
+  if(!c||c.querySelector('.sb-xchiudi'))return;
+  var b=document.createElement('button');
+  b.type='button';b.className='sb-xchiudi';b.setAttribute('aria-label','Chiudi ricerca');b.innerHTML='&times;';
+  b.onclick=function(){var t=document.querySelector('.search__toggle');if(t)t.click();};
+  c.appendChild(b);
+});
+</script>
