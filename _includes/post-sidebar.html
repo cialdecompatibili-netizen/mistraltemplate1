@@ -51,8 +51,8 @@ Gli stili stanno qui dentro in <style> con !important perche' devono vincere sul
 }
 </style>
 {%- assign sb = site.data.sidebar -%}
-<aside class="ps" aria-label="Barra laterale">
-  <button type="button" class="ps-search" onclick="var t=document.querySelector('.search__toggle');if(t){t.click();}">Cerca nel Blog <span aria-hidden="true">&#128269;</span></button>
+{%- if sb.foto != blank %}<aside class="ps" aria-label="Barra laterale">
+  {%- comment -%} Il bottone Cerca ora sta in _includes/sidebar.html (sopra la foto autore). {%- endcomment -%}
 
   {%- if sb.foto != blank %}
   <section class="ps-card ps-about">
@@ -64,4 +64,4 @@ Gli stili stanno qui dentro in <style> con !important perche' devono vincere sul
     </div>
   </section>
   {%- endif %}
-</aside>
+</aside>{%- endif %}
