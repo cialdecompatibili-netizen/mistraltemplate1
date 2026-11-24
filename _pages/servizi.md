@@ -4,6 +4,7 @@ title: "Servizi"
 permalink: /servizi/
 ref: servizi
 author_profile: false
+toc: false
 seo_description: "I nostri servizi."
 ---
 
