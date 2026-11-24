@@ -405,6 +405,13 @@ document.addEventListener('DOMContentLoaded', function(){
     });
 
     // Follow (bio autore sidebar) / Website (link social generico)
+    // 24/11/2026: il tema scrive i link di author.links (_config.yml) SENZA baseurl: "/contatti/" finiva su
+    // sito.github.io/contatti/ (404). Qui aggiungiamo il baseurl ai link interni: adattivo, nessun nome repo scritto a mano.
+    var bu = {{ site.baseurl | default: '' | jsonify }};
+    document.querySelectorAll('.author__urls a[href^="/"]').forEach(function(a){
+      var h = a.getAttribute('href');
+      if (bu && h.indexOf(bu + '/') !== 0 && h !== bu) a.setAttribute('href', bu + h);
+    });
     document.querySelectorAll('.author__urls-wrapper .btn').forEach(function(el){
       if (el.textContent.trim() === 'Follow') el.textContent = 'Segui';
     });

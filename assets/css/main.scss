@@ -216,6 +216,10 @@ a.page__taxonomy-item:hover {
     grid-column: 1 !important;
     grid-row: 2 !important;
     width: 100% !important;
+    /* 24/11/2026: post-sidebar.html mette max-width:calc(100% - 332px) (serve solo al vecchio layout flex con .ps):
+       qui lo azzeriamo, cosi' le card correlate sono larghe quanto il testo e i bottoni Precedente/Successivo. */
+    max-width: none !important;
+    flex: none !important;
     clear: none !important;
   }
 }
