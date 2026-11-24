@@ -39,7 +39,9 @@ NON toccare: gli attributi data-pg* abilitano la paginazione del sito (assets/js
 .cl-topics a{padding:.35rem .9rem;border:1px solid var(--cl-line);border-radius:999px;font-size:.85rem;color:var(--cl-ink)}
 .cl-topics a:hover{border-color:var(--cl-acc);color:var(--cl-acc)}
 .cl-topics a.on{background:var(--cl-acc);border-color:var(--cl-acc);color:#fff}
-.cl-list{list-style:none;padding:0;margin:1.2rem 0 0;display:flex;flex-direction:column;gap:.3rem}
+/* DISTANZA TRA ARTICOLI: solo il gap (.25rem). Il margin-bottom 1.4em che .page__content li dava a ogni <li> va azzerato (specificita' > .page__content li), altrimenti lo stacco era ~28px. Per piu'/meno stacco cambiare SOLO gap. */
+.cl-list{list-style:none;padding:0;margin:1.2rem 0 0;display:flex;flex-direction:column;gap:.25rem}
+.cl-list>.cl-item{margin:0 !important}
 .cl-item{position:relative;display:flex;gap:1.5rem;align-items:stretch;padding:0;overflow:hidden;background:#fff;border:1px solid var(--cl-line);border-radius:14px;transition:border-color .25s,box-shadow .25s,transform .25s}
 .cl-item:hover,.cl-item:focus-within{border-color:var(--cl-acc);box-shadow:0 0 0 1px var(--cl-acc),0 0 18px 2px color-mix(in srgb,var(--cl-acc) 45%,transparent),0 8px 24px rgba(30,40,80,.12);transform:translateY(-1px)}
 
